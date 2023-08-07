@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content= "The Latest news from SevenT33N">
+    <meta name= “robots” content="index, nofollow">
+    <meta property=”og:title” content="SevenT33N Music | News">
+    <meta property=”og:description” content="The Latest news from SevenT33N">
+    <meta property=”og:type” content="website">
+    <meta property=”og:image” content="/IMAGES/favicon.ico">
+    <meta property=”og:url” content="https://sevent33nmusic.sevent33n.repl.co/news.html">
+    <title>SevenT33N Music | News</title>
+    <link id="pagestyle" href="light.css" rel="stylesheet" type="text/css" />
+    <script type="application/javascript" src="updating.js"></script>
+    <script type="application/javascript" src="styling.js"></script>
+    <script src="https://kit.fontawesome.com/71266e3234.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+  </head>
+  <body>
+  <script>
+    function setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      let expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+  </script>
+    <script>
+      var time;
+      function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("space1").style.display = "none";
+        document.getElementById("space2").style.display = "none";
+        document.getElementById("loadHint").style.display = "none";
+        document.getElementById("hideContent").style.display = "block";
+      }
+      document.onreadystatechange = function () {
+        if (document.readyState == "complete") {
+          time = setTimeout(showPage, 1250);
+        }
+      }
+      function social(type) {
+        if (type == 'twitter') {
+          window.location.href = '#';
+        }
+        if (type == 'reddit') {
+          window.location.href = '#';
+        }
+        if (type == 'youtube') {
+          window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
+        }
+        if (type == 'patreon') {
+          window.location.href = 'https://patreon.com/SevenT33NMusic';
+        }
+        if (type == 'paypal') {
+          window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
+        }
+        if (type == 'contact') {
+          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeZiPYk0GT-Dk3IJhW9vrKP4NCFOnZuVOka64VlE0V2YKUAGQ/viewform?usp=sf_link';
+        }
+      }
+      function redirect(link) {
+        window.location.href = link;
+      }
+    </script>
+    <script>
+      function redirect(link) {
+        window.location.href = link;
+      }
+      function backToTop() {
+        window.location.href = "#";
+      }
+    </script>
+    <div class="Center">
+      <div class="header">
+        <h1>SevenT33N Music</h1>
+        <h4>News</h4>
+      </div>
+      <div class="btn-group" style="width:100%">
+        <div class="topnav">
+          <button onclick="redirect('/index.html')" style="width:33.3%" title='Home Page'><i class="fa-solid fa-house fa-flip"></i></button> <!-- <i class="fa-solid fa-house fa-flip"></i> -->
+          <button onclick="redirect('/music.html')" style="width:33.3%" title='Music'><i class="fa-solid fa-music fa-beat"></i></button>
+          <button onclick="redirect('/settings.html')" style="width:33.3%" title='Settings'><i class="fa-solid fa-gear fa-spin"></i></button>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div id="space1"><br><br><br><br><br></div>
+    <div class="item" id="loader">
+			<i class="loader --4"></i>
+		</div>
+    <div class="loadHint" id="loadHint">
+      <h4>Loading The News...</h4>
+    </div>
+    <div class="hideContent" id="hideContent">
+    <div class="mstRecNews">
+      <h2>UPDATE LOG 1.2</h2> <!-- News Headline -->
+      <br>
+      <p>Yes, the bug on windows still exists. I'm sorry it hasn't been fixed yet.<br>I added a loading icon, so the wait time is a little more justified.<br>Great News! The layout of the music page has been completed! Check out the amazing new design, with contrasting colors for easy readability and so much more!</p> <!-- News -->
+      <br><br>
+      <h6>Sun August 8th, 2023 (08:17 AM UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+      <div class="mstRecNews">
+      <h2>UPDATE LOG 1.1</h2> <!-- News Headline -->
+      <br>
+      <p>There is still a bug on windows which fails to load icons. I'm still working to fix it.<br>I have added a "projects" section to the home page, so you can see some of the things I've made or are working on.<br>The redesign for the music page is nearly complete, I just need to add the finishing touches.<br>Thats all for now, have fun ya'll!</p> <!-- News -->
+      <br><br>
+      <h6>Fri August 4th, 2023 (12:17 PM UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>UPDATE LOG 1.0</h2> <!-- News Headline -->
+      <br>
+      <p>I am aware of a bug on windows where the icons may not load. I've added "title" tags to the buttons, so you can simply hover your cursor over the buttons to see what the button does.<br>I am also updating the layout of the "Music" page. Please be patient while I work, as it could take a few weeks.</p> <!-- News -->
+      <br><br>
+      <h6>Fri July 28th, 2023 (04:05 PM UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>IM BORRRRRED</h2> <!-- News Headline -->
+      <br>
+      <p>Mekayla has been publicly released. The next three songs for "STATIC" may not be published. I added a contact form button im probably gonna change it. I hav stoped caring about grammar..</p> <!-- News -->
+      <br><br>
+      <h6>idk what today is lol</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>WHERE DID HE GO?</h2> <!-- News Headline -->
+      <br>
+      <p>Hey everyone, I've got some explaining to do. I haven't been very active on my website, and I think it has poorly impacted the quality of the site. The truth is that I haven't been doing well emotionally. I've felt drained and tired, and my motivation was at an all-time low. For that reason, I decided to take a break from music production and my website. I needed to focus on my mental health, as it is so much more important than my music. I am back now, and I'm doing much better. My album "Static" should release in the next two weeks, but there are no guarantees.<br><br>As of right now, my song "Mekayla" is unlisted, so only those with the link can listen (If you want it to be public, you'll have to ask my friend to let me publicly release the song). Lastly, I am working on a form to add here, so you can easily contact me with questions, concerns, and suggestions.<br><br>P.S: You can listen to "Mekayla" here on the website</p> <!-- News -->
+      <br><br>
+      <h6>Wed June 21st, 2023 (02:22 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>DELAYS</h2> <!-- News Headline -->
+      <br>
+      <p>Due to technical difficulties, the release date for "Static" has been pushed to Saturday, June 10th, 2023, at 12:00 P.M MST.</p> <!-- News -->
+      <br><br>
+      <h6>Tue June 6th, 2023 (11:13 P.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>RE-RELEASED</h2> <!-- News Headline -->
+      <br>
+      <p>After careful consideration, I have decided to re-release "Mekayla" as unlisted. You can access the song here: <a href="https://youtu.be/oNYhi5QVS8w">Mekayla [Official Auio]</a><br>Please note that this is subject to change, and may be publicly released or made private again.</p> <!-- News -->
+      <br><br>
+      <h6>Sat June 3rd, 2023 (04:56 P.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>NEW FEATURES</h2> <!-- News Headline -->
+      <br>
+      <p>New features have been added to the webiste. This includes toggleable smooth scroll, and the ability to support me on my socials. Speaking of socials, go check them out!</p> <!-- News -->
+      <br><br>
+      <h6>Fri June 2nd, 2023 (06:34 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>NEW PAGE!</h2> <!-- News Headline -->
+      <br>
+      <p>The music page has been completed! New songs will be released regularly, so be on the lookout!</p> <!-- News -->
+      <br><br>
+      <h6>Fri June 2nd, 2023 (04:01 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>GOTTA STAY HIGH</h2> <!-- News Headline -->
+      <br>
+      <p>I've remixed "Stay High" by Juice WRLD... again. Don't worry, this trap remix is much better than the last. "Stay High (Trap Remix)" drops on June 10th, 2023 at 12:00 P.M MST!</p> <!-- News -->
+      <br><br>
+      <h6>Thu June 1st, 2023 (07:08 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>HELPFUL!</h2> <!-- News Headline -->
+      <br>
+      <p>Pro Tip: You can enable dark mode in settings!<br>For real though, I spent a lot of time making it work, far longer than I needed to.</p> <!-- News -->
+      <br><br>
+      <h6>Thu June 1st, 2023 (06:37 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>MEKAYLA</h2> <!-- News Headline -->
+      <br>
+      <p>Recently, I had published a love song titled "Mekayla". Sadly, I had to take it down. I will not go into detail about what happened, but most of you can probably assume what did happened.</p> <!-- News -->
+      <br><br>
+      <h6>Thu June 1st, 2023 (06:25 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>LIQUID?? WEAK??</h2> <!-- News Headline -->
+      <br>
+      <p>I had previously announced a few songs and albums on my Youtube. LIQUID (the album) has been discontinued, and will not be released, as a few songs from it have been moved to "Static". However, my single "WEAK" will be released. The release date is currently set for June 3rd, 2023 at 12:00 P.M MST.</p> <!-- News -->
+      <br><br>
+      <h6>Thu June 1st, 2023 (06:22 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>STATIC RELEASE DATE</h2> <!-- News Headline -->
+      <br>
+      <p>The current release date of "Static" is set for June 5th, 2023. However, as with every song and album I've released so far, there will likely be complications that cause delays for the release.</p> <!-- News -->
+      <br><br>
+      <h6>Thu June 1st, 2023 (06:10 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>WEBSITE</h2> <!-- News Headline -->
+      <br>
+      <p>The website is now up and running!</p> <!-- News -->
+      <br><br>
+      <h6>Thu June 1st, 2023 (05:53 A.M UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="Center">
+      <div class="Settings">
+        <button onclick="backToTop()" style="border: 3px solid black;">Back to Top</button>
+      </div>
+    </div>
+    <br>
+    </div>
+    <div id="space2"><br><br><br><br><br></div>
+    <div class="footer">
+      <h5>
+        <div class="btn-group" style="width:100%">
+          <button onclick="social('contact')" style="width:100%;" title='Contact Form'>Got A Question? Ask Me Here!</button>
+        </div>
+      </h5>
+      <h3>Show Your Support for Me!</h3>
+      <div class="Center">
+        <h5>
+          <div class="btn-group" style="width:100%">
+            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-twitter"></i></button>
+            <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
+            <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
+            <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>
+            <button onclick="social('reddit')" style="width:20%;" title='Reddit'><i class="fa-brands fa-reddit-alien"></i></button>
+          </div>
+        </h5>
+      </div>
+    </div>
+  </body>
+</html>

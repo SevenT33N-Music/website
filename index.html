@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content= "Welcome to the home page of my website. You'll find all the other pages here!">
+    <meta name= “robots” content="index, nofollow">
+    <meta property=”og:title” content="SevenT33N Music | Home Page">
+    <meta property=”og:description” content="The Official Landing Page for SevenT33N Music">
+    <meta property=”og:type” content="website">
+    <meta property=”og:image” content="/IMAGES/favicon.ico">
+    <meta property=”og:url” content="https://sevent33nmusic.sevent33n.repl.co">
+    <title>SevenT33N Music | Home Page</title>
+    <link id="pagestyle" href="light.css" rel="stylesheet" type="text/css" />
+    <script type="application/javascript" src="styling.js"></script>
+    <script type="application/javascript" src="updating.js"></script>
+    <script src="https://kit.fontawesome.com/31d1513c70.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+  </head>
+  <body>
+
+
+
+<!-- SCRIPTS -->
+  <script>
+    var time;
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("space1").style.display = "none";
+      document.getElementById("space2").style.display = "none";
+      document.getElementById("hideContent").style.display = "block";
+    }
+    document.onreadystatechange = function () {
+      if (document.readyState == "complete") {
+        time = setTimeout(showPage, 500);
+      }
+    }
+    function setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      let expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+  </script>
+    <script>
+      function social(type) {
+        if (type == 'twitter') {
+          window.location.href = '#';
+        }
+        if (type == 'reddit') {
+          window.location.href = '#';
+        }
+        if (type == 'youtube') {
+          window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
+        }
+        if (type == 'patreon') {
+          window.location.href = 'https://patreon.com/SevenT33NMusic';
+        }
+        if (type == 'paypal') {
+          window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
+        }
+        if (type == 'contact') {
+          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeZiPYk0GT-Dk3IJhW9vrKP4NCFOnZuVOka64VlE0V2YKUAGQ/viewform?usp=sf_link';
+        }
+      }
+      function redirect(link) {
+        window.location.href = link;
+      }
+    </script>
+
+
+
+<!-- HEADER -->
+    <div class="Center">
+      <div class="header">
+        <h1>SevenT33N Music</h1>
+        <h4>Home</h4>
+      </div>
+
+
+
+<!-- TOPNAV -->
+      <div class="btn-group" style="width:100%">
+        <div class="topnav">
+          <button title='News' onclick="redirect('/news.html')" style="width:33.3%"><i class="fa-solid fa-newspaper fa-bounce"></i></button>
+          <button title='Music' onclick="redirect('/music.html')" style="width:33.3%"><i class="fa-solid fa-music fa-beat"></i></button>
+          <button title='Settings' onclick="redirect('/settings.html')" style="width:33.3%"><i class="fa-solid fa-gear fa-spin"></i></button>
+        </div>
+      </div>
+
+
+<!-- LOADING -->
+<div id="space1"><br><br><br><br><br></div>
+<div class="item" id="loader">
+	<i class="loader --4"></i>
+	</div>
+<div class="hideContent" id="hideContent">
+
+      
+      
+<!-- LOGO -->
+      <br>
+      <img  class="logo" src="/IMAGES/logo.png" alt="SevenT33N Logo"/>
+      <br>
+      <hr style="border: 2px solid black;">
+      <br>
+
+
+
+<!-- NEWS -->
+    <div class="mstRecNews">
+      <h1>News</h1>
+      <h2>UPDATE LOG 1.2</h2> <!-- News Headline -->
+      <br>
+      <p>Yes, the bug on windows still exists. I'm sorry it hasn't been fixed yet.<br>I added a loading icon, so the wait time is a little more justified.<br>Great News! The layout of the music page has been completed! Check out the amazing new design, with contrasting colors for easy readability and so much more!</p> <!-- News -->
+      <br><br>
+      <h6>Sun August 8th, 2023 (08:17 AM UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+
+
+
+<!-- PROJECTS -->
+    <div class="mstRecNews"> <!-- Projects -->
+      <h1>Projects</h1>
+      <h2>Dark Humor</h2>
+      <br>
+      <p>I created a dark humor website, for those who's humor is a little more edgy.</p>
+      <a href="javascript:void(0);">Dark Humor Website</a>
+      <br>
+      <br>
+      <h2>Unicode Copy/Paste</h2>
+      <br>
+      <p>This is a WIP website, where a user can search for an emoji or unicode character, and copy it to their clipboard to paste elsewhere. Once released, it will be updated with new unicode characters, so that it can be the largest unicode database on the internet.</p>
+    </div>
+
+
+</div>
+<div id="space2"><br><br><br><br><br></div>
+<!-- FOOTER -->
+    <div class="footer">
+      <h5>
+        <div class="btn-group" style="width:100%">
+          <button onclick="social('contact')" style="width:100%;" title='Contact Form'>Got A Question? Ask Me Here!</button>
+        </div>
+      </h5>
+
+
+<!-- SOCIAL LINKS -->
+      <h3>Show Your Support for Me!</h3>
+      <div class="Center">
+        <h5>
+          <div class="btn-group" style="width:100%">
+            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-twitter"></i></button>
+            <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
+            <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
+            <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>
+            <button onclick="social('reddit')" style="width:20%;" title='Reddit'><i class="fa-brands fa-reddit-alien"></i></button>
+          </div>
+        </h5>
+      </div>
+
+
+
+    </div>
+    </div>
+  </body>
+</html>
