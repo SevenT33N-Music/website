@@ -1,5 +1,5 @@
-var update = 0; // 0 = not updated, 1 = updated
-var updateReason = 2; // 1 = bug, 2 = new feature
+var update = 1; // 0 = not updated, 1 = updated
+var updateReason = 1; // 1 = bug, 2 = new feature
 var checkUpdateReason = localStorage.getItem("updateReason");
 if (checkUpdateReason == null || checkUpdateReason == "") {
   if (updateReason == 1) {
@@ -8,9 +8,9 @@ if (checkUpdateReason == null || checkUpdateReason == "") {
     localStorage.setItem("updateReason", "2");
   }
 } else {
-  if (checkUpdateReason == "1") {
+  if (updateReason == 1) {
     localStorage.setItem("updateReason", "1");
-  } else if (checkUpdateReason == "2") {
+  } else if (updateReason == 2) {
     localStorage.setItem("updateReason", "2");
   }
 }
