@@ -1,4 +1,4 @@
-var update = 1; // 0 = not updated, 1 = updated
+var update = 0; // 0 = not updated, 1 = updated
 var updateReason = 1; // 1 = bug, 2 = new feature
 var checkUpdateReason = localStorage.getItem("updateReason");
 if (checkUpdateReason == null || checkUpdateReason == "") {

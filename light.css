@@ -253,6 +253,7 @@ ul {
 /*------------------------------------- song list style -------------------------------------*/
 
 .songList {
+  font-family: Tahoma, sans-serif;
   text-align: center;
   background-color: var(--recNewsBckColor);
   border: 5px solid var(--recNewsbordrColor);
