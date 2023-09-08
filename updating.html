@@ -16,7 +16,7 @@
     <script src="https://kit.fontawesome.com/71266e3234.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
   </head>
-  <body>
+  <body onload="giveUpdateReason()">
     <script>
       var time;
       function showPage() {
@@ -101,6 +101,15 @@
           }
         }
       }
+      function giveUpdateReason() {
+        var updateReason = localStorage.getItem("updateReason");
+        if (updateReason == "1") {
+          document.getElementById("updateInfo").innerHTML = "New Features Are Being Added, So This May Take A While. Hang Tight!";
+        } else if (updateReason == "2") {
+          document.getElementById("updateInfo").innerHTML = "A Bug Is Currently Being Fixed. This Shouldn't Take Long!";
+          document.getElementById("updateInfo").style.color = "red";
+        }
+      }
     </script>
     <div class="Center">
       <div class="header">
@@ -119,7 +128,7 @@
     <div class="mstRecNews">
       <h2>UPDATING</h2> <!-- News Headline -->
       <br>
-      <p>The website is currently being updated. Please be patient.</p> <!-- News -->
+      <p id="updateInfo"></p> <!-- News -->
       <br><br>
     </div>
     <br>

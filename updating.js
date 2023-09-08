@@ -1,4 +1,19 @@
-var update = 0;
+var update = 0; // 0 = not updated, 1 = updated
+var updateReason = 2; // 1 = bug, 2 = new feature
+var checkUpdateReason = localStorage.getItem("updateReason");
+if (checkUpdateReason == null || checkUpdateReason == "") {
+  if (updateReason == 1) {
+    localStorage.setItem("updateReason", "1");
+  } else if (updateReason == 2) {
+    localStorage.setItem("updateReason", "2");
+  }
+} else {
+  if (checkUpdateReason == "1") {
+    localStorage.setItem("updateReason", "1");
+  } else if (checkUpdateReason == "2") {
+    localStorage.setItem("updateReason", "2");
+  }
+}
 function setCookie(cname, cvalue, exdays) {
   const d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
