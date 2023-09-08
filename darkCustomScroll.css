@@ -1,0 +1,536 @@
+:root {
+  --headerTxt: #f3f5f8;
+  --headerBck: #07090a;
+  --recNewsTxtColor: #dfc9df;
+  --recNewsBckColor: #1d1a30;
+  --recNewsbordrColor: #fdc9fd;
+  --navCol: #c4aacf;
+  --navBckCol: #1d1023;
+  --navColHov: #f5dbff;
+  --navBackColHov: #3e1a4d;
+  --btnCol: #ffd8cf;
+  --btnBckCol: #16110f;
+  --smoothScrolling: smooth;
+}
+
+/*Style Body and HTML*/
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: #1c1c1c;
+  scroll-behavior: var(--smoothScrolling);
+  transition-duration: 0.5s;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  color: transparent;
+  
+  border-radius: 5vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--navCol);
+  border-radius: 10px;
+  transition-duration: 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--navColHov);
+  cursor: pointer;
+}
+
+
+
+/*Style header*/
+.header {
+  font-size: 3vh;
+  color: var(--headerTxt);
+  background-color: var(--headerBck);
+  text-align: center;
+  padding: 3vh 4vw;
+  border-bottom: 1.5vh solid black;
+  transition-duration: 0.5s;
+}
+
+.header h1 {
+  font-size: 2em;
+}
+
+/*Style logo img*/
+.logo {
+  max-width: 50%;
+  max-height: 50%;
+  transition-duration: 0.5s;
+}
+
+.Center {
+  text-align: center;
+}
+
+.mstRecNews {
+  color: var(--recNewsTxtColor);
+  background-color: var(--recNewsBckColor);
+  border: 5px solid var(--recNewsbordrColor);
+  border-radius: 10px;
+  text-align: center;
+  padding: 1vh 1vw;
+  margin: 2%;
+  transition-duration: 0.5s;
+}
+
+.mstRecNews a {
+  text-decoration: none;
+  color: #11a5e4;
+}
+
+.mstRecNews a:hover {
+  text-decoration: none;
+  color: #00b3ff;
+}
+
+/* The navbar container */
+.topnav {
+  overflow: hidden;
+  background-color: var(--navBckCol);
+}
+
+/* Navbar links */
+.topnav a {
+  float: left;
+  display: block;
+  color: var(--navCol);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Links - change color on hover */
+.topnav a:hover {
+  background-color: var(--navBackColHov);
+  color: var(--navColHov);
+}
+
+.Settings {
+  color: black;
+}
+
+ul {
+  list-style: none;
+}
+
+.Settings button {
+  color: var(--btnCol);
+  background-color: var(--btnBckCol);
+  border-radius: 8px;
+  border: none;
+  padding: 14px 16px;
+  transition-duration: 0.5s;
+}
+
+.Settings button:hover {
+  cursor: pointer;
+  color: var(--recNewsbordrColor);
+  background-color: var(--navBackColHov);
+}
+
+.btn-group {
+  font-size: 2vh;
+}
+
+.btn-group button {
+  background-color: var(--navBckCol);
+  border: none;
+  font-size: 2em;
+  color: var(--navCol);
+  padding: 2.5vh 0;
+  cursor: pointer;
+  float: left;
+  transition-duration: 0.5s;
+  border-radius: 10px;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none;
+  /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: var(--navBackColHov);
+  color: var(--navColHov);
+  border-radius: 25px;
+}
+
+.homeNewsTxt {
+  color: var(--headerTxt);
+  text-align: center;
+}
+
+.footer {
+  font-size: 3vh;
+  color: var(--headerTxt);
+  background-color: var(--headerBck);
+  text-align: center;
+  padding: 3vh 4vw;
+  border-bottom: 1.5vh solid black;
+  transition-duration: 0.5s;
+}
+
+.footer h3,
+h5 {
+  font-size: 2em;
+}
+
+.music {
+  text-align: center;
+  color: white;
+}
+
+.unselectable {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.coverIMG {
+  width: 40vw;
+  height: auto;
+  max-width: 512px;
+  max-height: 512px;
+  transition-duration: 0.5s;
+  margin-left: 3%;
+  float: left;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.musicButtons {
+  color: black;
+}
+
+.musicButtons button {
+  color: var(--btnCol);
+  background-color: var(--btnBckCol);
+  border-radius: 8px;
+  border: none;
+  padding: 14px 16px;
+  font-size: 4vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
+}
+
+.musicButtons button::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /*Remember to add position: relative; to parent!*/
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+  backdrop-filter: invert(100%);
+  transform: scale(0);
+  transition: 0.25s ease-in-out;
+}
+
+.musicButtons button i {
+  transition: 0.25s ease-in-out;
+}
+
+.musicButtons button:hover i {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.musicButtons button:hover::after {
+  transform: scale(1);
+}
+
+.songList {
+  text-align: center;
+  background-color: var(--recNewsBckColor);
+  border: 5px solid var(--recNewsbordrColor);
+  border-radius: 10px;
+  padding: 1vh 1vw;
+  margin: 2%;
+  transition-duration: 0.5s;
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.songList::-webkit-scrollbar {
+  width: 20px;
+}
+
+.songList::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--headerTxt);
+  border-radius: 5vw;
+}
+
+.songList::-webkit-scrollbar-thumb {
+  background: var(--navCol);
+  border-radius: 10px;
+  transition-duration: 0.3s;
+}
+
+.songList::-webkit-scrollbar-thumb:hover {
+  background: var(--navColHov);
+  cursor: pointer;
+}
+
+.songList a {
+  color: var(--recNewsTxtColor);
+  background-color: var(--recNewsBckColor);
+  padding: 14px 16px;
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+
+.songList a:hover {
+  color: var(--headerTxt);
+  cursor: pointer;
+  background-color: var(--navBackColHov);
+  border-radius: 25px;
+}
+
+.hideContent {
+  display: none;
+}
+
+/*#loader {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  margin: -76px 0 0 -76px;
+  border: 16px transparent;
+  border-radius: 50%;
+  border-top: 16px solid var(--recNewsTxtColor);
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+*/
+
+.item {
+  background: rgba(255, 255, 255, 0.1);
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  transition: opacity 0.4s ease;
+}
+
+.loader {
+  --color: var(--btnCol);
+  --size-mid: 6vmin;
+  --size-dot: 1.5vmin;
+  --size-bar: 0.4vmin;
+  --size-square: 3vmin;
+  position: relative;
+  width: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.loader::before,
+.loader::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+}
+
+.loader.--4::before {
+  height: var(--size-bar);
+  width: 6vmin;
+  background-color: var(--color);
+  animation: loader-4 0.8s ease-in-out infinite;
+}
+
+
+@keyframes loader-4 {
+
+  0%,
+  44%,
+  88.1%,
+  100% {
+    transform-origin: left;
+  }
+
+  0%,
+  100%,
+  88% {
+    transform: scaleX(0);
+  }
+
+  44.1%,
+  88% {
+    transform-origin: right;
+  }
+
+  33%,
+  44% {
+    transform: scaleX(1);
+  }
+}
+
+.loadHint {
+  color: var(--recNewsbordrColor);
+  font-size: 3vh;
+  text-align: center;
+  padding: 3vh 4vw;
+}
+
+.socials {
+  font-size: 2vh;
+}
+
+.socials button {
+  background-color: var(--navBckCol);
+  border: none;
+  font-size: 2em;
+  color: var(--navCol);
+  padding: 2.5vh 0;
+  cursor: pointer;
+  float: left;
+  transition-duration: 0.5s;
+  border-radius: 10px;
+}
+
+.socials button:not(:last-child) {
+  border-right: none;
+  /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.socials:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.socials button:hover {
+  background-color: var(--navBackColHov);
+  color: var(--navColHov);
+  border-radius: 25px;
+}
+
+.socials button::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /*Remember to add position: relative; to parent!*/
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+  backdrop-filter: invert(100%);
+  transform: scale(0);
+  transition: 0.25s ease-in-out;
+}
+
+.socials button i {
+  transition: 0.25s ease-in-out;
+}
+
+.socials button:hover i {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.socials button:hover::after {
+  transform: scale(1);
+}
+
+/*------------------------------------- Popup Modal -------------------------------------*/
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+/* Modal Body */
+.modal-body {padding: 2px 16px;}
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+/* Add Animation */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 0; opacity: 1}
+}

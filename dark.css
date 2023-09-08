@@ -14,14 +14,21 @@
 }
 
 /*Style Body and HTML*/
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
   background-color: #1c1c1c;
   scroll-behavior: var(--smoothScrolling);
   transition-duration: 0.5s;
+  font-family: 'Foldit', cursive;
+  font-family: 'Shadows Into Light', cursive;
+  font-family: 'Tulpen One', cursive;
+  font-family: 'Vast Shadow', serif;
 }
+
+
 
 /*Style header*/
 .header {
@@ -106,10 +113,13 @@ ul {
   border-radius: 8px;
   border: none;
   padding: 14px 16px;
+  transition-duration: 0.5s;
 }
 
 .Settings button:hover {
   cursor: pointer;
+  color: var(--recNewsbordrColor);
+  background-color: var(--navBackColHov);
 }
 
 .btn-group {
@@ -129,7 +139,8 @@ ul {
 }
 
 .btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
+  border-right: none;
+  /* Prevent double borders */
 }
 
 /* Clear floats (clearfix hack) */
@@ -161,7 +172,8 @@ ul {
   transition-duration: 0.5s;
 }
 
-.footer h3, h5 {
+.footer h3,
+h5 {
   font-size: 2em;
 }
 
@@ -201,10 +213,33 @@ ul {
   padding: 14px 16px;
   font-size: 4vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
 }
 
-.musicButtons button:hover {
-  cursor: pointer;
+.musicButtons button::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /*Remember to add position: relative; to parent!*/
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+  backdrop-filter: invert(100%);
+  transform: scale(0);
+  transition: 0.25s ease-in-out;
+}
+
+.musicButtons button i {
+  transition: 0.25s ease-in-out;
+}
+
+.musicButtons button:hover i {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.musicButtons button:hover::after {
+  transform: scale(1);
 }
 
 .songList {
@@ -215,6 +250,28 @@ ul {
   padding: 1vh 1vw;
   margin: 2%;
   transition-duration: 0.5s;
+  max-height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.songList::-webkit-scrollbar {
+  width: 4vw;
+}
+
+.songList::-webkit-scrollbar-track {
+  border-radius: 5vw;
+}
+
+.songList::-webkit-scrollbar-thumb {
+  background: var(--navCol);
+  border-radius: 10vw;
+  transition-duration: 0.3s;
+}
+
+.songList::-webkit-scrollbar-thumb:hover {
+  background: var(--navColHov);
+  cursor: pointer;
 }
 
 .songList a {
@@ -262,56 +319,63 @@ ul {
 }
 */
 
-.item	{
-	background: rgba(255, 255, 255, 0.1);
-	display: grid;
-	place-items: center;
-	border-radius: 4px;
-	transition: opacity 0.4s ease;
+.item {
+  background: rgba(255, 255, 255, 0.1);
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  transition: opacity 0.4s ease;
 }
 
 .loader {
-	--color: var(--btnCol);
-	--size-mid: 6vmin;
-	--size-dot: 1.5vmin;
-	--size-bar: 0.4vmin;
-	--size-square: 3vmin;
-	display: block;
-	position: relative;
-	width: 50%;
-	display: grid;
-	place-items: center;
+  --color: var(--btnCol);
+  --size-mid: 6vmin;
+  --size-dot: 1.5vmin;
+  --size-bar: 0.4vmin;
+  --size-square: 3vmin;
+  position: relative;
+  width: 50%;
+  display: grid;
+  place-items: center;
 }
 
 .loader::before,
 .loader::after {
-	content: '';
-	box-sizing: border-box;
-	position: absolute;
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
 }
 
 .loader.--4::before {
   height: var(--size-bar);
   width: 6vmin;
   background-color: var(--color);
-  animation: loader-4 0.8s cubic-bezier(0, 0, 0.03, 0.9) infinite;
+  animation: loader-4 0.8s ease-in-out infinite;
 }
 
 
 @keyframes loader-4 {
-  0%, 44%, 88.1%, 100% {
+
+  0%,
+  44%,
+  88.1%,
+  100% {
     transform-origin: left;
   }
-  
-  0%, 100%, 88% {
+
+  0%,
+  100%,
+  88% {
     transform: scaleX(0);
   }
-  
-  44.1%, 88% {
+
+  44.1%,
+  88% {
     transform-origin: right;
   }
-  
-  33%, 44% {
+
+  33%,
+  44% {
     transform: scaleX(1);
   }
 }
@@ -321,4 +385,163 @@ ul {
   font-size: 3vh;
   text-align: center;
   padding: 3vh 4vw;
+}
+
+.socials {
+  font-size: 2vh;
+}
+
+.socials button {
+  background-color: var(--navBckCol);
+  border: none;
+  font-size: 2em;
+  color: var(--navCol);
+  padding: 2.5vh 0;
+  cursor: pointer;
+  float: left;
+  transition-duration: 0.5s;
+  border-radius: 10px;
+}
+
+.socials button:not(:last-child) {
+  border-right: none;
+  /* Prevent double borders */
+}
+
+/* Clear floats (clearfix hack) */
+.socials:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Add a background color on hover */
+.socials button:hover {
+  background-color: var(--navBackColHov);
+  color: var(--navColHov);
+  border-radius: 25px;
+}
+
+.socials button::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /*Remember to add position: relative; to parent!*/
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+  backdrop-filter: invert(100%);
+  transform: scale(0);
+  transition: 0.25s ease-in-out;
+}
+
+.socials button i {
+  transition: 0.25s ease-in-out;
+}
+
+.socials button:hover i {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.socials button:hover::after {
+  transform: scale(1);
+}
+
+
+
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
 }

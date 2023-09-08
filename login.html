@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content= "Welcome to the home page of my website. You'll find all the other pages here!">
+    <meta name= “robots” content="index, nofollow">
+    <meta property=”og:title” content="SevenT33N Music | Home Page">
+    <meta property=”og:description” content="The Official Landing Page for SevenT33N Music">
+    <meta property=”og:type” content="website">
+    <meta property=”og:image” content="/IMAGES/favicon.ico">
+    <meta property=”og:url” content="https://sevent33nmusic.sevent33n.repl.co">
+    <title>SevenT33N Music | Home Page</title>
+    <link id="pagestyle" href="light.css" rel="stylesheet" type="text/css" />
+    <script type="application/javascript" src="styling.js"></script>
+    <script type="application/javascript" src="updating.js"></script>
+    <script src="https://kit.fontawesome.com/31d1513c70.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+  </head>
+  <body onload="checkIconChoice()">
+
+
+
+<!-- SCRIPTS -->
+  <script>
+    var time;
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("space1").style.display = "none";
+      document.getElementById("space2").style.display = "none";
+      document.getElementById("hideContent").style.display = "block";
+    }
+    document.onreadystatechange = function () {
+      if (document.readyState == "complete") {
+        time = setTimeout(showPage, 500);
+      }
+    }
+    function setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + (exdays*24*60*60*1000));
+      let expires = "expires="+ d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+    function checkIconChoice() {
+      var choice = localStorage.getItem('unicodeIcons');
+      if (choice == 'true') {
+        document.getElementById('newsNavBtn').innerHTML = '📰';
+        document.getElementById('musicNavbtn').innerHTML = '🎵';
+        document.getElementById('settingsNavBtn').innerHTML = '⚙️';
+        document.getElementById('loginBtn').innerHTML = "🠖]";
+      }
+      let cookieValue = getCookie('adminLog');
+      if (cookieValue == '1') {
+        document.getElementById('loginBtn').innerHTML = "[🠔";
+        document.getElementById('loginBtn').title = "Logout";
+      }
+    }
+  </script>
+    <script>
+      function social(type) {
+        if (type == 'twitter') {
+          window.location.href = '#';
+        }
+        if (type == 'reddit') {
+          window.location.href = '#';
+        }
+        if (type == 'youtube') {
+          window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
+        }
+        if (type == 'patreon') {
+          window.location.href = 'https://patreon.com/SevenT33NMusic';
+        }
+        if (type == 'paypal') {
+          window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
+        }
+        if (type == 'contact') {
+          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeZiPYk0GT-Dk3IJhW9vrKP4NCFOnZuVOka64VlE0V2YKUAGQ/viewform?usp=sf_link';
+        }
+      }
+      function redirect(link) {
+        if (link != "#") {
+          window.location.href = link;
+        }
+      }
+      function log() {
+        let adminLogin = getCookie('adminLog');
+        let userLogin = getCookie('userLog');
+        if (adminLogin == '1') {
+          setCookie('adminLog', 'delete', -1);
+          window.location.href = '';
+        } else if (userLogin == '1') {
+          setCookie('userLog', 'delete', -1);
+          window.location.href = '';
+        } else {
+          window.location.href = '';
+        }
+      }
+    </script>
+
+
+
+<!-- HEADER -->
+    <div class="Center">
+      <div class="header">
+        <h1>SevenT33N Music</h1>
+        <h4>Login</h4>
+      </div>
+
+
+
+<!-- TOPNAV -->
+      <div class="btn-group" style="width:100%">
+        <div class="topnav">
+          <button title='News' id='newsNavBtn' onclick="redirect('/news.html')" style="width:33.3%"><i class="fa-solid fa-newspaper fa-bounce"></i></button>
+          <button title='Music' id='musicNavbtn' onclick="redirect('/music.html')" style="width:33.3%"><i class="fa-solid fa-music fa-beat"></i></button>
+          <button title='Settings' id='settingsNavBtn' onclick="redirect('/settings.html')" style="width:33.3%"><i class="fa-solid fa-gear fa-spin"></i></button>
+        </div>
+      </div>
+
+
+      
+<!-- LOADING -->
+<div id="space1"><br><br><br><br><br></div>
+<div class="item" id="loader">
+	<i class="loader --4"></i>
+</div>
+
+
+      
+      <!-- Main Content (First Div Hides Content While Page Loads) -->
+<div class="hideContent" id="hideContent">
+
+
+
+  <!-- Login Form -->
+  <form>
+    <label for="username">First Name</label>
+    <input type="email" id="username" name="username" placeholder="Username..">
+
+    <label for="password">Last Name</label>
+    <input type="password" id="password" name="password" placeholder="Password..">
+  </form>
+
+
+
+</div>
+<div id="space2"><br><br><br><br><br></div>
+
+
+      
+<!-- FOOTER -->
+    <div class="footer">
+      <h5>
+        <div class="btn-group" style="width:100%">
+          <button onclick="social('contact')" style="width:100%;" title='Contact Form'>Got A Question? Ask Me Here!</button>
+        </div>
+      </h5>
+
+
+<!-- SOCIAL LINKS -->
+      <h3>Show Your Support for Me!</h3>
+      <div class="Center">
+        <h5>
+          <div class="btn-group" style="width:100%">
+            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-twitter"></i></button>
+            <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
+            <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
+            <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>
+            <button onclick="social('reddit')" style="width:20%;" title='Reddit'><i class="fa-brands fa-reddit-alien"></i></button>
+          </div>
+        </h5>
+      </div>
+
+    </div>
+    </div>
+  </body>
+</html>

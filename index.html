@@ -16,8 +16,11 @@
     <script type="application/javascript" src="updating.js"></script>
     <script src="https://kit.fontawesome.com/31d1513c70.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Foldit&family=Shadows+Into+Light&family=Tulpen+One&family=Vast+Shadow&display=swap');
+    </style>
   </head>
-  <body>
+  <body onload="checkIconChoice()">
 
 
 
@@ -56,6 +59,21 @@
       }
       return "";
     }
+    function checkIconChoice() {
+      var choice = localStorage.getItem('unicodeIcons');
+      if (choice == 'true') {
+        document.getElementById('newsNavBtn').innerHTML = '📰';
+        document.getElementById('musicNavbtn').innerHTML = '🎵';
+        document.getElementById('settingsNavBtn').innerHTML = '⚙️';
+        document.getElementById('loginBtn').innerHTML = "🠖]";
+      }
+      let cookieValue = getCookie('adminLog');
+      if (cookieValue == '1') {
+        document.getElementById("logoutBtn").style.display = "block";
+        document.getElementById('loginBtn').innerHTML = "[🠔";
+        document.getElementById('loginBtn').title = "Logout";
+      }
+    }
   </script>
     <script>
       function social(type) {
@@ -63,7 +81,7 @@
           window.location.href = '#';
         }
         if (type == 'reddit') {
-          window.location.href = '#';
+          window.location.href = 'https://www.reddit.com/user/SevenT33N-Music';
         }
         if (type == 'youtube') {
           window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
@@ -75,11 +93,26 @@
           window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
         }
         if (type == 'contact') {
-          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeZiPYk0GT-Dk3IJhW9vrKP4NCFOnZuVOka64VlE0V2YKUAGQ/viewform?usp=sf_link';
+          window.location.href = 'https://contact-form.sevent33n.repl.co/';
         }
       }
       function redirect(link) {
-        window.location.href = link;
+        if (link != "#") {
+          window.location.href = link;
+        }
+      }
+      function log() {
+        let adminLogin = getCookie('adminLog');
+        let userLogin = getCookie('userLog');
+        if (adminLogin == '1') {
+          setCookie('adminLog', 'delete', -1);
+          window.location.href = '';
+        } else if (userLogin == '1') {
+          setCookie('userLog', 'delete', -1);
+          window.location.href = '';
+        } else {
+          window.location.href = '/login.html';
+        }
       }
     </script>
 
@@ -88,6 +121,11 @@
 <!-- HEADER -->
     <div class="Center">
       <div class="header">
+        <div class="btn-group" id="logoutBtn" style="width:10%;float: right;font-size: calc(1.2vw);display: none;">
+          <button title='Login' id='loginBtn' onclick="log()" style="width:100%;"><i class="fa-solid fa-right-to-bracket fa-fade"></i></button>
+        </div>
+        <br>
+        <br>
         <h1>SevenT33N Music</h1>
         <h4>Home</h4>
       </div>
@@ -97,9 +135,9 @@
 <!-- TOPNAV -->
       <div class="btn-group" style="width:100%">
         <div class="topnav">
-          <button title='News' onclick="redirect('/news.html')" style="width:33.3%"><i class="fa-solid fa-newspaper fa-bounce"></i></button>
-          <button title='Music' onclick="redirect('/music.html')" style="width:33.3%"><i class="fa-solid fa-music fa-beat"></i></button>
-          <button title='Settings' onclick="redirect('/settings.html')" style="width:33.3%"><i class="fa-solid fa-gear fa-spin"></i></button>
+          <button title='News' id='newsNavBtn' onclick="redirect('/news.html')" style="width:33.3%"><i class="fa-solid fa-newspaper fa-bounce"></i></button>
+          <button title='Music' id='musicNavbtn' onclick="redirect('/music.html')" style="width:33.3%"><i class="fa-solid fa-music fa-beat"></i></button>
+          <button title='Settings' id='settingsNavBtn' onclick="redirect('/settings.html')" style="width:33.3%"><i class="fa-solid fa-gear fa-spin"></i></button>
         </div>
       </div>
 
@@ -108,7 +146,7 @@
 <div id="space1"><br><br><br><br><br></div>
 <div class="item" id="loader">
 	<i class="loader --4"></i>
-	</div>
+</div>
 <div class="hideContent" id="hideContent">
 
       
@@ -124,12 +162,12 @@
 
 <!-- NEWS -->
     <div class="mstRecNews">
-      <h1>News</h1>
-      <h2>UPDATE LOG 1.2</h2> <!-- News Headline -->
+      <h1>NEWS</h1>
+      <h2>UPDATE LOG 1.2.2</h2> <!-- News Headline -->
       <br>
-      <p>Yes, the bug on windows still exists. I'm sorry it hasn't been fixed yet.<br>I added a loading icon, so the wait time is a little more justified.<br>Great News! The layout of the music page has been completed! Check out the amazing new design, with contrasting colors for easy readability and so much more!</p> <!-- News -->
+      <p>I updated the "twitter" icons to match Elon Musk's Rebranding. Why did he do this? I don't know, but I don't like it.</p> <!-- News -->
       <br><br>
-      <h6>Sun August 8th, 2023 (08:17 AM UTC)</h6> <!-- Date of News Release -->
+      <h6>Thu September 7th, 2023 (05:25 PM UTC)</h6> <!-- Date of News Release -->
     </div>
     <br>
 
@@ -141,12 +179,17 @@
       <h2>Dark Humor</h2>
       <br>
       <p>I created a dark humor website, for those who's humor is a little more edgy.</p>
-      <a href="javascript:void(0);">Dark Humor Website</a>
+      <a target="_blank" rel="noopener" href="https://dark-humor.mynamelsbob.repl.co/">Dark Humor Website</a>
       <br>
       <br>
       <h2>Unicode Copy/Paste</h2>
       <br>
       <p>This is a WIP website, where a user can search for an emoji or unicode character, and copy it to their clipboard to paste elsewhere. Once released, it will be updated with new unicode characters, so that it can be the largest unicode database on the internet.</p>
+      <br>
+      <br>
+      <h2>Budget</h2>
+      <br>
+      <p>A website to help you budget. Thats it. Simple. To-the-point. Questions? None? Good.</p>
     </div>
 
 
@@ -166,7 +209,7 @@
       <div class="Center">
         <h5>
           <div class="btn-group" style="width:100%">
-            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-twitter"></i></button>
+            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-x-twitter"></i></button>
             <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
             <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
             <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>
@@ -174,8 +217,6 @@
           </div>
         </h5>
       </div>
-
-
 
     </div>
     </div>

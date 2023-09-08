@@ -58,12 +58,22 @@
         document.getElementById("pagestyle").setAttribute("href", v); 
         localStorage.setItem("darkMode", v);
       }
+      function unicodeSet(val, hideID, showID) {
+        if (val == 'true') {
+          localStorage.setItem("unicodeIcons", 'true');
+        }
+        if (val == 'false') {
+          localStorage.setItem("unicodeIcons", 'false');
+        }
+        let show = document.getElementById(showID);
+        let hide = document.getElementById(hideID);
+      }
       function social(type) {
         if (type == 'twitter') {
           window.location.href = '#';
         }
         if (type == 'reddit') {
-          window.location.href = '#';
+          window.location.href = 'https://www.reddit.com/user/SevenT33N-Music';
         }
         if (type == 'youtube') {
           window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
@@ -75,7 +85,7 @@
           window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
         }
         if (type == 'contact') {
-          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeZiPYk0GT-Dk3IJhW9vrKP4NCFOnZuVOka64VlE0V2YKUAGQ/viewform?usp=sf_link';
+          window.location.href = 'https://contact-form.sevent33n.repl.co/';
         }
       }
       function login() {
@@ -121,6 +131,11 @@
           <button onclick="changeSheet('light.css')" style="border: 3px solid black;">Enable Light Mode</button>
           <button onclick="changeSheet('dark.css')" style="border: 3px solid black;">Enable Dark Mode</button>
         </div>
+        <br>
+        <div class="Settings">
+          <button onclick="unicodeSet('false', '5', '6')" id='5' style="border: 3px solid black;">Disable Unicode Icons</button>
+          <button onclick="unicodeSet('true', '6', '5')" id='6' style="border: 3px solid black;">Enable Unicode Icons</button>
+        </div>
       </div>
       <br><br>
     </div>
@@ -137,7 +152,7 @@
       <div class="Center">
         <h5>
           <div class="btn-group" style="width:100%">
-            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-twitter"></i></button>
+            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-x-twitter"></i></button>
             <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
             <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
             <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>

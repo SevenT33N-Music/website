@@ -15,6 +15,9 @@
     <script type="application/javascript" src="styling.js"></script>
     <script src="https://kit.fontawesome.com/71266e3234.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Foldit&family=Shadows+Into+Light&family=Tulpen+One&family=Vast+Shadow&display=swap');
+    </style>
   </head>
   <body onload="setBtnVis()">
   <script>
@@ -58,7 +61,7 @@
           window.location.href = '#';
         }
         if (type == 'reddit') {
-          window.location.href = '#';
+          window.location.href = 'https://www.reddit.com/user/SevenT33N-Music';
         }
         if (type == 'youtube') {
           window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
@@ -70,7 +73,7 @@
           window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
         }
         if (type == 'contact') {
-          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeZiPYk0GT-Dk3IJhW9vrKP4NCFOnZuVOka64VlE0V2YKUAGQ/viewform?usp=sf_link';
+          window.location.href = 'https://contact-form.sevent33n.repl.co/';
         }
       }
       function redirect(link) {
@@ -79,6 +82,18 @@
     </script>
     <script>
       function setBtnVis() {
+        var alertHide = document.getElementById('alertChangeOfIcons');
+        /*
+        alertHide.setAttribute("hidden", "hidden");
+        var alertHide = document.getElementById('alertChangeOfScrollbar');
+        */
+        alertHide.setAttribute("hidden", "hidden");
+        var choice = localStorage.getItem('unicodeIcons');
+        if (choice == 'true') {
+          document.getElementById('homeNavBtn').innerHTML = '🏠';
+          document.getElementById('musicNavBtn').innerHTML = '🎵';
+          document.getElementById('newsNavBtn').innerHTML = '📰';
+        }
         let s = localStorage.getItem("smoothScrolling");
         if (s == 'yes') {
           let showBtn = document.getElementById('2');
@@ -103,6 +118,32 @@
           hideBtn.setAttribute("hidden", "hidden");
           showBtn.removeAttribute("hidden");
         }
+        let u = localStorage.getItem("unicodeIcons");
+        if (u == 'true') {
+          let showBtn = document.getElementById('5');
+          let hideBtn = document.getElementById('6');
+          hideBtn.setAttribute("hidden", "hidden");
+          showBtn.removeAttribute("hidden");
+        } else {
+          let showBtn = document.getElementById('6');
+          let hideBtn = document.getElementById('5');
+          hideBtn.setAttribute("hidden", "hidden");
+          showBtn.removeAttribute("hidden");
+        }
+        /*
+        let cs = localStorage.getItem("scrollbar");
+        if (cs == 'true') {
+          let showBtn = document.getElementById('7');
+          let hideBtn = document.getElementById('8');
+          hideBtn.setAttribute("hidden", "hidden");
+          showBtn.removeAttribute("hidden");
+        } else {
+          let showBtn = document.getElementById('8');
+          let hideBtn = document.getElementById('7');
+          hideBtn.setAttribute("hidden", "hidden");
+          showBtn.removeAttribute("hidden");
+        }
+        */
       }
       function changeSheet(v, hideID, showID) {
         document.getElementById("pagestyle").setAttribute("href", v); 
@@ -125,12 +166,73 @@
         if (i == 'yes') {
           r.style.setProperty('--smoothScrolling', 'smooth');
           localStorage.setItem("smoothScrolling", 'yes');
+          alertModalDisplayed = localStorage.getItem("alertDisplayed");
+          if (alertModalDisplayed != "true") {
+            localStorage.setItem("alertDisplayed", "true");
+            openModal();
+          }
         } else if (i == 'no') {
           r.style.setProperty('--smoothScrolling', 'auto');
           localStorage.setItem("smoothScrolling", 'no');
         }
       }
+      const currentChoice = localStorage.getItem("displayIcons");
+      const currentChoice2 = localStorage.getItem("scrollbar");
+      function unicodeSet(val, hideID, showID) {
+        let alertIcon = document.getElementById('alertChangeOfIcons');
+        if (val != currentChoice) {
+          alertIcon.removeAttribute("hidden");
+        }
+        if (currentChoice == val) {
+          alertIcon.setAttribute("hidden", "hidden");
+        }
+        if (val == 'true') {
+          localStorage.setItem("unicodeIcons", 'true');
+        }
+        if (val == 'false') {
+          localStorage.setItem("unicodeIcons", 'false');
+        }
+        let show = document.getElementById(showID);
+        let hide = document.getElementById(hideID);
+        hide.setAttribute("hidden", "hidden");
+        show.removeAttribute("hidden");
+      }
+      /*
+      function customScrollbar(val, hideID, showID) {
+        let alertScroll = document.getElementById('alertChangeOfScrollbar');
+        if (val != currentChoice2) {
+          alertScroll.removeAttribute("hidden");
+        }
+        if (currentChoice2 == val) {
+          alertScroll.setAttribute("hidden", "hidden");
+        }
+        if (val == 'true') {
+          localStorage.setItem('scrollbar', 'true');
+        } else if (val = 'false') {
+          localStorage.setItem('scrollbar', 'false');
+        }
+        let show = document.getElementById(showID);
+        let hide = document.getElementById(hideID);
+        hide.setAttribute("hidden", "hidden");
+        show.removeAttribute("hidden");
+      }
+      */
     </script>
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close">&times;</span>
+          <h2>ALERT</h2>
+        </div>
+        <div class="modal-body">
+          <p>Smooth does NOT make page scrolling smooth. To see what it does, go to the 'News' page and scroll to the bottom. There is a 'scroll to top' button. Click it.</p>
+        </div>
+        <div class="modal-footer">
+          <h3>Copyright SevenT33N Music 2020-2023. All Rights Reserved.</h3>
+        </div>
+      </div>
+    </div>
     <div class="Center">
       <div class="header">
         <h1>SevenT33N Music</h1>
@@ -138,9 +240,9 @@
       </div>
       <div class="btn-group" style="width:100%">
         <div class="topnav">
-          <button onclick="redirect('/index.html')" style="width:33.3%" title='Home Page'><i class="fa-solid fa-house fa-flip"></i></button>
-          <button onclick="redirect('/news.html')" style="width:33.3%" title='News'><i class="fa-solid fa-newspaper fa-bounce"></i></button>
-          <button onclick="redirect('/music.html')" style="width:33.3%" title='Music'><i class="fa-solid fa-music fa-beat"></i></button>
+          <button id="homeNavBtn" onclick="redirect('/index.html')" style="width:33.3%" title='Home Page'><i class="fa-solid fa-house fa-flip"></i></button>
+          <button id="newsNavBtn" onclick="redirect('/news.html')" style="width:33.3%" title='News'><i class="fa-solid fa-newspaper fa-bounce"></i></button>
+          <button id="musicNavBtn" onclick="redirect('/music.html')" style="width:33.3%" title='Music'><i class="fa-solid fa-music fa-beat"></i></button>
         </div>
       </div>
       <br>
@@ -154,11 +256,28 @@
         <button onclick="setVar('no', '2', '1')" id='2'>Disable Smooth Scrolling</button>
       </div>
       <br>
+      <br>
       <div class="Settings">
         <button onclick="changeSheet('light.css', '3', '4')" id='3'>Enable Light Mode</button>
         <button onclick="changeSheet('dark.css', '4', '3')" id='4'>Enable Dark Mode</button>
       </div>
       <br>
+      <br>
+      <div class="Settings">
+        <h6 style='color: red; text-align: center;' id="alertChangeOfIcons">*Change Will Take Affect Once Page is Refreshed*</h6>
+        <button onclick="unicodeSet('false', '5', '6')" id='5'>Disable Unicode Icons</button>
+        <button onclick="unicodeSet('true', '6', '5')" id='6'>Enable Unicode Icons</button>
+      </div>
+      <br>
+      <!--
+      <br>
+      <div class="Settings">
+        <h6 style='color: red; text-align: center;' id="alertChangeOfScrollbar">*Change Will Take Affect Once Page is Refreshed*</h6>
+        <button onclick="customScrollbar('false', '7', '8')" id='7'>Disable Custom Scrollbar</button>
+        <button onclick="customScrollbar('true', '8', '7')" id='8'>Enable Custom Scrollbar</button>
+      </div>
+      </br>
+      -->
     </div>
     <div id="space2"><br><br><br><br><br></div>
     <div class="footer">
@@ -171,7 +290,7 @@
       <div class="Center">
         <h5>
           <div class="btn-group" style="width:100%">
-            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-twitter"></i></button>
+            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-x-twitter"></i></button>
             <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
             <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
             <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>
@@ -180,6 +299,26 @@
         </h5>
       </div>
     </div>
+    <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      var smoothScrollBtn = document.getElementById("1");
+      smoothScrollBtn.onclick = function() {
+        modal.style.display = "block";
+      }
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
   </body>
 </html>
 

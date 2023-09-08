@@ -15,7 +15,11 @@
     <script type="application/javascript" src="styling.js"></script>
     <script type="application/javascript" src="updating.js"></script>
     <script src="https://kit.fontawesome.com/71266e3234.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@{{5.3.2}}/dist/amplitude.js"></script>
     <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Foldit&family=Shadows+Into+Light&family=Tulpen+One&family=Vast+Shadow&display=swap');
+    </style>
   </head>
   <body onload="createSongNum()">
   <script>
@@ -49,7 +53,7 @@
           window.location.href = '#';
         }
         if (type == 'reddit') {
-          window.location.href = '#';
+          window.location.href = 'https://www.reddit.com/user/SevenT33N-Music';
         }
         if (type == 'youtube') {
           window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
@@ -61,7 +65,7 @@
           window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
         }
         if (type == 'contact') {
-          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeZiPYk0GT-Dk3IJhW9vrKP4NCFOnZuVOka64VlE0V2YKUAGQ/viewform?usp=sf_link';
+          window.location.href = 'https://contact-form.sevent33n.repl.co/';
         }
       }
       // Redirect to different page on webiste
@@ -71,8 +75,24 @@
     </script>
     <!-- Audio Script -->
     <script>
+      function changePlayBtnStyle() {
+        element.classList.add("playing");
+      }
       function createSongNum() { // Create Song Index
         localStorage.setItem('songIndex', '0');
+        var choice = localStorage.getItem('unicodeIcons');
+        if (choice == 'true') {
+          document.getElementById('newsNavBtn').innerHTML = '📰';
+          document.getElementById('homeNavBtn').innerHTML = '🏠';
+          document.getElementById('settingsNavBtn').innerHTML = '⚙️';
+          document.getElementById('skipBack').innerHTML = '⏮';
+          document.getElementById('skipFoward').innerHTML = '⏭';
+          document.getElementById('playBtn').innerHTML = '⏯';
+          document.getElementById('pauseBtn').innerHTML = '⏯';
+          document.getElementById('repeatBtn').innerHTML = '🔁';
+          document.getElementById('restartBtn').innerHTML = '⏪';
+          document.getElementById('shuffleBtn').innerHTML = '🔀';
+        }
       }
       var time;
       function showPage() {
@@ -97,9 +117,9 @@
           time = setTimeout(showPage, 1000);
         }
       }
-      var coverArr = ['/IMAGES/stay high trap.jpg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/someoneYouLoved.jpeg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/staticCover.jpg', '/IMAGES/staticCover.jpg']; // Links To Song Covers
-      var songArr = ['/AUDIO/stayHighTrap.mp3', '/AUDIO/Mekayla.mp3', '/AUDIO/someoneYouLoved.mp3', '/AUDIO/Mask off Aesthetic.mp3', '/AUDIO/wontLetGoClean.mp3', "/AUDIO/Lyin' To My Face.mp3", '/AUDIO/Trust.mp3']; // Links to songs
-      var songTitleArr = ['Juice WRLD - Stay High (Trap Remix)', 'SevenT33N - Mekayla [Official Audio]', 'Lewis Capaldi - Someone You Loved (Acoustic Remix)', 'Future - Mask Off (Aesthetic Mix)', "Juice WRLD - Won't Let Go (Clean Remix)", "SevenT33N - Lyin' To My Face", "SevenT33N - Trust"]; // Song Titles
+      var coverArr = ['/IMAGES/stay high trap.jpg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/someoneYouLoved.jpeg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/staticCover.jpg', '/IMAGES/staticCover.jpg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/placeHolderCover.jpeg', '/IMAGES/loveReggaeton.jpeg']; // Links To Song Covers
+      var songArr = ['/AUDIO/stayHighTrap.mp3', '/AUDIO/Mekayla.mp3', '/AUDIO/someoneYouLoved.mp3', '/AUDIO/Mask off Aesthetic.mp3', '/AUDIO/wontLetGoClean.mp3', "/AUDIO/Lyin' To My Face.mp3", '/AUDIO/Trust.mp3', "/AUDIO/thatRecipe.mp3", "/AUDIO/Mekayla (Heartbreak Remix).mp3", "/AUDIO/Stay With Me.mp3", "/AUDIO/Too Far.mp3", "/AUDIO/Love Reggaeton.mp3"]; // Links to songs
+      var songTitleArr = ['Juice WRLD - Stay High (Trap Remix)', 'SevenT33N - Mekayla [Official Audio]', 'Lewis Capaldi - Someone You Loved (Acoustic Remix)', 'Future - Mask Off (Aesthetic Mix)', "Juice WRLD - Won't Let Go (Clean Remix)", "SevenT33N - Lyin' To My Face", "SevenT33N - Trust", "BiggRojo - That Recipe (Prod. SevenT33N)", "Mekayla (Heartbreak Remix)", "Sam Smith - Stay With Me (Remade)", "SevenT33N - Too Far", "SevenT33N - Love Reggaeton"]; // Song Titles
       listSongTitles();
       function newSongNum(num) { // Calculate New Song Index
         var prevSongID = localStorage.getItem('songIndex');
@@ -174,6 +194,14 @@
         document.getElementById('song5').innerHTML = array2[4];
         document.getElementById('song6').innerHTML = array2[5];
         document.getElementById('song7').innerHTML = array2[6];
+        document.getElementById('song8').innerHTML = array2[7];
+        document.getElementById('song9').innerHTML = array2[8];
+        document.getElementById('song10').innerHTML = array2[9];
+        document.getElementById('song11').innerHTML = array2[10];
+        document.getElementById('song12').innerHTML = array2[11];
+        console.log(array1.length);
+        console.log(array2.length);
+        console.log(array3.length);
         return array1;
         return array2;
         return array3;
@@ -182,8 +210,8 @@
         var audioE = document.getElementById('song'); // get id of audio element
         audioE.addEventListener("ended", function() {
           audioE.pause();
-          audioE.currentTime = 0;
           newSongNum('+1');
+          audioE.currentTime = 0;
           audioE.play();
         });
         function playAudio() { // play audio
@@ -245,9 +273,9 @@
       </div>
       <div class="btn-group" style="width:100%"> <!-- Topnav Button Group -->
         <div class="topnav"> <!-- Top Navigation -->
-          <button onclick="redirect('/index.html')" style="width:33.3%" title="Home Page"><i class="fa-solid fa-house fa-flip"></i></button>
-          <button onclick="redirect('/news.html')" style="width:33.3%" title='News'><i class="fa-solid fa-newspaper fa-bounce"></i></button>
-          <button onclick="redirect('/settings.html')" style="width:33.3%" title='Settings'><i class="fa-solid fa-gear fa-spin"></i></button>
+          <button onclick="redirect('/index.html')" id='homeNavBtn' style="width:33.3%" title="Home Page"><i class="fa-solid fa-house fa-flip"></i></button>
+          <button onclick="redirect('/news.html')" id='newsNavBtn' style="width:33.3%" title='News'><i class="fa-solid fa-newspaper fa-bounce"></i></button>
+          <button onclick="redirect('/settings.html')" id='settingsNavBtn' style="width:33.3%" title='Settings'><i class="fa-solid fa-gear fa-spin"></i></button>
         </div>
       </div>
       <br>
@@ -282,9 +310,12 @@
               <button hidden="hidden" onclick="audio('pause')" id="pauseBtn" title='Pause'><i class="fa-solid fa-pause"></i></button> <!-- Pause Button -->
               <button onclick="newSongNum('+1')" id="skipFoward" title='Next'><i class="fa-solid fa-forward-step"></i></button> <!-- Next Song Button -->
               <br><br>
-              <button onclick="restart('song')" title="Restart"><i class="fa-solid fa-rotate-left"></i></button> <!-- Restart Button -->
-              <button onclick="audio('repeat')" title="Repeat"><i class="fa-solid fa-repeat"></i></button> <!-- Repeat Button -->
-              <button onclick="audio('shuffle')" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button> <!-- Shuffle Button -->
+              <button onclick="restart('song')" id='restartBtn' title="Restart"><i class="fa-solid fa-rotate-left"></i></button> <!-- Restart Button -->
+              <button onclick="audio('repeat')" id='repeatBtn' title="Repeat"><i class="fa-solid fa-repeat"></i></button> <!-- Repeat Button -->
+              <button onclick="audio('shuffle')" id='shuffleBtn' title="Shuffle"><i class="fa-solid fa-shuffle"></i></button> <!-- Shuffle Button -->
+              <br>
+              <br>
+              <br>
               <br>
               <br>
               <br>
@@ -319,6 +350,26 @@
                 <a id='song7' style='font-size: 3vw;' onclick="newSongNum(6)">SevenT33N - Trust</a>
                 <br>
                 <br>
+                <br>
+                <a id='song8' style='font-size: 3vw;' onclick="newSongNum(7)">BiggRojo - That Recipe (Prod. SevenT33N)</a>
+                <br>
+                <br>
+                <br>
+                <a id='song9' style='font-size: 3vw;' onclick="newSongNum(8)">SevenT33N - Mekayla (Heartbreak Remix)</a>
+                <br>
+                <br>
+                <br>
+                <a id='song10' style='font-size: 3vw;' onclick="newSongNum(9)">Sam Smith - Stay With Me (Remade)</a>
+                <br>
+                <br>
+                <br>
+                <a id='song11' style='font-size: 3vw;' onclick="newSongNum(10)">SevenT33N - Too Far</a>
+                <br>
+                <br>
+                <br>
+                <a id='song12' style='font-size: 3vw;' onclick="newSongNum(11)">SevenT33N - Love Reggaeton</a>
+                <br>
+                <br>
               </div>
             </div>
           </div>
@@ -338,7 +389,7 @@
       <div class="Center"> <!-- Center Footer Buttons -->
         <h5>
           <div class="btn-group" style="width:100%"> <!-- Create button group for socials buttons -->
-            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-twitter"></i></button>
+            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-x-twitter"></i></button>
             <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
             <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
             <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>

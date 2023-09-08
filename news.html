@@ -16,8 +16,11 @@
     <script type="application/javascript" src="styling.js"></script>
     <script src="https://kit.fontawesome.com/71266e3234.js" crossorigin="anonymous"></script>
     <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Foldit&family=Shadows+Into+Light&family=Tulpen+One&family=Vast+Shadow&display=swap');
+    </style>
   </head>
-  <body>
+  <body onload="checkIconChoice()">
   <script>
     function setCookie(cname, cvalue, exdays) {
       const d = new Date();
@@ -60,7 +63,7 @@
           window.location.href = '#';
         }
         if (type == 'reddit') {
-          window.location.href = '#';
+          window.location.href = 'https://www.reddit.com/user/SevenT33N-Music';
         }
         if (type == 'youtube') {
           window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
@@ -72,7 +75,7 @@
           window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
         }
         if (type == 'contact') {
-          window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSeZiPYk0GT-Dk3IJhW9vrKP4NCFOnZuVOka64VlE0V2YKUAGQ/viewform?usp=sf_link';
+          window.location.href = 'https://contact-form.sevent33n.repl.co/';
         }
       }
       function redirect(link) {
@@ -86,6 +89,14 @@
       function backToTop() {
         window.location.href = "#";
       }
+      function checkIconChoice() {
+        var choice = localStorage.getItem('unicodeIcons');
+        if (choice == 'true') {
+          document.getElementById('homeNavBtn').innerHTML = '🏠';
+          document.getElementById('musicNavBtn').innerHTML = '🎵';
+          document.getElementById('settingsNavBtn').innerHTML = '⚙️';
+        }
+      }
     </script>
     <div class="Center">
       <div class="header">
@@ -94,9 +105,9 @@
       </div>
       <div class="btn-group" style="width:100%">
         <div class="topnav">
-          <button onclick="redirect('/index.html')" style="width:33.3%" title='Home Page'><i class="fa-solid fa-house fa-flip"></i></button> <!-- <i class="fa-solid fa-house fa-flip"></i> -->
-          <button onclick="redirect('/music.html')" style="width:33.3%" title='Music'><i class="fa-solid fa-music fa-beat"></i></button>
-          <button onclick="redirect('/settings.html')" style="width:33.3%" title='Settings'><i class="fa-solid fa-gear fa-spin"></i></button>
+          <button id = 'homeNavBtn' onclick="redirect('/index.html')" style="width:33.3%" title='Home Page'><i class="fa-solid fa-house fa-flip"></i></button> <!-- <i class="fa-solid fa-house fa-flip"></i> -->
+          <button id = 'musicNavBtn' onclick="redirect('/music.html')" style="width:33.3%" title='Music'><i class="fa-solid fa-music fa-beat"></i></button>
+          <button id = 'settingsNavBtn' onclick="redirect('/settings.html')" style="width:33.3%" title='Settings'><i class="fa-solid fa-gear fa-spin"></i></button>
         </div>
       </div>
       <br>
@@ -110,15 +121,39 @@
     </div>
     <div class="hideContent" id="hideContent">
     <div class="mstRecNews">
-      <h2>UPDATE LOG 1.2</h2> <!-- News Headline -->
+      <h2>UPDATE LOG 1.2.2</h2> <!-- News Headline -->
+      <br>
+      <p>I updated the "twitter" icons to match Elon Musk's Rebranding. Why did he do this? I don't know, but I don't like it.</p> <!-- News -->
+      <br><br>
+      <h6>Thu September 7th, 2023 (05:25 PM UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>UPDATE LOG 1.2.1</h2> <!-- News Headline -->
+      <br>
+      <p>I have updated the button interaction on the <a href="/music.html">music page</a>.</p> <!-- News -->
+      <br><br>
+      <h6>Fri August 18th, 2023 (07:53 PM UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>UPDATE LOG 1.2.0</h2> <!-- News Headline -->
+      <br>
+      <p>I have created a work-around for the bug on windows, which is to simply replace the original icons with emojis. To enable this, click the nav button in the top right, which will open settings. There you can change the unicode options: click "disable". That should load emojis instead of icons.<br>I also fixed the link to my dark humor website, so you can actually open it now. Here is the link: <a target="_blank" rel="noopener" href="https://dark-humor.mynamelsbob.repl.co/">Dark Humor Website</a>.<br><br><hr><br<br><b><i>MUSIC NEWS</i></b><br><br>I will finish publishing the songs for my Album "STATIC" soon. Meanwhile, I'm excited to announce a new album, simply titled "E" (I know, <i>super</i> creative).</p> <!-- News -->
+      <br><br>
+      <h6>Thu August 10th, 2023 (04:33 PM UTC)</h6> <!-- Date of News Release -->
+    </div>
+    <br>
+    <div class="mstRecNews">
+      <h2>UPDATE LOG 1.1.0</h2> <!-- News Headline -->
       <br>
       <p>Yes, the bug on windows still exists. I'm sorry it hasn't been fixed yet.<br>I added a loading icon, so the wait time is a little more justified.<br>Great News! The layout of the music page has been completed! Check out the amazing new design, with contrasting colors for easy readability and so much more!</p> <!-- News -->
       <br><br>
-      <h6>Sun August 8th, 2023 (08:17 AM UTC)</h6> <!-- Date of News Release -->
+      <h6>Sun August 6th, 2023 (08:17 AM UTC)</h6> <!-- Date of News Release -->
     </div>
     <br>
       <div class="mstRecNews">
-      <h2>UPDATE LOG 1.1</h2> <!-- News Headline -->
+      <h2>UPDATE LOG 1.0.2</h2> <!-- News Headline -->
       <br>
       <p>There is still a bug on windows which fails to load icons. I'm still working to fix it.<br>I have added a "projects" section to the home page, so you can see some of the things I've made or are working on.<br>The redesign for the music page is nearly complete, I just need to add the finishing touches.<br>Thats all for now, have fun ya'll!</p> <!-- News -->
       <br><br>
@@ -126,7 +161,7 @@
     </div>
     <br>
     <div class="mstRecNews">
-      <h2>UPDATE LOG 1.0</h2> <!-- News Headline -->
+      <h2>UPDATE LOG 1.0.1</h2> <!-- News Headline -->
       <br>
       <p>I am aware of a bug on windows where the icons may not load. I've added "title" tags to the buttons, so you can simply hover your cursor over the buttons to see what the button does.<br>I am also updating the layout of the "Music" page. Please be patient while I work, as it could take a few weeks.</p> <!-- News -->
       <br><br>
@@ -247,11 +282,11 @@
       <div class="Center">
         <h5>
           <div class="btn-group" style="width:100%">
-            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-twitter"></i></button>
+            <button onclick="javascript:void(0);" style="width:20%;" title='Twitter'><i class="fa-brands fa-x-twitter"></i></button>
             <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
             <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
             <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>
-            <button onclick="social('reddit')" style="width:20%;" title='Reddit'><i class="fa-brands fa-reddit-alien"></i></button>
+            <button onclick="javascript:void(0);" style="width:20%;" title='Reddit'><i class="fa-brands fa-reddit-alien"></i></button>
           </div>
         </h5>
       </div>
