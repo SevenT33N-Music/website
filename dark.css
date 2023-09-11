@@ -22,10 +22,6 @@ body {
   background-color: #1c1c1c;
   scroll-behavior: var(--smoothScrolling);
   transition-duration: 0.5s;
-  font-family: 'Foldit', cursive;
-  font-family: 'Shadows Into Light', cursive;
-  font-family: 'Tulpen One', cursive;
-  font-family: 'Vast Shadow', serif;
 }
 
 

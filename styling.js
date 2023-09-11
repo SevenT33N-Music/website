@@ -5,31 +5,12 @@ function swapStyleSheet(sheet) {
 
 // Check for Dark Mode on Page Load
 var d = localStorage.getItem("darkMode");
-var f = localStorage.getItem("scrollbar");
 if (d == "dark.css") {
-  if (f == 'true') {
-    swapStyleSheet("darkCustomScroll.css");
-  } else {
-    swapStyleSheet("dark.css");
-  }
+  swapStyleSheet("dark.css");
 } else if (d == 'light.css') {
-  if (f == 'true') {
-    swapStyleSheet("lightCustomScroll.css");
-  } else {
-    swapStyleSheet("light.css");
-  }
-} else if (d == "darkCustomScroll.css") {
-  if (f == 'true') {
-    swapStyleSheet("darkCustomScroll.css");
-  } else {
-    swapStyleSheet("dark.css");
-  }
-} else if (d == "lightCustomScroll.css") {
-  if (f == 'true') {
-    swapStyleSheet("lightCustomScroll.css");
-  } else {
-    swapStyleSheet("light.css");
-  }
+  swapStyleSheet("light.css");
+} else {
+  swapStyleSheet("light.css");
 }
 
 // Check for Smooth Scroll on Page Load
