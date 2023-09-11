@@ -1,3 +1,4 @@
+/*------------------------------------- ROOT -------------------------------------*/
 :root {
   --headerTxt: #f3f5f8;
   --headerBck: #07090a;
@@ -22,9 +23,10 @@ body {
   background-color: #1c1c1c;
   scroll-behavior: var(--smoothScrolling);
   transition-duration: 0.5s;
+  font-family: 'Merienda', cursive;
 }
 
-
+/*------------------------------------- Header -------------------------------------*/
 
 /*Style header*/
 .header {
@@ -36,10 +38,11 @@ body {
   border-bottom: 1.5vh solid black;
   transition-duration: 0.5s;
 }
-
 .header h1 {
   font-size: 2em;
 }
+
+/*------------------------------------- Image / Logo -------------------------------------*/
 
 /*Style logo img*/
 .logo {
@@ -48,9 +51,13 @@ body {
   transition-duration: 0.5s;
 }
 
+/*------------------------------------- Center Elements -------------------------------------*/
+
 .Center {
   text-align: center;
 }
+
+/*------------------------------------- News Div Element -------------------------------------*/
 
 .mstRecNews {
   color: var(--recNewsTxtColor);
@@ -62,23 +69,22 @@ body {
   margin: 2%;
   transition-duration: 0.5s;
 }
-
 .mstRecNews a {
   text-decoration: none;
   color: #11a5e4;
 }
-
 .mstRecNews a:hover {
   text-decoration: none;
   color: #00b3ff;
 }
+
+/*------------------------------------- Top Navagation Bar -------------------------------------*/
 
 /* The navbar container */
 .topnav {
   overflow: hidden;
   background-color: var(--navBckCol);
 }
-
 /* Navbar links */
 .topnav a {
   float: left;
@@ -88,21 +94,22 @@ body {
   padding: 14px 16px;
   text-decoration: none;
 }
-
 /* Links - change color on hover */
 .topnav a:hover {
   background-color: var(--navBackColHov);
   color: var(--navColHov);
 }
 
-.Settings {
-  color: black;
-}
+/*------------------------------------- List Style -------------------------------------*/
 
 ul {
   list-style: none;
 }
 
+/*------------------------------------- Settings -------------------------------------*/
+.Settings {
+  color: black;
+}
 .Settings button {
   color: var(--btnCol);
   background-color: var(--btnBckCol);
@@ -111,17 +118,17 @@ ul {
   padding: 14px 16px;
   transition-duration: 0.5s;
 }
-
 .Settings button:hover {
   cursor: pointer;
   color: var(--recNewsbordrColor);
   background-color: var(--navBackColHov);
 }
 
+/*------------------------------------- Button Group -------------------------------------*/
+
 .btn-group {
   font-size: 2vh;
 }
-
 .btn-group button {
   background-color: var(--navBckCol);
   border: none;
@@ -133,19 +140,16 @@ ul {
   transition-duration: 0.5s;
   border-radius: 10px;
 }
-
 .btn-group button:not(:last-child) {
   border-right: none;
   /* Prevent double borders */
 }
-
 /* Clear floats (clearfix hack) */
 .btn-group:after {
   content: "";
   clear: both;
   display: table;
 }
-
 /* Add a background color on hover */
 .btn-group button:hover {
   background-color: var(--navBackColHov);
@@ -153,10 +157,14 @@ ul {
   border-radius: 25px;
 }
 
+/*------------------------------------- News (On Home Page) -------------------------------------*/
+
 .homeNewsTxt {
   color: var(--headerTxt);
   text-align: center;
 }
+
+/*------------------------------------- Footer -------------------------------------*/
 
 .footer {
   font-size: 3vh;
@@ -167,16 +175,19 @@ ul {
   border-bottom: 1.5vh solid black;
   transition-duration: 0.5s;
 }
-
 .footer h3,
 h5 {
   font-size: 2em;
 }
 
+/*------------------------------------- Music -------------------------------------*/
+
 .music {
   text-align: center;
   color: white;
 }
+
+/*------------------------------------- No Select Text -------------------------------------*/
 
 .unselectable {
   -webkit-user-select: none;
@@ -185,6 +196,8 @@ h5 {
   -ms-user-select: none;
   user-select: none;
 }
+
+/*------------------------------------- Song Cover Image -------------------------------------*/
 
 .coverIMG {
   width: 40vw;
@@ -197,10 +210,11 @@ h5 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/*------------------------------------- Music Playback Buttons -------------------------------------*/
+
 .musicButtons {
   color: black;
 }
-
 .musicButtons button {
   color: var(--btnCol);
   background-color: var(--btnBckCol);
@@ -211,7 +225,6 @@ h5 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: relative;
 }
-
 .musicButtons button::after {
   content: "";
   width: 100%;
@@ -225,18 +238,26 @@ h5 {
   transform: scale(0);
   transition: 0.25s ease-in-out;
 }
-
 .musicButtons button i {
   transition: 0.25s ease-in-out;
 }
-
 .musicButtons button:hover i {
   transform: scale(1.15) rotate(-5deg);
 }
-
 .musicButtons button:hover::after {
   transform: scale(1);
 }
+.musicButtons button:active::after {
+  position: absolute; /*Remember to add position: relative; to parent!*/
+  top: 0;
+  left: 0;
+  content: "";
+  backdrop-filter: invert(100%);
+  transition: 0.05s ease-in-out;
+  transform: scale(0);
+}
+
+/*------------------------------------- Song List Buttons -------------------------------------*/
 
 .songList {
   font-family: Tahoma, sans-serif;
@@ -251,26 +272,21 @@ h5 {
   overflow-y: scroll;
   overflow-x: hidden;
 }
-
 .songList::-webkit-scrollbar {
   width: 4vw;
 }
-
 .songList::-webkit-scrollbar-track {
   border-radius: 5vw;
 }
-
 .songList::-webkit-scrollbar-thumb {
   background: var(--navCol);
   border-radius: 10vw;
   transition-duration: 0.3s;
 }
-
 .songList::-webkit-scrollbar-thumb:hover {
   background: var(--navColHov);
   cursor: pointer;
 }
-
 .songList a {
   color: var(--recNewsTxtColor);
   background-color: var(--recNewsBckColor);
@@ -278,7 +294,6 @@ h5 {
   text-decoration: none;
   transition-duration: 0.5s;
 }
-
 .songList a:hover {
   color: var(--headerTxt);
   cursor: pointer;
@@ -286,35 +301,13 @@ h5 {
   border-radius: 25px;
 }
 
+/*------------------------------------- Hide Content -------------------------------------*/
+
 .hideContent {
   display: none;
 }
 
-/*#loader {
-  position: relative;
-  left: 50%;
-  top: 50%;
-  z-index: 1;
-  width: 120px;
-  height: 120px;
-  margin: -76px 0 0 -76px;
-  border: 16px transparent;
-  border-radius: 50%;
-  border-top: 16px solid var(--recNewsTxtColor);
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-}
-
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-*/
+/*------------------------------------- ~~ -------------------------------------*/
 
 .item {
   background: rgba(255, 255, 255, 0.1);
@@ -323,6 +316,8 @@ h5 {
   border-radius: 4px;
   transition: opacity 0.4s ease;
 }
+
+/*------------------------------------- Loader -------------------------------------*/
 
 .loader {
   --color: var(--btnCol);
@@ -335,48 +330,39 @@ h5 {
   display: grid;
   place-items: center;
 }
-
 .loader::before,
 .loader::after {
   content: '';
   box-sizing: border-box;
   position: absolute;
 }
-
 .loader.--4::before {
   height: var(--size-bar);
   width: 6vmin;
   background-color: var(--color);
   animation: loader-4 0.8s ease-in-out infinite;
 }
-
-
 @keyframes loader-4 {
-
   0%,
   44%,
   88.1%,
   100% {
     transform-origin: left;
   }
-
   0%,
   100%,
   88% {
     transform: scaleX(0);
   }
-
   44.1%,
   88% {
     transform-origin: right;
   }
-
   33%,
   44% {
     transform: scaleX(1);
   }
 }
-
 .loadHint {
   color: var(--recNewsbordrColor);
   font-size: 3vh;
@@ -384,10 +370,11 @@ h5 {
   padding: 3vh 4vw;
 }
 
+/*------------------------------------- Socials Buttons Style -------------------------------------*/
+
 .socials {
   font-size: 2vh;
 }
-
 .socials button {
   background-color: var(--navBckCol);
   border: none;
@@ -399,26 +386,22 @@ h5 {
   transition-duration: 0.5s;
   border-radius: 10px;
 }
-
 .socials button:not(:last-child) {
   border-right: none;
   /* Prevent double borders */
 }
-
 /* Clear floats (clearfix hack) */
 .socials:after {
   content: "";
   clear: both;
   display: table;
 }
-
 /* Add a background color on hover */
 .socials button:hover {
   background-color: var(--navBackColHov);
   color: var(--navColHov);
   border-radius: 25px;
 }
-
 .socials button::after {
   content: "";
   width: 100%;
@@ -432,21 +415,17 @@ h5 {
   transform: scale(0);
   transition: 0.25s ease-in-out;
 }
-
 .socials button i {
   transition: 0.25s ease-in-out;
 }
-
 .socials button:hover i {
   transform: scale(1.15) rotate(-5deg);
 }
-
 .socials button:hover::after {
   transform: scale(1);
 }
 
-
-
+/*------------------------------------- Style Inputs (future login inputs?) -------------------------------------*/
 
 input[type=text], select {
   width: 100%;
@@ -471,7 +450,7 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
-
+/*------------------------------------- Style Modal -------------------------------------*/
 
 /* The Modal (background) */
 .modal {
@@ -487,7 +466,6 @@ input[type=submit]:hover {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
 /* Modal Content */
 .modal-content {
   position: relative;
@@ -502,18 +480,15 @@ input[type=submit]:hover {
   animation-name: animatetop;
   animation-duration: 0.4s
 }
-
 /* Add Animation */
 @-webkit-keyframes animatetop {
   from {top:-300px; opacity:0} 
   to {top:0; opacity:1}
 }
-
 @keyframes animatetop {
   from {top:-300px; opacity:0}
   to {top:0; opacity:1}
 }
-
 /* The Close Button */
 .close {
   color: white;
@@ -521,22 +496,18 @@ input[type=submit]:hover {
   font-size: 28px;
   font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-
 .modal-header {
   padding: 2px 16px;
   background-color: #5cb85c;
   color: white;
 }
-
 .modal-body {padding: 2px 16px;}
-
 .modal-footer {
   padding: 2px 16px;
   background-color: #5cb85c;

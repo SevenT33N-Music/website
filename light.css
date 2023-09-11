@@ -22,6 +22,7 @@ html, body {
   background-color: #ededed;
   scroll-behavior: var(--smoothScrolling);
   transition-duration: 0.5s;
+  font-family: 'Merienda', cursive;
 }
 
 /*------------------------------------- header -------------------------------------*/
@@ -244,6 +245,15 @@ ul {
 }
 .musicButtons button:hover::after {
   transform: scale(1);
+}
+.musicButtons button:active::after {
+  position: absolute; /*Remember to add position: relative; to parent!*/
+  top: 0;
+  left: 0;
+  content: "";
+  backdrop-filter: invert(100%);
+  transition: 0.05s ease-in-out;
+  transform: scale(0);
 }
 
 /*------------------------------------- song list style -------------------------------------*/
