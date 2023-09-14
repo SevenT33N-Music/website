@@ -17,6 +17,18 @@
     <script src="https://kit.fontawesome.com/71266e3234.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/amplitudejs@{{5.3.2}}/dist/amplitude.js"></script>
     <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+        font-size: 30px;
+        font-size: calc(3.5vw + 3.5vh);
+      }
+    </style>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@500&display=swap');
     </style>
@@ -155,6 +167,10 @@
           }
         } else if (num == 'reset') {
           localStorage.setItem('songIndex', '0');
+        } else if (num == "repeat") {
+          localStorage.setItem("repeatSong", "true");
+          var keepSongNum = localStorage.getItem('songIndex');
+          localStorage.setItem('songIndex', keepSongNum);
         } else {
           localStorage.setItem('songIndex', num);
         }
@@ -207,10 +223,15 @@
         return array3;
       }
       function audio(action) { // Play or pause audio, change title displayed
+        var repeatSongON = localStorage.getItem("repeatSong");
         var audioE = document.getElementById('song'); // get id of audio element
         audioE.addEventListener("ended", function() {
           audioE.pause();
-          newSongNum('+1');
+          if (repeatSongON == "yes") {
+            newSongNum('repeat');
+          } else {
+            newSongNum('+1');
+          }
           audioE.currentTime = 0;
           audioE.play();
         });
@@ -239,6 +260,12 @@
           audioE.currentTime = 0;
           newSongNum('reset');
           playAudio();
+        } else if (action == "repeat") {
+          if (repeatSongON == "on") {
+            localStorage.setItem("repeatSong", "no");
+          } else {
+            localStorage.setItem("repeatSong", "yes");
+          }
         }
       }
       function toggle(act) { // toggle play and pause button visibility
@@ -277,9 +304,9 @@
       
       <div class="btn-group" style="width:100%"> <!-- Topnav Button Group -->
         <div class="topnav"> <!-- Top Navigation -->
-          <button onclick="redirect('/index.html')" id='homeNavBtn' style="width:33.3%" title="Home Page"><i class="fa-solid fa-house fa-flip"></i></button>
-          <button onclick="redirect('/news.html')" id='newsNavBtn' style="width:33.3%" title='News'><i class="fa-solid fa-newspaper fa-bounce"></i></button>
-          <button onclick="redirect('/settings.html')" id='settingsNavBtn' style="width:33.3%" title='Settings'><i class="fa-solid fa-gear fa-spin"></i></button>
+          <button onclick="redirect('/index.html')" id='homeNavBtn' style="width:33.3%" title="Home Page"><span class="material-symbols-outlined">home</span></button>
+          <button onclick="redirect('/news.html')" id='newsNavBtn' style="width:33.3%" title='News'><span class="material-symbols-outlined">news</span></button>
+          <button onclick="redirect('/settings.html')" id='settingsNavBtn' style="width:33.3%" title='Settings'><span class="material-symbols-outlined">settings</span></i></button>
         </div>
       </div>
 
@@ -312,26 +339,21 @@
 
         
         <div class="music">
-          <h4 id="songTitle" style='font-size: 3vw;'>Juice WRLD - Stay High (Trap Remix)</h4> <!-- Song Title -->
+          <h4 id="songTitle" style="font-size: calc(1.5vw + 1.5vh);">Juice WRLD - Stay High (Trap Remix)</h4> <!-- Song Title -->
         </div>
 
         
         <div class="Center"> <!-- Song Buttons -->
           <div class="unselectable">
             <div class="musicButtons">
-              <button onclick="newSongNum('-1')" id="skipBack" title='Previous'><i class="fa-solid fa-backward-step"></i></button> <!-- Previous Song Button -->
-              <button onclick="audio('play')" id="playBtn" title='Play'><i class="fa-solid fa-play"></i></button> <!-- Play Button -->
-              <button hidden="hidden" onclick="audio('pause')" id="pauseBtn" title='Pause'><i class="fa-solid fa-pause"></i></button> <!-- Pause Button -->
-              <button onclick="newSongNum('+1')" id="skipFoward" title='Next'><i class="fa-solid fa-forward-step"></i></button> <!-- Next Song Button -->
+              <button onclick="newSongNum('-1')" id="skipBack" title='Previous'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">skip_previous</span></button> <!-- Previous Song Button -->
+              <button onclick="audio('play')" id="playBtn" title='Play'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">play_circle</span></button> <!-- Play Button -->
+              <button hidden="hidden" onclick="audio('pause')" id="pauseBtn" title='Pause'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">pause_circle</span></button> <!-- Pause Button -->
+              <button onclick="newSongNum('+1')" id="skipFoward" title='Next'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">skip_next</span></button> <!-- Next Song Button -->
               <br><br>
-              <button onclick="restart('song')" id='restartBtn' title="Restart"><i class="fa-solid fa-rotate-left"></i></button> <!-- Restart Button -->
-              <button onclick="audio('repeat')" id='repeatBtn' title="Repeat"><i class="fa-solid fa-repeat"></i></button> <!-- Repeat Button -->
-              <button onclick="audio('shuffle')" id='shuffleBtn' title="Shuffle"><i class="fa-solid fa-shuffle"></i></button> <!-- Shuffle Button -->
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
+              <button onclick="restart('song')" id='restartBtn' title="Restart"><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">replay</span></button> <!-- Restart Button -->
+              <button onclick="audio('repeat')" id='repeatBtn' title="Repeat"><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">repeat</span></button> <!-- Repeat Button -->
+              <button onclick="audio('shuffle')" id='shuffleBtn' title="Shuffle"><span class="material-symbols-outlined" id="shuffleBtnSpan" style="font-size: calc(3vw + 2vh);">shuffle</span></button> <!-- Shuffle Button -->
               <br>
               <br>
               <br style="margin-top: 15vh;">

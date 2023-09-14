@@ -14,6 +14,11 @@
   --smoothScrolling: smooth;
 }
 
+@font-face {
+  font-family: SF Pro Display;
+  src: url("SF-Pro-Display-Regular.otf");
+}
+
 /*Style Body and HTML*/
 html,
 body {
@@ -24,6 +29,10 @@ body {
   scroll-behavior: var(--smoothScrolling);
   transition-duration: 0.5s;
   font-family: 'Merienda', cursive;
+}
+
+a.apple-logo {
+	font-size: 22px;
 }
 
 /*------------------------------------- Header -------------------------------------*/
@@ -205,8 +214,6 @@ h5 {
   max-width: 512px;
   max-height: 512px;
   transition-duration: 0.5s;
-  margin-left: 3%;
-  float: left;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 

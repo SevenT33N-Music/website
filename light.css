@@ -23,6 +23,7 @@ html, body {
   scroll-behavior: var(--smoothScrolling);
   transition-duration: 0.5s;
   font-family: 'Merienda', cursive;
+  overflow-x: hidden;
 }
 
 /*------------------------------------- header -------------------------------------*/
@@ -170,6 +171,8 @@ ul {
 .music {
   text-align: center;
   color: black;
+  appearance: none;
+  text-overflow: clip;
 }
 
 /*------------------------------------- footer div -------------------------------------*/
@@ -205,8 +208,6 @@ ul {
   max-width: 512px;
   max-height: 512px;
   transition-duration: 0.5s;
-  margin-left: 3%;
-  float: left;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -220,7 +221,7 @@ ul {
   background-color: var(--btnBckCol);
   border-radius: 8px;
   border: none;
-  padding: 14px 16px;
+  padding: 10px 12px;
   font-size: 4vw;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   position: relative;

@@ -1,5 +1,5 @@
 var update = 0; // 0 = not updated, 1 = updated
-var updateReason = 1; // 1 = bug, 2 = new feature
+var updateReason = 1; // 2 = bug, 1 = new feature, 3 = Editing Code
 var checkUpdateReason = localStorage.getItem("updateReason");
 if (checkUpdateReason == null || checkUpdateReason == "") {
   if (updateReason == 1) {
