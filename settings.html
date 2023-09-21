@@ -142,20 +142,6 @@
           hideBtn.setAttribute("hidden", "hidden");
           showBtn.removeAttribute("hidden");
         }
-        /*
-        let cs = localStorage.getItem("scrollbar");
-        if (cs == 'true') {
-          let showBtn = document.getElementById('7');
-          let hideBtn = document.getElementById('8');
-          hideBtn.setAttribute("hidden", "hidden");
-          showBtn.removeAttribute("hidden");
-        } else {
-          let showBtn = document.getElementById('8');
-          let hideBtn = document.getElementById('7');
-          hideBtn.setAttribute("hidden", "hidden");
-          showBtn.removeAttribute("hidden");
-        }
-        */
       }
       function changeSheet(v, hideID, showID) {
         document.getElementById("pagestyle").setAttribute("href", v); 
@@ -167,26 +153,6 @@
       }
       function redirect(link) {
         window.location.href = link;
-      }
-      function setVar(i, hideID, showID) {
-        let showBTN = document.getElementById(showID);
-        let hideBTN = document.getElementById(hideID);
-        hideBTN.setAttribute("hidden", "hidden");
-        showBTN.removeAttribute("hidden");
-        var r = document.querySelector(':root');
-        var smooth = localStorage.getItem("smoothScrolling");
-        if (i == 'yes') {
-          r.style.setProperty('--smoothScrolling', 'smooth');
-          localStorage.setItem("smoothScrolling", 'yes');
-          alertModalDisplayed = localStorage.getItem("alertDisplayed");
-          if (alertModalDisplayed != "true") {
-            localStorage.setItem("alertDisplayed", "true");
-            openModal();
-          }
-        } else if (i == 'no') {
-          r.style.setProperty('--smoothScrolling', 'auto');
-          localStorage.setItem("smoothScrolling", 'no');
-        }
       }
       const currentChoice = localStorage.getItem("displayIcons");
       const currentChoice2 = localStorage.getItem("scrollbar");
@@ -209,26 +175,6 @@
         hide.setAttribute("hidden", "hidden");
         show.removeAttribute("hidden");
       }
-      /*
-      function customScrollbar(val, hideID, showID) {
-        let alertScroll = document.getElementById('alertChangeOfScrollbar');
-        if (val != currentChoice2) {
-          alertScroll.removeAttribute("hidden");
-        }
-        if (currentChoice2 == val) {
-          alertScroll.setAttribute("hidden", "hidden");
-        }
-        if (val == 'true') {
-          localStorage.setItem('scrollbar', 'true');
-        } else if (val = 'false') {
-          localStorage.setItem('scrollbar', 'false');
-        }
-        let show = document.getElementById(showID);
-        let hide = document.getElementById(hideID);
-        hide.setAttribute("hidden", "hidden");
-        show.removeAttribute("hidden");
-      }
-      */
     </script>
     <div id="myModal" class="modal">
       <!-- Modal content -->
@@ -308,8 +254,36 @@
       // Get the <span> element that closes the modal
       var span = document.getElementsByClassName("close")[0];
       var smoothScrollBtn = document.getElementById("1");
+      var smoothScrollBtnOff = document.getElementById("2");
+      smoothScrollBtnOff.onclick = function() {
+        var alertModalDisplayed = localStorage.getItem("alertDisplayed");
+        if (alertModalDisplayed != "true") {
+          localStorage.setItem("alertDisplayed", "true");
+          modal.style.display = "block";
+        }
+        let showBTN = document.getElementById("1");
+        let hideBTN = document.getElementById("2");
+        hideBTN.setAttribute("hidden", "hidden");
+        showBTN.removeAttribute("hidden");
+        var r = document.querySelector(':root');
+        var smooth = localStorage.getItem("smoothScrolling");
+        r.style.setProperty('--smoothScrolling', 'auto');
+        localStorage.setItem("smoothScrolling", 'no');
+        console.log("Smooth Scroll Off");
+      }
       smoothScrollBtn.onclick = function() {
-        modal.style.display = "block";
+        var alertModalDisplayed = localStorage.getItem("alertDisplayed");
+        if (alertModalDisplayed != "true") {
+          localStorage.setItem("alertDisplayed", "true");
+          modal.style.display = "block";
+        }
+        let showBTN = document.getElementById("2");
+        let hideBTN = document.getElementById("1");
+        hideBTN.setAttribute("hidden", "hidden");
+        showBTN.removeAttribute("hidden");
+        r.style.setProperty('--smoothScrolling', 'smooth');
+        localStorage.setItem("smoothScrolling", 'yes');
+        console.log("Smooth Scroll On");
       }
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
