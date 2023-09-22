@@ -93,6 +93,7 @@
       function createSongNum() { // Create Song Index
         localStorage.setItem('songIndex', '0');
         var choice = localStorage.getItem('unicodeIcons');
+        var choice2 = localStorage.getItem("repeatSong");
         if (choice == 'true') {
           document.getElementById('newsNavBtn').innerHTML = '📰';
           document.getElementById('homeNavBtn').innerHTML = '🏠';
@@ -104,6 +105,11 @@
           document.getElementById('repeatBtn').innerHTML = '🔁';
           document.getElementById('restartBtn').innerHTML = '⏪';
           document.getElementById('shuffleBtn').innerHTML = '🔀';
+        }
+        if (choice2 == "yes") {
+          document.getElementById("repeatBtn2").innerHTML = "repeat_on";
+        } else {
+          document.getElementById("repeatBtn2").innerHTML = "repeat";
         }
       }
       var time;
@@ -215,7 +221,7 @@
         document.getElementById('song10').innerHTML = array2[9];
         document.getElementById('song11').innerHTML = array2[10];
         document.getElementById('song12').innerHTML = array2[11];
-        document.getElementById('song12').innerHTML = array2[12];
+        document.getElementById('song13').innerHTML = array2[12];
         console.log(array1.length);
         console.log(array2.length);
         console.log(array3.length);
@@ -253,10 +259,12 @@
           newSongNum('reset');
           playAudio();
         } else if (action == "repeat") {
-          if (repeatSongON == "on") {
+          if (repeatSongON == "yes") {
             localStorage.setItem("repeatSong", "no");
+            document.getElementById("repeatBtn2").innerHTML = "repeat";
           } else {
             localStorage.setItem("repeatSong", "yes");
+            document.getElementById("repeatBtn2").innerHTML = "repeat_on";
           }
         }
       }
@@ -350,7 +358,7 @@
               <button onclick="newSongNum('+1')" id="skipFoward" title='Next'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">skip_next</span></button> <!-- Next Song Button -->
               <br><br>
               <button onclick="restart('song')" id='restartBtn' title="Restart"><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">replay</span></button> <!-- Restart Button -->
-              <button onclick="audio('repeat')" id='repeatBtn' title="Repeat"><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">repeat</span></button> <!-- Repeat Button -->
+              <button onclick="audio('repeat')" id='repeatBtn' title="Repeat"><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);" id="repeatBtn2">repeat</span></button> <!-- Repeat Button -->
               <button onclick="audio('shuffle')" id='shuffleBtn' title="Shuffle"><span class="material-symbols-outlined" id="shuffleBtnSpan" style="font-size: calc(3vw + 2vh);">shuffle</span></button> <!-- Shuffle Button -->
               <br>
               <br>
