@@ -15,7 +15,7 @@
     <script type="application/javascript" src="styling.js"></script>
     <script type="application/javascript" src="updating.js"></script>
     <script src="https://kit.fontawesome.com/71266e3234.js" crossorigin="anonymous"></script>
-    <link rel="icon" href="/IMAGES/logo.png" type="image/x-icon"/>
+    <link rel="icon" href="/IMAGES/favaicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
@@ -233,12 +233,14 @@
           audioE.pause();
           toggle('pause');
         }
-        if (action == 'play') { // call playAudio function if true
-          playAudio();
-          localStorage.setItem('runLoop', 'yes');
-        } else if (action == 'pause') { // Call pauseAudio function if true
-          pauseAudio();
-          localStorage.setItem('runLoop', 'no');
+        if (action == 'togglePlay') {
+          if (document.getElementById("playCircle").innerHTML == "play_circle") {
+            playAudio();
+            localStorage.setItem('runLoop', 'yes');
+          } else if (document.getElementById("playCircle").innerHTML == "pause_circle") {
+            pauseAudio();
+            localStorage.setItem('runLoop', 'no');
+          }
         } else if (action == 'shuffle') {
           pauseAudio();
           shuffle(songArr, songTitleArr, coverArr);
@@ -262,12 +264,18 @@
         let play = document.getElementById('playBtn');
         let pause = document.getElementById('pauseBtn');
         if (act == 'play') {
+          /*
           play.setAttribute("hidden", "hidden");
           pause.removeAttribute("hidden");
+          */
+          document.getElementById("playCircle").innerHTML = "pause_circle";
         } 
         if (act == 'pause') {
+          /*
           pause.setAttribute("hidden", "hidden");
           play.removeAttribute("hidden");
+          */
+          document.getElementById("playCircle").innerHTML = "play_circle";
         }
       }
       function restart(song) { // Restart song currently playing
@@ -337,7 +345,7 @@
           <div class="unselectable">
             <div class="musicButtons">
               <button onclick="newSongNum('-1')" id="skipBack" title='Previous'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">skip_previous</span></button> <!-- Previous Song Button -->
-              <button onclick="audio('play')" id="playBtn" title='Play'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">play_circle</span></button> <!-- Play Button -->
+              <button onclick="audio('togglePlay')" id="playBtn" title='Play'><span class="material-symbols-outlined" id="playCircle" style="font-size: calc(3vw + 2vh);">play_circle</span></button> <!-- Play Button -->
               <button hidden="hidden" onclick="audio('pause')" id="pauseBtn" title='Pause'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">pause_circle</span></button> <!-- Pause Button -->
               <button onclick="newSongNum('+1')" id="skipFoward" title='Next'><span class="material-symbols-outlined" style="font-size: calc(3vw + 2vh);">skip_next</span></button> <!-- Next Song Button -->
               <br><br>

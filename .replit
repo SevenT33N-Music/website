@@ -1,12 +1,12 @@
 hidden=[".config"]
+entrypoint = "index.html"
+[nix]
+channel = "stable-22_11"
 
 # hosting is currently hardcoded for this language
 # [hosting]
 # route = "/"
 # directory= "/"
-
-[nix]
-channel = "stable-22_11"
 
 [languages.html]
 pattern = "**/*.html"
