@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<news xmlns:xlink="http://www.w3.org/1999/xlink">
+  <item>
+    <header>UPDATE LOG 2.0!</header>
+    <info>The News Has Changed! That's right, I've changed the way the news page renders. This should make the page run much faster.</info>
+    <time>Mon September 25th, 2023 (03:47 PM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 1.3</header>
+    <info>Settings have been updated! You can now customize the home page feed, adding or removing the news/projects. The page now uses toggle switches, for a fun interactive experience! I am slowly releasing the songs for my new album "LOVE, HEARTBREAK, REPEAT. As of publishing this update, there are curently two songs released in the album, with a bonus track "Spirit". Hope ya'll enjoy this album!</info>
+    <time>Sat September 23rd, 2023 (10:52 PM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 1.2.2</header>
+    <info>I updated the "twitter" icons to match Elon Musk's Rebranding. Why did he do this? I don't know, but I don't like it.</info>
+    <time>Thu September 7th, 2023 (05:25 PM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 1.2.1</header>
+    <info>I have updated the button interaction on the music page.</info>
+    <time>Fri August 18th, 2023 (07:53 PM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 1.2.0</header>
+    <info>I have created a work-around for the bug on windows, which is to simply replace the original icons with emojis. To enable this, click the nav button in the top right, which will open settings. There you can change the unicode options: click "disable". That should load emojis instead of icons. I also fixed the link to my dark humor website, so you can actually open it now.</info>
+    <time>Thu August 10th, 2023 (04:33 PM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 1.1.0</header>
+    <info>Yes, the bug on windows still exists. I'm sorry it hasn't been fixed yet. I added a loading icon, so the wait time is a little more justified. Great News! The layout of the music page has been completed! Check out the amazing new design, with contrasting colors for easy readability and so much more!</info>
+    <time>Sun August 6th, 2023 (08:17 AM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 1.0.2</header>
+    <info>There is still a bug on windows which fails to load icons. I'm still working to fix it. I have added a "projects" section to the home page, so you can see some of the things I've made or are working on. The redesign for the music page is nearly complete, I just need to add the finishing touches. Thats all for now, have fun ya'll!</info>
+    <time>Fri August 4th, 2023 (12:17 PM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 1.0.1</header>
+    <info>I am aware of a bug on windows where the icons may not load. I've added "title" tags to the buttons, so you can simply hover your cursor over the buttons to see what the button does. I am also updating the layout of the "Music" page. Please be patient while I work, as it could take a few weeks.</info>
+    <time>Fri July 28th, 2023 (04:05 PM UTC)</time>
+  </item>
+  <item>
+    <header>IM BORRRRRED</header>
+    <info>Mekayla has been publicly released. The next three songs for "STATIC" may not be published. I added a contact form button im probably gonna change it. I hav stoped caring about grammar..</info>
+    <time>idk what today is lol</time>
+  </item>
+  <item>
+    <header>DELAYS</header>
+    <info>Due to technical difficulties, the release date for "Static" has been pushed to Saturday, June 10th, 2023, at 12:00 P.M MST.</info>
+    <time>Tue June 6th, 2023 (11:13 P.M UTC)</time>
+  </item>
+  <item>
+    <header>RE-RELEASED</header>
+    <info>After careful consideration, I have decided to re-release "Mekayla" as unlisted. Please note that this is subject to change, and may be publicly released or made private again.</info>
+    <time>Sat June 3rd, 2023 (04:56 P.M UTC)</time>
+  </item>
+  <item>
+    <header>NEW FEATURES</header>
+    <info>New features have been added to the webiste. This includes toggleable smooth scroll, and the ability to support me on my socials. Speaking of socials, go check them out!</info>
+    <time>Fri June 2nd, 2023 (06:34 A.M UTC)</time>
+  </item>
+  <item>
+    <header>NEW PAGE!</header>
+    <info>The music page has been completed! New songs will be released regularly, so be on the lookout!</info>
+    <time>Fri June 2nd, 2023 (04:01 A.M UTC)</time>
+  </item>
+  <item>
+    <header>GOTTA STAY HIGH</header>
+    <info>I've remixed "Stay High" by Juice WRLD... again. Don't worry, this trap remix is much better than the last. "Stay High (Trap Remix)" drops on June 10th, 2023 at 12:00 P.M MST!</info>
+    <time>Thu June 1st, 2023 (07:08 A.M UTC</time>
+  </item>
+  <item>
+    <header>HELPFUL!</header>
+    <info>Pro Tip: You can enable dark mode in settings! For real though, I spent a lot of time making it work, far longer than I needed to.</info>
+    <time>Thu June 1st, 2023 (06:37 A.M UTC)</time>
+  </item>
+  <item>
+    <header>MEKAYLA</header>
+    <info>Recently, I had published a love song titled "Mekayla". Sadly, I had to take it down. I will not go into detail about what happened, but most of you can probably assume what did happened.</info>
+    <time>Thu June 1st, 2023 (06:25 A.M UTC)</time>
+  </item>
+  <item>
+    <header>LIQUID?? WEAK??</header>
+    <info>I had previously announced a few songs and albums on my Youtube. LIQUID (the album) has been discontinued, and will not be released, as a few songs from it have been moved to "Static". However, my single "WEAK" will be released. The release date is currently set for June 3rd, 2023 at 12:00 P.M MST.</info>
+    <time>Thu June 1st, 2023 (06:22 A.M UTC)</time>
+  </item>
+  <item> <!-- Item 2 -->
+    <header>STATIC RELEASE DATE</header>
+    <info>The current release date of "Static" is set for June 5th, 2023. However, as with every song and album I've released so far, there will likely be complications that cause delays for the release.</info>
+    <time>Thu June 1st, 2023 (06:10 A.M UTC)</time>
+  </item>
+  <item> <!-- Item 1 -->
+    <header>WEBSITE</header>
+    <info>The Website is now up and running!</info>
+    <time>Thu June 1st, 2023 (05:53 A.M UTC)</time>
+  </item>
+</news>
