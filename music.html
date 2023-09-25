@@ -190,7 +190,9 @@
         document.getElementById('songCover').src = newSongCover;
         document.getElementById('songTitle').innerHTML = newSongTitle;
         document.getElementById(newSongTitleID).innerHTML = '➤ ' + songTitleArr[newIdx];
-        audio('play');
+        if (document.getElementById("playCircle").innerHTML == "pause_circle") {
+          audio('play');
+        }
       }
       function shuffle(array1, array2, array3) { // Shuffle Function
         let currentIndex = array1.length,  randomIndex;
@@ -266,6 +268,8 @@
             localStorage.setItem("repeatSong", "yes");
             document.getElementById("repeatBtn2").innerHTML = "repeat_on";
           }
+        } else if (action == "play") {
+          playAudio();
         }
       }
       function toggle(act) { // toggle play and pause button visibility
