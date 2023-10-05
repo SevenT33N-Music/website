@@ -14,7 +14,7 @@
     <link id="pagestyle" href="light.css" rel="stylesheet" type="text/css" />
     <script type="application/javascript" src="updating.js"></script>
     <script type="application/javascript" src="styling.js"></script>
-    <script src="https://kit.fontawesome.com/71266e3234.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="/IMAGES/favaicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -33,7 +33,45 @@
       @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@500&display=swap');
     </style>
   </head>
-  <body onload="checkIconChoice()">
+  <body onload="checkIconChoice()" id="body">
+    <script>
+      document.getElementById("body").onscroll = function myFunction() {  
+        var scrolltotop = document.scrollingElement.scrollTop;
+        if (localStorage.getItem("unicodeIcons") != "true") {
+          var musicBtn = document.getElementById("musicSpan");
+          var newsbtn = document.getElementById("homeSpan");
+          var settingsBtn = document.getElementById("settingsSpan");
+          var btnGroup = document.getElementById("btnGroup");
+          var factor2 = 25
+          var yvalue2 = scrolltotop / factor2;
+          var opacity = yvalue2 / 100;
+          console.log("Opacity: " + opacity + ". calculated as: " + "1 - " + opacity);
+          console.log((1 - opacity));
+          var newFontSize = yvalue2 / 5;
+          console.log(`calc(2rem - ${newFontSize}px)`);
+          musicBtn.style.fontSize = `calc(2rem - ${newFontSize}px)`;
+          newsbtn.style.fontSize = `calc(2rem - ${newFontSize}px)`;
+          settingsBtn.style.fontSize = `calc(2rem - ${newFontSize}px)`;
+          btnGroup.style.opacity = `calc(1 - ${opacity}`;
+          if ((1 - opacity) < 0.1) {
+            btnGroup.style.display = "none";
+          } else {
+            btnGroup.style.display = "block";
+          }
+        } else {
+          var btnGroup = document.getElementById("btnGroup");
+          var factor2 = 25
+          var yvalue2 = scrolltotop / factor2;
+          var opacity = yvalue2 / 100;
+          btnGroup.style.opacity = `calc(1 - ${opacity}`;
+          if ((1 - opacity) < 0.1) {
+            btnGroup.style.display = "none";
+          } else {
+            btnGroup.style.display = "block";
+          }
+        }
+      }
+    </script>
     <script>
       function setCookie(cname, cvalue, exdays) {
         const d = new Date();
@@ -112,7 +150,7 @@
       function loadNews() {
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {readAndParseXMLData(this);}
-        xhttp.open("GET", "news.xml");
+        xhttp.open("GET", "/news.xml");
         xhttp.send();
       }
       function readAndParseXMLData(xml) {
@@ -137,15 +175,14 @@
         <h1>SevenT33N Music</h1>
         <h4>News</h4>
       </div>
-      <div class="btn-group" style="width:100%">
+      <div class="btn-group" style="width:100%" id="btnGroup">
         <div class="topnav">
-          <button id = 'homeNavBtn' onclick="redirect('/index.html')" style="width:33.3%" title='Home Page'><span class="material-symbols-outlined">home</span></button> <!-- <i class="fa-solid fa-house fa-flip"></i> -->
-          <button id = 'musicNavBtn' onclick="redirect('/music.html')" style="width:33.3%" title='Music'><span class="material-symbols-outlined">library_music</span></button>
-          <button id = 'settingsNavBtn' onclick="redirect('/settings.html')" style="width:33.3%" title='Settings'><span class="material-symbols-outlined">settings</span></button>
+          <button title='Home' id='homeNavBtn' onclick="redirect('/index.html')" style="width:33.3%"><i class="fa-solid fa-house-chimney fa-flip" id="homeSpan"></i></button>
+          <button title='Music' id='musicNavBtn' onclick="redirect('/music.html')" style="width:33.3%"><i class="fa-solid fa-music fa-beat" id="musicSpan"></i></button>
+          <button title='Settings' id='settingsNavBtn' onclick="redirect('/settings.html')" style="width:33.3%"><i class="fa-solid fa-gear fa-spin" id="settingsSpan"></i></button>
         </div>
       </div>
       <br>
-    </div>
     <div id="space1"><br><br><br><br><br></div>
     <div class="item" id="loader">
 			<i class="loader --4"></i>
@@ -165,7 +202,7 @@
     <div id="space2"><br><br><br><br><br></div>
     <div class="footer">
       <h5>
-        <div class="btn-group" style="width:100%">
+        <div class="btn-group" style="width:100%;z-index: 99;">
           <button onclick="social('contact')" style="width:100%;" title='Contact Form'>Got A Question? Ask Me Here!</button>
         </div>
       </h5>
@@ -181,6 +218,7 @@
           </div>
         </h5>
       </div>
+    </div>
     </div>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

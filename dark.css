@@ -14,11 +14,6 @@
   --smoothScrolling: smooth;
 }
 
-@font-face {
-  font-family: SF Pro Display;
-  src: url("SF-Pro-Display-Regular.otf");
-}
-
 /*Style Body and HTML*/
 html,
 body {
@@ -29,10 +24,7 @@ body {
   scroll-behavior: var(--smoothScrolling);
   transition-duration: 0.5s;
   font-family: 'Merienda', cursive;
-}
-
-a.apple-logo {
-	font-size: 22px;
+  overflow-x: clip;
 }
 
 /*------------------------------------- Header -------------------------------------*/
@@ -58,6 +50,18 @@ a.apple-logo {
   max-width: 50%;
   max-height: 50%;
   transition-duration: 0.5s;
+}
+.imgScrollDiv {
+  background-image: url(/IMAGES/logo.png);
+  background-position:top center;
+  background-attachment:scroll;
+  background-repeat: no-repeat;
+  background-size: 90%;
+  color: transparent;
+  text-align: center;
+  max-height: 50%;
+  height: calc(25vw + 20vh);
+  width: 100%;
 }
 
 /*------------------------------------- Center Elements -------------------------------------*/
@@ -136,7 +140,11 @@ ul {
 /*------------------------------------- Button Group -------------------------------------*/
 
 .btn-group {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
   font-size: 2vh;
+  z-index: 999;
 }
 .btn-group button {
   background-color: var(--navBckCol);
@@ -591,4 +599,40 @@ input:checked + .slider:before {
 }
 .slider.round:before {
   border-radius: 50%;
+}
+
+/*------------------------------------- YT SUB COUNT -------------------------------------*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+.yt {
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  align-items: center;
+  width: 50%;
+  text-align: center;
+}
+
+.youtube-button {
+  padding: 1.5vw;
+  color: #fff;
+  background-color: #cc181e;
+  display: flex;
+  align-items: center;
+  border-radius: 3vw;
+  text-align: center;
+}
+.youtube-button i {
+  font-size: calc(1.5vw + 1.5vh);
+  margin-right: 12px;
+  margin-left: 2vw;
+}
+.youtube-button p {
+  font-size: calc(2vw + 2vh);
+}
+.youtube-button span {
+  margin-right: 4px;
 }
