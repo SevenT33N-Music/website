@@ -3,309 +3,140 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <meta name="description" content= "Welcome to the home page of my website. You'll find all the other pages here!">
-    <meta name= “robots” content="index, nofollow">
-    <meta property=”og:title” content="SevenT33N Music | Home Page">
-    <meta property=”og:description” content="The Official Landing Page for SevenT33N Music">
-    <meta property=”og:type” content="website">
-    <meta property=”og:image” content="/IMAGES/favicon.ico">
-    <meta property=”og:url” content="https://sevent33nmusic.sevent33n.repl.co">
-    <title>SevenT33N Music | Home Page</title>
-    <link id="pagestyle" href="light.css" rel="stylesheet" type="text/css"/>
-    <script type="application/javascript" src="styling.js"></script>
-    <script type="application/javascript" src="updating.js"></script>
-    <script src="https://apis.google.com/js/platform.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" href="/IMAGES/favaicon.png" type="image/x-icon"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-      .material-symbols-outlined {
-        font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24;
-        font-size: 30px;
-        font-size: calc(3.5vw + 3.5vh);
-      }
-    </style>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Merienda:wght@500&display=swap');
-    </style>
+    <title>SevenT33N Music</title>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
+    <link href="https://unpkg.com/movement.css/movement.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="styling.js"></script>
   </head>
-  <body onload="checkIconChoice()" id="body">
+  <body id="body">
 
-
-  <!-- SCRIPTS -->
-  <script>
-    function setCookie(cname, cvalue, exdays) {
-      const d = new Date();
-      d.setTime(d.getTime() + (exdays*24*60*60*1000));
-      let expires = "expires="+ d.toUTCString();
-      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    }
-    function getCookie(cname) {
-      let name = cname + "=";
-      let decodedCookie = decodeURIComponent(document.cookie);
-      let ca = decodedCookie.split(';');
-      for(let i = 0; i <ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-        }
-      }
-      return "";
-    }
-    function checkIconChoice() {
-      var choice = localStorage.getItem('unicodeIcons');
-      var choice2 = localStorage.getItem('displayNewsOnHomePage');
-      var choice3 = localStorage.getItem('displayProjectsOnHomePage');
-      if (choice == 'true') {
-        document.getElementById('newsNavBtn').innerHTML = '📰';
-        document.getElementById('musicNavbtn').innerHTML = '🎵';
-        document.getElementById('settingsNavBtn').innerHTML = '⚙️';
-        document.getElementById('loginBtn').innerHTML = "🠖]";
-      }
-      if (choice2 == "yes") {
-        document.getElementById("homepageNews").style.display = "block";
-      } else {
-        document.getElementById("homepageNews").style.display = "none";
-      }
-      if (choice3 == "yes") {
-        document.getElementById("homepageProjects").style.display = "block";
-      } else {
-        document.getElementById("homepageProjects").style.display = "none";
-      }
-      let cookieValue = getCookie('adminLog');
-      if (cookieValue == '1') {
-        document.getElementById("logoutBtn").style.display = "block";
-        document.getElementById('loginBtn').innerHTML = "[🠔";
-        document.getElementById('loginBtn').title = "Logout";
-      }
-    }
-  </script>
-    <script>
-      function social(type) {
-        if (type == 'twitter') {
-          window.location.href = '#';
-        }
-        if (type == 'reddit') {
-          window.location.href = 'https://www.reddit.com/user/SevenT33N-Music';
-        }
-        if (type == 'youtube') {
-          window.location.href = 'https://www.youtube.com/@SevenT33N-Music';
-        }
-        if (type == 'patreon') {
-          window.location.href = 'https://patreon.com/SevenT33NMusic';
-        }
-        if (type == 'paypal') {
-          window.location.href = 'https://paypal.me/SevenT33NMusic?country.x=US&locale.x=en_US';
-        }
-        if (type == 'contact') {
-          window.location.href = 'https://contact-form.sevent33n.repl.co/';
-          //window.location.href = '/contact.php';
-        }
-      }
-      function redirect(link) {
-        if (link != "#") {
-          window.location.href = link;
-        }
-      }
-      function log() {
-        let adminLogin = getCookie('adminLog');
-        let userLogin = getCookie('userLog');
-        if (adminLogin == '1') {
-          setCookie('adminLog', 'delete', -1);
-          window.location.href = '';
-        } else if (userLogin == '1') {
-          setCookie('userLog', 'delete', -1);
-          window.location.href = '';
-        } else {
-          window.location.href = '/login.html';
-        }
-      }
-      var time;
-        function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("space1").style.display = "none";
-        document.getElementById("space2").style.display = "none";
-        document.getElementById("hideContent").style.display = "block";
-      }
-      document.onreadystatechange = function () {
-        if (document.readyState == "complete") {
-          loadNews();
-        }
-      }
-      function loadNews() {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {readAndParseXMLData(this);}
-        xhttp.open("GET", "/news.xml");
-        xhttp.send();
-      }
-      function readAndParseXMLData(xml) {
-        const xmlDoc = xml.responseXML;
-        const data = xmlDoc.getElementsByTagName("item");
-        let p = "<h1>NEWS</h1><br><h2>" +
-          data[0].getElementsByTagName("header")[0].childNodes[0].nodeValue +
-          "</h2><br><p>" +
-          data[0].getElementsByTagName("info")[0].childNodes[0].nodeValue +
-          "</p><br><br><h6>" +
-          data[0].getElementsByTagName("time")[0].childNodes[0].nodeValue +
-          "</h6><br>";
-        document.getElementById("homepageNews").innerHTML = p;
-        time = setTimeout(showPage, 125);
-      }
-      document.getElementById("body").onscroll = function myFunction() {  
-        var scrolltotop = document.scrollingElement.scrollTop;
-        var target = document.getElementById("logoDiv");
-        var xvalue = "center";
-        var factor = 0.5;
-        var yvalue = scrolltotop * (factor * -1);
-        target.style.backgroundPosition = xvalue + " " + yvalue + "px";
-        if (localStorage.getItem("unicodeIcons") != "true") {
-          var musicBtn = document.getElementById("musicSpan");
-          var newsbtn = document.getElementById("newsSpan");
-          var settingsBtn = document.getElementById("settingsSpan");
-          var btnGroup = document.getElementById("btnGroup");
-          var factor2 = 25
-          var yvalue2 = scrolltotop / factor2;
-          var opacity = yvalue2 / 100;
-          console.log("Opacity: " + opacity + ". calculated as: " + "1 - " + opacity);
-          console.log((1 - opacity));
-          var newFontSize = yvalue2 / 5;
-          console.log(`calc(2rem - ${newFontSize}px)`);
-          musicBtn.style.fontSize = `calc(2rem - ${newFontSize}px)`;
-          newsbtn.style.fontSize = `calc(2rem - ${newFontSize}px)`;
-          settingsBtn.style.fontSize = `calc(2rem - ${newFontSize}px)`;
-          btnGroup.style.opacity = `calc(1 - ${opacity}`;
-          if ((1 - opacity) < 0.1) {
-            btnGroup.style.display = "none";
-          } else {
-            btnGroup.style.display = "block";
-          }
-        } else {
-          var btnGroup = document.getElementById("btnGroup");
-          var factor2 = 25
-          var yvalue2 = scrolltotop / factor2;
-          var opacity = yvalue2 / 100;
-          btnGroup.style.opacity = `calc(1 - ${opacity}`;
-          if ((1 - opacity) < 0.1) {
-            btnGroup.style.display = "none";
-          } else {
-            btnGroup.style.display = "block";
-          }
-        }
-      }
-    </script>
-
-
-
-<!-- HEADER -->
-    <div class="Center">
-      <div class="header">
-        <div class="btn-group" id="logoutBtn" style="width:10%;float: right;font-size: calc(1.2vw);display: none;">
-          <button title='Login' id='loginBtn' onclick="log()" style="width:100%;"><i class="fa-solid fa-right-to-bracket fa-fade"></i></button>
-        </div>
-        <br>
-        <br>
-        <h1>SevenT33N Music</h1>
-        <h4>Home</h4>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="/ytsub.js" type="module"></script>
-      </div>
-
-
-
-<!-- TOPNAV -->
-      <div class="btn-group" style="width:100%" id="btnGroup">
-        <div class="topnav">
-          <button title='News' id='newsNavBtn' onclick="redirect('/news.html')" style="width:33.3%"><i class="fa-solid fa-newspaper fa-bounce" id="newsSpan"></i></button>
-          <button title='Music' id='musicNavbtn' onclick="redirect('/music.html')" style="width:33.3%"><i class="fa-solid fa-music fa-beat" id="musicSpan"></i></button>
-          <button title='Settings' id='settingsNavBtn' onclick="redirect('/settings.html')" style="width:33.3%"><i class="fa-solid fa-gear fa-spin" id="settingsSpan"></i></button>
-        </div>
-      </div>
-
-
-<!-- LOADING -->
-<div id="space1"><br><br><br><br><br></div>
-<div class="item" id="loader">
-	<i class="loader --4"></i>
-</div>
-<div class="hideContent" id="hideContent" >
-
-      
-      
-<!-- LOGO -->
-      <br>
-      <div class="imgScrollDiv" id="logoDiv"></div>
-      <!--
-      <img  class="logo" src="/IMAGES/logo.png" alt="SevenT33N Logo"/>
-      <br>
-      <hr style="border: 2px solid black;">
-      -->
-      <br>
-
-
-
-<!-- NEWS -->
-    <div class="mstRecNews" id="homepageNews"></div>
-
-
-
-<!-- PROJECTS -->
-    <div class="mstRecNews" id="homepageProjects"> <!-- Projects -->
-      <h1>Projects</h1>
-      <h2>Dark Humor</h2>
-      <br>
-      <p>I created a dark humor website, for those who's humor is a little more edgy.</p>
-      <a target="_blank" rel="noopener" href="https://dark-humor.mynamelsbob.repl.co/">Dark Humor Website</a>
-      <br>
-      <br>
-      <h2>Unicode Copy/Paste</h2>
-      <br>
-      <p>This is a WIP website, where a user can search for an emoji or unicode character, and copy it to their clipboard to paste elsewhere. Once released, it will be updated with new unicode characters, so that it can be the largest unicode database on the internet.</p>
-      <br>
-      <br>
-      <h2>Budget</h2>
-      <br>
-      <p>A website to help you budget. Thats it. Simple. To-the-point. Questions? None? Good.</p>
-    </div>
-
-</div>
-</div>
-<div id="space2"><br><br><br><br><br></div>
-<!-- FOOTER -->
-    <div class="footer">
-      <h5>
-        <div class="btn-group" style="width:100%;z-index: 99;">
-          <button onclick="social('contact')" style="width:100%;" title='Contact Form'>Got A Question? Ask Me Here!</button>
-        </div>
-      </h5>
-
-
-<!-- SOCIAL LINKS -->
-      <h3>Show Your Support for Me!</h3>
-      <div class="Center">
-        <h5>
-          <div class="btn-group" style="width:100%">
-            <button onclick="social('twitter')" style="width:20%;" title='Twitter'><i class="fa-brands fa-x-twitter"></i></button>
-            <button onclick="social('youtube')" style="width:20%;" title='YouTube'><i class="fa-brands fa-youtube"></i></button>
-            <button onclick="social('paypal')" style="width:20%;" title='Paypal'><i class="fa-brands fa-paypal"></i></button>
-            <button onclick="social('patreon')" style="width:20%;" title='Patreon'><i class="fa-brands fa-patreon"></i></button>
-            <button onclick="social('reddit')" style="width:20%;" title='Reddit'><i class="fa-brands fa-reddit-alien"></i></button>
-          </div>
+    <!-- Tooltip:
+    <span data-tooltip="Tooltip help here!" data-flow="right">CSS Tooltips</span>
+    -->
+    
+    <div id="myNav" class="overlay">
+      <a href="javascript:void(0)" class="closebtn" id="closeNav" onclick="closeNav()"><i class="fa-solid fa-xmark"></i></a>
+      <a href="javascript:void(0)" class="closebtn" style="display: none;" id="backNews" onclick="closeNews()"><i class="fa-solid fa-reply"></i></a>
+      <a href="javascript:void(0)" class="closebtn" style="display: none;margin-bottom: -10vh;" id="backTxt" onclick="closeFancyText()"><i class="fa-solid fa-reply"></i></a>
+      <a href="javascript:void(0)" class="closebtn" style="display: none;margin-bottom: -10vh;" id="backCredit" onclick="closeCredits()"><i class="fa-solid fa-reply"></i></a>
+      <a href="javascript:void(0)" class="closebtn" style="display: none;" id="backSettings" onclick="closeSettings()"><i class="fa-solid fa-reply" id="rotateArrow"></i></a>
+      <div class="overlay-content">
+        <div id="nav">
+          <a href="javascript:void(0)" onclick="loadMusicPage()" id='musicNav'><i class="fa-solid fa-music"></i> Music <i class="fa-solid fa-music"></i></a>
+          <a href="javascript:void(0)" style="display: none;" onclick="loadHomePage()" id='homeNav'><i class="fa-solid fa-house"></i> Home <i class="fa-solid fa-house"></i></a>
           <br>
-          <div class="yt">
-            <div class="youtube-button">
-              <i class="fab fa-youtube"></i>
-              <p><span class="sub-count"></span>Subscribers</p>
-            </div>
+          <a href="javascript:void(0)" onclick="openNews()"><i class="fa-solid fa-newspaper"></i> News <i class="fa-solid fa-newspaper"></i></a>
+          <br>
+          <a href="javascript:void(0)" onclick="openSettings()"><i class="fa-solid fa-gear"></i> Settings <i class="fa-solid fa-gear"></i></a>
+          <br>
+          <a href="https://forms.gle/jFwVjwtyvvAhKMop7" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"></i> Contact <i class="fa-solid fa-up-right-from-square"></i></a>
+          <br>
+          <a href="javascript:void(0)" onclick="openCredits()"><i class="fa-solid fa-handshake" style="transform: scaleX(-1);"></i> Credits <i class="fa-solid fa-handshake"></i></a>
+          <!--<a href="javascript:void(0)" onclick="openFancyText()">Fancy Text</a>-->
+        </div>
+        <div id="settings" style="display: none;">
+          <h2 style="text-align: center;color: white;"> Dark Mode </h2>
+          <label class="switch">
+            <input type="checkbox" id="darkModeToggle" onclick="toggleOptions('darkModeToggle','darkMode')">
+            <span class="slider"></span>
+          </label>
+          <br><br>
+          <div class="container" style="margin: calc(1.2vw + 1.2vh);cursor: pointer;" onclick="saveOptions()">
+            <button class="nav-btn" id="saveBtn" onclick="saveOptions()">
+              <i class="fas fa-sd-card"></i>
+            </button>
           </div>
-        </h5>
+        </div>
+        <div id="news" style="display: none;margin-top: -10vh;">
+          <div id="newsFromXMLFile" class="news"> <span class="loader"></span> </div>
+        </div>
+        <div id="credits" style="display: none;margin-top: -10vh;">
+          <div class="news">
+            <h1>Credits</h1>
+            <hr>
+            <p>
+              <b>Icons:</b> <a href="https://fontawesome.com/" target="_blank" rel="noopener"><i class="fa-solid fa-font-awesome"></i> Font Awesome <i class="fa-solid fa-up-right-from-square"></i></a>
+              <br><br>
+              <b>Music:</b> <a href="https://www.youtube.com/@SevenT33N-Music" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> SevenT33N Music <i class="fa-solid fa-up-right-from-square"></i></a>
+              <br><br><hr><br><br>
+              <b>Code:</b>
+              <br><br>
+              <a href="https://w3schools.com/" target="_blank" rel="noopener"><i class="fa-brands fa-square-js"></i> W3Schools <i class="fa-solid fa-up-right-from-square"></i></a>
+              <br><br>
+              <a href="https://stackoverflow.com/" target="_blank" rel="noopener"><i class="fa-brands fa-stack-overflow"></i> Stack Overflow <i class="fa-solid fa-up-right-from-square"></i></a>
+              <br><br>
+              <a href="https://www.cssportal.com/" target="_blank" rel="noopener"><i class="fa-brands fa-css3-alt"></i> CSS Portal <i class="fa-solid fa-up-right-from-square"></i></a>
+              <br><br>
+              <a href="https://www.youtube.com/watch?v=QTHRWGn_sJw" target="_blank" rel="noopener"><i class="fa-solid fa-music"></i> Music Player <i class="fa-solid fa-up-right-from-square"></i></a>
+              <br><br>
+              And of course, myself!
+            </p>
+          </div>
+        </div>
       </div>
     </div>
+
+    
+    <div id="home">
+      <h1 class="headerText" style="margin-top: -2.5vh;margin-bottom: calc(10vh - (2.5vw + 2.5vh));text-align: center;"> SevenT33N Music </h1>
+      <div class="container" style="margin-top: 0vh;">
+        <div class="logo">
+          <div id="imgLoader" style="margin-top: calc(10vh - 48px);display: none;">
+            <span class="loader2">L &nbsp; ading</span>
+          </div>
+          <img src="/images/logo.png" alt="logo" id="image" style="opacity: 1;">
+        </div>
+      </div>
+    </div>
+
+
+    <div id="music" style="display: none;">
+      <h1 class="headerText" style="margin-top: -30.5vh;margin-bottom: 20.5vh;text-align: center;font-size: calc(1.6vw + 1.6vh);"> SevenT33N Music </h1>
+      <div class="music-container" style="margin-bottom: -5vh;margin-top: 25vh;">
+        <div class="music-info">
+          <h4 id="title"> Title </h4>
+          <div class="progress-container">
+            <div class="progress"></div>
+          </div>
+        </div>
+        <audio src="/music/fake.mp3" id="audio"></audio>
+        <div class="img-container">
+          <img src="/images/cover1.jpg" alt="music-cover" id="cover">
+        </div>
+        <div class="navigation">
+          <button id="prev" class="action-btn">
+            <i class="fas fa-backward"></i>
+          </button>
+          <button id="play" class="action-btn action-btn-big">
+            <i class="fas fa-play"></i>
+          </button>
+          <button id="next" class="action-btn">
+            <i class="fas fa-forward"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="smallScreenAlert" style="display: none;">
+      <h1 class="headerText" style="margin-top: 5vh;text-align: center;font-size: calc(1.6vw + 1.6vh);"> SevenT33N Music </h1>
+      <div class="container" style="margin-top: 25vh;">
+        <h3 style="color: white;"> Sorry, your screen size is too small. Resize the browser or use a larger device. </h3>
+      </div>
+    </div>
+
+    
+    <div id="fixedNavBtn" class="fixed-nav" style="margin: calc(-1.2vw + -1.2vh);cursor: pointer;" onclick="openNav()">
+      <button class="nav-btn" onclick="openNav()">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    
+    <script src="audio.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

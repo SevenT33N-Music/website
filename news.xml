@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <news xmlns:xlink="http://www.w3.org/1999/xlink">
   <item>
+    <header>Page Navigation (v.3.1.0)</header>
+    <info>Added some more options to the navigation. Also added more music.</info>
+    <time>Mon October 30th, 2023 (07:23 PM UTC)</time>
+  </item>
+  <item>
+    <header>MAJOR UPDATE! (3.0)</header>
+    <info>The UI has been completely redesigned from the bottom up, with mobile users in mind!</info>
+    <time>Thur October 26th, 2023 (01:29 AM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 2.1.0</header>
+    <info>The website has officially been published. In addition to this, the "Back to Top" button on the "news" page has been updated to always show at the bottom right side of the screen.</info>
+    <time>Thur October 19th, 2023 (6:22 PM UTC)</time>
+  </item>
+  <item>
+    <header>UPDATE LOG 2.0.1</header>
+    <info>The page is going into official deployment soon! I'll give an update when it  does.</info>
+    <time>Tue October 18th, 2023 (4:48 PM UTC)</time>
+  </item>
+  <item>
     <header>UPDATE LOG 2.0!</header>
     <info>The News Has Changed! That's right, I've changed the way the news page renders. This should make the page run much faster. I've also made the site more responsive, so have fun looking around!</info>
     <time>Mon September 25th, 2023 (03:47 PM UTC)</time>

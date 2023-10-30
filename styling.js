@@ -1,26 +1,16 @@
-function swapStyleSheet(sheet) {
-  document.getElementById("pagestyle").setAttribute("href", sheet);
-  localStorage.setItem("darkMode", sheet);
-}
+let root = document.querySelector(':root');
+let darkMode = localStorage.getItem("darkMode");
 
-// Check for Dark Mode on Page Load
-var d = localStorage.getItem("darkMode");
-if (d == "dark.css") {
-  swapStyleSheet("dark.css");
-} else if (d == 'light.css') {
-  swapStyleSheet("light.css");
+if (darkMode == "yes") {
+  root.style.setProperty('--gradient-color-top', '#1c131a');
+  root.style.setProperty('--gradient-color-bottom', '#52374c');
+  root.style.setProperty('--txt-color', 'white');
+  root.style.setProperty('--btn-color', 'white');
+  root.style.setProperty('--background-color', '#474747');
 } else {
-  swapStyleSheet("light.css");
-}
-
-// Check for Smooth Scroll on Page Load
-var s = localStorage.getItem("smoothScrolling");
-var r = document.querySelector(':root');
-if (s == 'yes') {
-  r.style.setProperty('--smoothScrolling', 'smooth');
-} else if (s == 'no') {
-  r.style.setProperty('--smoothScrolling', 'auto');
-} else if (s == null) {
-  r.style.setProperty('--smoothScrolling', 'auto');
-  localStorage.setItem("smoothScrolling", 'no');
+  root.style.setProperty('--gradient-color-top', '#ffa8ec');
+  root.style.setProperty('--gradient-color-bottom', '#ffe0f8');
+  root.style.setProperty('--txt-color', 'black');
+  root.style.setProperty('--btn-color', '#736c75');
+  root.style.setProperty('--background-color', 'white');
 }
