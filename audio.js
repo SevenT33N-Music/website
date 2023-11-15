@@ -9,19 +9,20 @@ const title = document.querySelector("#title");
 const cover = document.querySelector("#cover");
 
 // Song Titles
-const songs = ['Love Reggaeton', 'Stay With Me', 'Someone You Loved'];
+const songs = ['Twilight', 'Together', 'Into Darkness (C Major)', 'Close Call', 'Love Reggaeton', 'Stay With Me', 'Someone You Loved', 'Lucky You Remix'];
+const covers = ['Real Love', 'Real Love', 'Real Love', 'Real Love', 'Love Reggaeton', 'Placeholder', 'Someone You Loved', 'Placeholder'];
 
 // Keep track of songs
 let songIndex = 0;
 
 // Initially load song details into DOM
-loadSong(songs[songIndex]);
+loadSong(songs[songIndex], covers[songIndex]);
 
 // Update song details
-function loadSong(song) {
+function loadSong(song,art) {
   title.innerHTML = song;
   audio.src = `music/${song}.mp3`;
-  cover.src = `images/${song}.jpg`;
+  cover.src = `images/${art}.jpg`;
 }
 
 function playSong() {
@@ -47,7 +48,7 @@ function prevSong() {
     songIndex = songs.length - 1;
   }
 
-  loadSong(songs[songIndex]);
+  loadSong(songs[songIndex], covers[songIndex]);
 
   playSong();
 }
@@ -59,7 +60,7 @@ function nextSong() {
     songIndex = 0;
   }
 
-  loadSong(songs[songIndex]);
+  loadSong(songs[songIndex], covers[songIndex]);
 
   playSong();
 }

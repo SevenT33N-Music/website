@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <news xmlns:xlink="http://www.w3.org/1999/xlink">
   <item>
-    <header>Page Navigation (v.3.1.0)</header>
-    <info>Added some more options to the navigation. Also added more music.</info>
-    <time>Mon October 30th, 2023 (07:23 PM UTC)</time>
+    <header>Navigation Animation (v.3.3.1)</header>
+    <info>Added animation to the page navigation.</info>
+    <time>Wed November 15th, 2023 (05:29 PM UTC)</time>
   </item>
   <item>
-    <header>MAJOR UPDATE! (3.0)</header>
+    <header>More Options in Settings (v.3.3.0)</header>
+    <info>Added another option to "settings", which is the ability to enable or disable smooth animations. Another feature coming soon is the ability to change the timing functions of the animations. For example, you could switch the current "Cubic Bezier" for a linear animation.</info>
+    <time>Mon November 13th, 2023 (04:58 PM UTC)</time>
+  </item>
+  <item>
+    <header>Another Minor Update (v.3.2.3)</header>
+    <info>Renamed "Piano Chords" to "Extras" and added a new page to "Extras" called "AI Images".</info>
+    <time>Fri November 10th, 2023 (03:32 PM UTC)</time>
+  </item>
+  <item>
+    <header>Minor Update (v.3.2.2)</header>
+    <info>Finished adding my new album "Real Love", and fixed a few more bugs. Navigation now drops from the top instead of the side, and the links now resize to fit differnet screen sizes.</info>
+    <time>Thu November 9th, 2023 (04:35 AM UTC)</time>
+  </item>
+  <item>
+    <header>Bug Fix (v.3.2.1)</header>
+    <info>Removed Tutorials. Ranamed "Piano Chords Reference" to "Piano Chords". Removed ads and fixed bugs.</info>
+    <time>Wed November 8th, 2023 (05:00 PM UTC)</time>
+  </item>
+  <item>
+    <header>More Features (v.3.2.0)</header>
+    <info>Added tutorials and piano chord references. Piano chord reference is incomplete.</info>
+    <time>Tue November 7th, 2023 (04:23 PM UTC)</time>
+  </item>
+  <item>
+    <header>Page Navigation (v.3.1.0)</header>
+    <info>Added some more options to the navigation, and added more music. In addition to this, I also changed the color scheme of the site from pink to blue, and made the navigation more reactive. For bug fixes, I fixed an issue that was causing some songs not to play. Also... GLOW EFFECTS!!!!!</info>
+    <time>Fri November 3rd, 2023 (07:23 PM UTC)</time>
+  </item>
+  <item>
+    <header>MAJOR UPDATE! (3.0.0)</header>
     <info>The UI has been completely redesigned from the bottom up, with mobile users in mind!</info>
-    <time>Thur October 26th, 2023 (01:29 AM UTC)</time>
+    <time>Thu October 26th, 2023 (01:29 AM UTC)</time>
   </item>
   <item>
     <header>UPDATE LOG 2.1.0</header>
     <info>The website has officially been published. In addition to this, the "Back to Top" button on the "news" page has been updated to always show at the bottom right side of the screen.</info>
-    <time>Thur October 19th, 2023 (6:22 PM UTC)</time>
+    <time>Thu October 19th, 2023 (6:22 PM UTC)</time>
   </item>
   <item>
     <header>UPDATE LOG 2.0.1</header>

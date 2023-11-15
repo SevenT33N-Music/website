@@ -4,129 +4,361 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>SevenT33N Music</title>
-    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
-    <link href="https://unpkg.com/movement.css/movement.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/movement.css/movement.css">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- <script type="module" src="https://pyscript.net/releases/2023.11.1/core.js"></script> -->
     <script src="styling.js"></script>
   </head>
   <body id="body">
-
+    <!-- <script type="py" src="main.py" config="pyscript.toml"></script> -->
+    <input type="text" value="" id="copyTxt" hidden="hidden" style="display: hidden;">
     <!-- Tooltip:
     <span data-tooltip="Tooltip help here!" data-flow="right">CSS Tooltips</span>
     -->
+
+    
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="welcomeClose">&times;</span>
+        <p>Welcome!<br>If you have any questions or concerns, feel free to reach out to me.</p>
+      </div>
+    </div>
+    <div id="confirm" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="confirmClose">&times;</span>
+        <p><b style="color: darkred;">⚠</b> WOAH THERE! <b style="color: darkred;">⚠</b><br>Are you <em>sure</em> you want to clear your save data?</p>
+        <button onclick="clearSaveData('confirmed')">Yes</button>
+      </div>
+    </div>
+    <div id="advertiseModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" id="adClose">&times;</span>
+        <p>HEY!<br>This ad box is open! If you want to advertise on my website, contact me.<br>(The contact form can be found in the page navigation)</p>
+      </div>
+    </div>
+    
+
     
     <div id="myNav" class="overlay">
-      <a href="javascript:void(0)" class="closebtn" id="closeNav" onclick="closeNav()"><i class="fa-solid fa-xmark"></i></a>
-      <a href="javascript:void(0)" class="closebtn" style="display: none;" id="backNews" onclick="closeNews()"><i class="fa-solid fa-reply"></i></a>
-      <a href="javascript:void(0)" class="closebtn" style="display: none;margin-bottom: -10vh;" id="backTxt" onclick="closeFancyText()"><i class="fa-solid fa-reply"></i></a>
-      <a href="javascript:void(0)" class="closebtn" style="display: none;margin-bottom: -10vh;" id="backCredit" onclick="closeCredits()"><i class="fa-solid fa-reply"></i></a>
-      <a href="javascript:void(0)" class="closebtn" style="display: none;" id="backSettings" onclick="closeSettings()"><i class="fa-solid fa-reply" id="rotateArrow"></i></a>
+      <div>
+        <a href="javascript:void(0)" class="closebtn" style="z-index: 55;" id="closeNav" onclick="closeNav()"><i class="fa-solid fa-xmark"></i></a>
+        <a href="javascript:void(0)" class="closebtn" style="display: none;z-index: 55;" id="backNews" onclick="openPage('nav','closeNav','news','backNews')"><i class="fa-solid fa-reply"></i></a>
+        <a href="javascript:void(0)" class="closebtn" style="display: none;z-index: 55;" id="backArticles" onclick="openPage('nav','closeNav','articles','backArticles')"><i class="fa-solid fa-reply"></i></a>
+        <a href="javascript:void(0)" class="closebtn" style="display: none;z-index: 55;margin-bottom: -10vh;" id="backTxt" onclick="openPage('nav','closeNav','credits','backCredit')"><i class="fa-solid fa-reply"></i></a>
+        <a href="javascript:void(0)" class="closebtn" style="display: none;z-index: 55;margin-bottom: -10vh;" id="backCredit" onclick="openPage('nav','closeNav','credits','backCredit')"><i class="fa-solid fa-reply"></i></a>
+        <a href="javascript:void(0)" class="closebtn" style="display: none;z-index: 55;margin-bottom: -10vh;" id="backReferences" onclick="openPage('nav','closeNav','musicReferences','backReferences')"><i class="fa-solid fa-reply"></i></a>
+        <a href="javascript:void(0)" class="closebtn" style="display: none;z-index: 55;" id="backSettings" onclick="openPage('nav','closeNav','settings','backSettings')"><i class="fa-solid fa-reply"></i></a>
+      </div>
       <div class="overlay-content">
-        <div id="nav">
-          <a href="javascript:void(0)" onclick="loadMusicPage()" id='musicNav'><i class="fa-solid fa-music"></i> Music <i class="fa-solid fa-music"></i></a>
-          <a href="javascript:void(0)" style="display: none;" onclick="loadHomePage()" id='homeNav'><i class="fa-solid fa-house"></i> Home <i class="fa-solid fa-house"></i></a>
-          <br>
-          <a href="javascript:void(0)" onclick="openNews()"><i class="fa-solid fa-newspaper"></i> News <i class="fa-solid fa-newspaper"></i></a>
-          <br>
-          <a href="javascript:void(0)" onclick="openSettings()"><i class="fa-solid fa-gear"></i> Settings <i class="fa-solid fa-gear"></i></a>
-          <br>
-          <a href="https://forms.gle/jFwVjwtyvvAhKMop7" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"></i> Contact <i class="fa-solid fa-up-right-from-square"></i></a>
-          <br>
-          <a href="javascript:void(0)" onclick="openCredits()"><i class="fa-solid fa-handshake" style="transform: scaleX(-1);"></i> Credits <i class="fa-solid fa-handshake"></i></a>
-          <!--<a href="javascript:void(0)" onclick="openFancyText()">Fancy Text</a>-->
-        </div>
-        <div id="settings" style="display: none;">
-          <h2 style="text-align: center;color: white;"> Dark Mode </h2>
-          <label class="switch">
-            <input type="checkbox" id="darkModeToggle" onclick="toggleOptions('darkModeToggle','darkMode')">
-            <span class="slider"></span>
-          </label>
-          <br><br>
-          <div class="container" style="margin: calc(1.2vw + 1.2vh);cursor: pointer;" onclick="saveOptions()">
-            <button class="nav-btn" id="saveBtn" onclick="saveOptions()">
-              <i class="fas fa-sd-card"></i>
-            </button>
+        <div class="overlay-page-section" id="navLinks" style="z-index: 5;">
+          <div class="overlay-page" id="nav" style="margin-top: -10vh;">
+            <a href="javascript:void(0)" onclick="loadMusicPage()" id='musicNav'><i class="fa-solid fa-headphones"></i> Music <i class="fa-solid fa-headphones"></i></a>
+            <a href="javascript:void(0)" style="display: none;" onclick="loadHomePage()" id='homeNav'><i class="fa-solid fa-house"></i> Home <i class="fa-solid fa-house"></i></a>
+            <br>
+            <a href="javascript:void(0)" onclick="openPage('news','backNews','nav','closeNav')"><i class="fa-solid fa-newspaper"></i> News <i class="fa-solid fa-newspaper"></i></a>
+            <br>
+            <!--<a href="javascript:void(0)" onclick="openPage('articles','backArticles','nav','closeNav')"><i class="fa-regular fa-newspaper"></i> Tutorials <i class="fa-regular fa-newspaper"></i></a>-->
+            <br>
+            <a href="javascript:void(0)" onclick="openPage('settings','backSettings','nav','closeNav')"><i class="fa-solid fa-gear"></i> Settings <i class="fa-solid fa-gear"></i></a>
+            <br>
+            <a href="javascript:void(0)" onclick="openPage('musicReferences','backReferences','nav','closeNav')"><i class="fa-regular fa-newspaper"></i> Extras <i class="fa-regular fa-newspaper"></i></a>
+            <br>
+            <a href="https://forms.gle/jFwVjwtyvvAhKMop7" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"></i> Contact <i class="fa-solid fa-up-right-from-square"></i></a>
+            <br>
+            <a href="javascript:void(0)" onclick="openPage('credits','backCredit','nav','closeNav')"><i class="fa-solid fa-handshake" style="transform: scaleX(-1);"></i> Credits <i class="fa-solid fa-handshake"></i></a>
+            <!--<a href="javascript:void(0)" onclick="openFancyText()">Fancy Text</a>-->
           </div>
         </div>
-        <div id="news" style="display: none;margin-top: -10vh;">
-          <div id="newsFromXMLFile" class="news"> <span class="loader"></span> </div>
-        </div>
-        <div id="credits" style="display: none;margin-top: -10vh;">
-          <div class="news">
-            <h1>Credits</h1>
-            <hr>
-            <p>
-              <b>Icons:</b> <a href="https://fontawesome.com/" target="_blank" rel="noopener"><i class="fa-solid fa-font-awesome"></i> Font Awesome <i class="fa-solid fa-up-right-from-square"></i></a>
-              <br><br>
-              <b>Music:</b> <a href="https://www.youtube.com/@SevenT33N-Music" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> SevenT33N Music <i class="fa-solid fa-up-right-from-square"></i></a>
-              <br><br><hr><br><br>
-              <b>Code:</b>
-              <br><br>
-              <a href="https://w3schools.com/" target="_blank" rel="noopener"><i class="fa-brands fa-square-js"></i> W3Schools <i class="fa-solid fa-up-right-from-square"></i></a>
-              <br><br>
-              <a href="https://stackoverflow.com/" target="_blank" rel="noopener"><i class="fa-brands fa-stack-overflow"></i> Stack Overflow <i class="fa-solid fa-up-right-from-square"></i></a>
-              <br><br>
-              <a href="https://www.cssportal.com/" target="_blank" rel="noopener"><i class="fa-brands fa-css3-alt"></i> CSS Portal <i class="fa-solid fa-up-right-from-square"></i></a>
-              <br><br>
-              <a href="https://www.youtube.com/watch?v=QTHRWGn_sJw" target="_blank" rel="noopener"><i class="fa-solid fa-music"></i> Music Player <i class="fa-solid fa-up-right-from-square"></i></a>
-              <br><br>
-              And of course, myself!
-            </p>
+
+        <div class="overlay-page-section" id="settings" style="height: 0%;">
+          <div class="overlay-page" style="margin-top: -15vh;">
+            <h2 style="text-align: center;color: white;"> <i class="fa-solid fa-bolt"></i> Glowing Effect <i class="fa-solid fa-sun"></i> </h2>
+            <label class="switch">
+              <input type="checkbox" id="glowToggle" onclick="toggleOptions('glowToggle','glowEffect')">
+              <span class="slider"></span>
+            </label>
+            <h2 style="text-align: center;color: white;"> <i class="fa-solid fa-wand-magic-sparkles"></i> Smooth Animations <i class="fa-solid fa-wand-magic-sparkles"></i> </h2>
+            <label class="switch">
+              <input type="checkbox" id="smoothAniToggle" onclick="toggleOptions('smoothAniToggle','smoothAnimations')">
+              <span class="slider"></span>
+            </label>
+            <h2 style="text-align: center;color: white;"> <i class="fa-solid fa-circle-half-stroke"></i> Dark Mode <i class="fa-solid fa-circle-half-stroke"></i> </h2>
+            <label class="switch">
+              <input type="checkbox" id="darkModeToggle" onclick="toggleOptions('darkModeToggle','darkMode')">
+              <span class="slider"></span>
+            </label>
+            <br><br>
+            <div class="container" style="margin: calc(1.2vw + 1.2vh);padding: 3vh 5vw;cursor: pointer;" onclick="saveOptions()">
+              <button class="nav-btn" id="saveBtn" onclick="saveOptions()">
+                <i class="fas fa-sd-card"></i>
+              </button>
+            </div>
+            <br><br><br>
+            <div class="container" style="margin: calc(1.2vw + 1.2vh);margin-top: -5vh;cursor: pointer;" onclick="clearSaveData('confirm')">
+              <button class="nav-btn" id="clearData" onclick="clearSaveData('confirm')" style="background-color: darkred;">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </div>
           </div>
         </div>
+        
+        <div id="news" class="overlay-page-section" style="margin-top: 5vh;">
+          <div class="overlay-page">
+            <div id="newsFromXMLFile" class="news"> <span class="loader"></span> </div>
+          </div>
+        </div>
+
+        <!--
+        <div id="articles" style="display: none;margin-top: -10vh;">
+          <div id="articlesFromXmlFile" class="news"> <span class="loader"></span> </div>
+        </div>
+        -->
+        
+        <div id="musicReferences" class="overlay-page-section" style="margin-top: 5vh;height: 0%;">
+          <div class="overlay-page">
+            <div class="news">
+              <br>
+              <h2> Piano Chords By Key </h2>
+              <details> <!-- Major Chords -->
+                <summary>Major Chords</summary>
+                <br>
+                <details>
+                  <summary>C Major</summary>
+                  <br>
+                  <img src="piano chords/c major.png" alt="c major chords">
+                </details>
+                <details>
+                  <summary>Db Major</summary>
+                  <br>
+                  <img src="piano chords/d flat major.png" alt="d flat major chords">
+                </details>
+                <details>
+                  <summary>D Major</summary>
+                  <br>
+                  <img src="piano chords/d major.png" alt="d major chords">
+                </details>
+                <details>
+                  <summary>Eb Major</summary>
+                  <img src="piano chords/e flat major.png" alt="e flat major chords">
+                </details>
+                <details>
+                  <summary>E Major</summary>
+                  <br>
+                  <img src="piano chords/e major.png" alt="e major chords">
+                </details>
+                <details>
+                  <summary>F Major</summary>
+                  <br>
+                  <img src="piano chords/f major.png" alt="f major chords">
+                </details>
+                <details>
+                  <summary>Gb Major</summary>
+                  <img src="piano chords/g flat major.png" alt="g glat major chords">
+                </details>
+                <details>
+                  <summary>G Major</summary>
+                  <br>
+                  <img src="piano chords/g major.png" alt="g major chords">
+                </details>
+                <details>
+                  <summary>Ab Major</summary>
+                  <br>
+                  <img src="piano chords/a flat major.png" alt="a flat major chords">
+                </details>
+                <details>
+                  <summary>A Major</summary>
+                  <img src="piano chords/a major.png" alt="a major chords">
+                </details>
+                <details>
+                  <summary>Bb Major</summary>
+                  <img src="piano chords/b flat major.png" alt="b flat major chords">
+                </details>
+                <details>
+                  <summary>B Major</summary>
+                  <img src="piano chords/b major.png" alt="b major chords">
+                </details>
+                <br>
+              </details>
+              <br>
+              <details>
+                <summary>Minor Chords</summary>
+                <br>
+                W.I.P
+              </details>
+              <br>
+              <hr>
+              <br>
+              <br>
+              <h2> AI Images </h2>
+              <details>
+                <summary>Cars</summary>
+                <br>
+                <img src="ai images/1983 Toyota AE86.jpeg" alt="1983 Toyota AE86">
+                <h3 style="margin-top: -2vh;">1983 Toyota AE86</h3>
+                <br>
+                <br>
+                <img src="ai images/1994 Toyota Supra Mk4.jpeg" alt="1994 Toyota Supra MK4">
+                <h3 style="margin-top: -2vh;">1994 Toyota Supra MK4</h3>
+                <br>
+                <br>
+                <img src="ai images/1994 Toyota Supra Mk4 (2).jpeg" alt="1994 Toyota Supra MK4 number 2">
+                <h3 style="margin-top: -2vh;">1994 Toyota Supra MK4 (No. 2)</h3>
+                <br>
+                <br>
+                <img src="ai images/2007 Nissan 350Z.jpeg" alt="2007 Nissan 350Z">
+                <h3 style="margin-top: -2vh;">2007 Nissan 350Z</h3>
+                <br>
+                <br>
+                <img src="ai images/2024 Corvette Z06.jpeg" alt="2024 Corvette Z06">
+                <h3 style="margin-top: -2vh;">2024 Corvette Z06</h3>
+                <br>
+                <br>
+                <img src="ai images/2024 Z06 and 2009 C6.jpeg" alt="2024 Z06 and 2009 C6">
+                <h3 style="margin-top: -2vh;">2024 Corvette Z06 Meets 2009 Corvette C6</h3>
+                <br>
+                <br>
+                <img src="ai images/1987 Ferrari.jpeg" alt="Ferrari From 1987">
+                <h3 style="margin-top: -2vh;">1987 Ferrari</h3>
+                <br>
+                <br>
+                <img src="ai images/2015 Ferrari LaFerrari.jpeg" alt="2015 Ferrari LaFerrari">
+                <h3 style="margin-top: -2vh;">2015 Ferrari LaFerrari</h3>
+                <br>
+                <br>
+                <hr>
+                <br>
+                <h3>Thats All For Now!</h3>
+              </details>
+              <br>
+              <details>
+                <summary> Neon Backgrounds </summary>
+                <br>
+                <img src="ai images/synthwave1.jpeg" alt="Synthwave 1">
+                <br>
+                <br>
+                <img src="ai images/synthwave2.jpg" alt="Synthwave 2">
+                <br>
+                <br>
+                <img src="ai images/synthwave3.jpg" alt="Synthwave 3">
+                <br>
+                <br>
+                <img src="ai images/synthwave4.jpg" alt="Synthwave 4">
+                <br>
+                <br>
+                <img src="ai images/synthwave5.jpg" alt="Synthwave 5">
+                <br>
+                <br>
+                <hr>
+                <br>
+                <h3>Thats All For Now!</h3>
+              </details>
+              <br>
+              <details>
+                <summary> People </summary>
+                <br>
+                <h3>Nothing here yet, Check Back Later!</h3>
+              </details>
+            </div>
+          </div>
+        </div>
+        
+        <div id="credits" class="overlay-page-section" style="margin-top: 5vh;height: 0%;">
+          <div class="overlay-page">
+            <div class="news">
+              <h1>Credits</h1>
+              <hr>
+              <p>
+                <b>Icons:</b> <a href="https://fontawesome.com/" target="_blank" rel="noopener"><i class="fa-solid fa-font-awesome"></i> Font Awesome <i class="fa-solid fa-up-right-from-square"></i></a>
+                <br><br><hr><br><br>
+                <b>Music:</b> <a href="https://www.youtube.com/@SevenT33N-Music" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i> SevenT33N Music <i class="fa-solid fa-up-right-from-square"></i></a>
+                <br><br><hr><br><br>
+                <b>Code:</b>
+                <br><br>
+                <a href="https://w3schools.com/" target="_blank" rel="noopener"><i class="fa-brands fa-square-js"></i> W3Schools <i class="fa-solid fa-up-right-from-square"></i></a>
+                <br><br>
+                <a href="https://stackoverflow.com/" target="_blank" rel="noopener"><i class="fa-brands fa-stack-overflow"></i> Stack Overflow <i class="fa-solid fa-up-right-from-square"></i></a>
+                <br><br>
+                <a href="https://www.cssportal.com/" target="_blank" rel="noopener"><i class="fa-brands fa-css3-alt"></i> CSS Portal <i class="fa-solid fa-up-right-from-square"></i></a>
+                <br><br>
+                <a href="https://www.youtube.com/watch?v=QTHRWGn_sJw" target="_blank" rel="noopener"><i class="fa-solid fa-music"></i> Music Player <i class="fa-solid fa-up-right-from-square"></i></a>
+                <br><br>
+                And of course, myself!
+                <br><br><hr><br><br>
+                <b>Page Colors:</b>
+                <br><br>
+                <a href="https://imagecolorpicker.com/" target="_blank" rel="noopener"><i class="fa-solid fa-image"></i> Image Color Picker <i class="fa-solid fa-up-right-from-square"></i></a>
+                <br><br>
+                And of course, myself!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        
       </div>
     </div>
 
     
-    <div id="home">
-      <h1 class="headerText" style="margin-top: -2.5vh;margin-bottom: calc(10vh - (2.5vw + 2.5vh));text-align: center;"> SevenT33N Music </h1>
-      <div class="container" style="margin-top: 0vh;">
-        <div class="logo">
+    <section class="page-section" id="home">
+      <div class="page-content" style="margin-bottom: 29vh;">
+        <h1 class="headerText" style="margin-top: -1vh;margin-bottom: calc(10vh - (2.5vw + 2.5vh));text-align: center;"> SevenT33N Music </h1>
+        <div class="container logo" style="margin-top: 0vh;margin-bottom: 0vh" onclick="copyText('�       �̈́    Ҁ Ͻ ƍ ͎   ۔ ')">
           <div id="imgLoader" style="margin-top: calc(10vh - 48px);display: none;">
             <span class="loader2">L &nbsp; ading</span>
           </div>
           <img src="/images/logo.png" alt="logo" id="image" style="opacity: 1;">
         </div>
       </div>
-    </div>
+    </section>
 
 
-    <div id="music" style="display: none;">
-      <h1 class="headerText" style="margin-top: -30.5vh;margin-bottom: 20.5vh;text-align: center;font-size: calc(1.6vw + 1.6vh);"> SevenT33N Music </h1>
-      <div class="music-container" style="margin-bottom: -5vh;margin-top: 25vh;">
-        <div class="music-info">
-          <h4 id="title"> Title </h4>
-          <div class="progress-container">
-            <div class="progress"></div>
+    
+    <section id="music" class="page-section" style="height: 0%;margin-bottom: 25vh;z-index: 2;">
+      <div class="page-content">
+        <div class="page-layout" id="img-container" style="margin-bottom: 30vh;">
+          <div class="headerText" style="margin-bottom: 5vh;">
+            <h1 style="text-align: center;font-size: calc(1.6vw + 1.6vh);"> SevenT33N Music </h1>
+          </div>
+          <img src="/images/Placeholder.jpg" alt="music-cover" id="cover" style="margin-bottom: -5vh;">
+          <div class="music-container" style="margin-bottom: 1vh;">
+            <div class="music-info">
+              <h4 id="title"> Title </h4>
+              <div class="progress-container" id="progressContainer">
+                <div class="progress" id="progress"></div>
+              </div>
+            </div>
+            <audio src="/music/Twilight.mp3" id="audio"></audio>
+            <div class="navigation">
+              <button id="prev" class="action-btn">
+                <i class="fas fa-backward"></i>
+              </button>
+              <button id="play" class="action-btn action-btn-big">
+                <i class="fas fa-play"></i>
+              </button>
+              <button id="next" class="action-btn">
+                <i class="fas fa-forward"></i>
+              </button>
+            </div>
           </div>
         </div>
-        <audio src="/music/fake.mp3" id="audio"></audio>
-        <div class="img-container">
-          <img src="/images/cover1.jpg" alt="music-cover" id="cover">
-        </div>
-        <div class="navigation">
-          <button id="prev" class="action-btn">
-            <i class="fas fa-backward"></i>
-          </button>
-          <button id="play" class="action-btn action-btn-big">
-            <i class="fas fa-play"></i>
-          </button>
-          <button id="next" class="action-btn">
-            <i class="fas fa-forward"></i>
-          </button>
-        </div>
       </div>
-    </div>
+    </section>
 
+    
 
     <div id="smallScreenAlert" style="display: none;">
       <h1 class="headerText" style="margin-top: 5vh;text-align: center;font-size: calc(1.6vw + 1.6vh);"> SevenT33N Music </h1>
       <div class="container" style="margin-top: 25vh;">
-        <h3 style="color: white;"> Sorry, your screen size is too small. Resize the browser or use a larger device. </h3>
+        <h3> Sorry, your screen size is less than 275 pixels. Please resize the browser or use a larger device. </h3>
       </div>
     </div>
+
 
     
     <div id="fixedNavBtn" class="fixed-nav" style="margin: calc(-1.2vw + -1.2vh);cursor: pointer;" onclick="openNav()">
@@ -134,6 +366,7 @@
         <i class="fas fa-bars"></i>
       </button>
     </div>
+
 
     
     <script src="audio.js"></script>
