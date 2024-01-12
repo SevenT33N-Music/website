@@ -1,9 +1,0 @@
-packages = ["arrr", "numberwang" ]
-plugins = [
-  "https://pyscript.net/latest/plugins/python/py_tutor.py"
-]
-[files]
-"/tampstamps.txt" = "./tampstamps.txt"
-
-[[fetch]]
-files = ["./main.py"]

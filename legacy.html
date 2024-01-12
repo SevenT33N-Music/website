@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Music</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+  <section id="nav" class="overlay">
+    <div class="overlay-content">
+      <div class="overlay-close-btn">
+        <a href="javascript:void(0)" style="z-index: 2;" id="closeOverlay" onclick="navMenu('close')"><i class="fa-solid fa-xmark"></i></a>
+      </div>
+      <h1 style="color: whitesmoke;margin-bottom: 3%;">Pages</h1>
+      <hr style="width: 35%;margin-bottom: 3%;"/>
+      <a href="javascript:void(0)" onclick="window.location.href = '/home.html';">Home</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '/profile.html';">Profile</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '/musicplayer.html#musicPage';">Music Player</a>
+      <h1 style="color: whitesmoke;margin-bottom: 3%;">Legal</h1>
+      <hr style="width: 35%;margin-bottom: 3%;"/>
+      <a href="javascript:void(0)" onclick="window.location.href = '/legal.html#termsOfUse'">Terms of Use</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '/legal.html#privacyPolicy'">Privacy Policy</a>
+      <h1 style="color: whitesmoke;margin-bottom: 3%;">Other</h1>
+      <hr style="width: 35%;margin-bottom: 3%;"/>
+      <a href="/news.html" onclick="navMenu('close')">News</a>
+      <a href="/aboutme.html">About Me</a>
+      <a href="javascript:void(0)" onclick="navMenu('close')">Legacy</a>
+    </div>
+  </section>
+  <header style="display: none;">
+    <div class="header"></div>
+  </header>
+  <nav class="nav-container">
+    <div class="nav-img" onclick="window.location.href = '/home.html'"></div>
+    <div class="nav-links">
+      <a href="javascript:void(0)" class="nav-link" style="width: 75%;justify-content: flex-start;" id="searchbox" onclick="searchMenu('open')"><i class="fa-solid fa-magnifying-glass" style="font-size: 20px;padding: 3%;margin-left: 2%;" id="searchIcon"></i><input type="text" name="search" placeholder="Search.." id="search" autocomplete="off"></a>
+      <a href="javascript:void(0)" class="nav-link" style="width: 100%;justify-content: center;" onclick="navMenu('open')"><i class="fa-solid fa-bars"></i></a>
+    </div>
+  </nav>
+  <section id="legacyPage" style="text-align: center;height: 80vh;overflow-y: auto;">
+    <h1>LEGACY PAGE</h1>
+    <p>Here you'll find old designs for my website.</p>
+    <h3>Design 1</h3>
+    <div class="img-container">
+      <img src="/legacy/design1_item1.png" alt="Dark Mode With Code" title="Dark Mode With Code" loading="lazy">
+    </div>
+    <br>
+    <div class="img-container">
+      <img src="/legacy/design1_item2.png" alt="Home Page" title="Home Page" loading="lazy">
+    </div>
+    <br>
+    <div class="img-container">
+      <img src="/legacy/design1_item3.jpg" alt="Music Page" title="Music Page" loading="lazy">
+    </div>
+    <br>
+    <div class="img-container">
+      <img src="/legacy/design1_item4.png" alt="Settings Page" title="Settings Page" loading="lazy">
+    </div>
+    <br>
+    <h3>Design 2</h3>
+    <div class="img-container">
+      <img src="/legacy/design2_item1.png" alt="Home" title="Home" loading="lazy">
+    </div>
+    <br>
+    <div class="img-container">
+      <img src="/legacy/design2_item1_dark.png" alt="Home Dark" title="Home Dark" loading="lazy">
+    </div>
+    <br>
+    <div class="img-container">
+      <img src="/legacy/design2_item2.png" alt="Music" title="Music" loading="lazy">
+    </div>
+    <br>
+    <div class="img-container">
+      <img src="/legacy/design2_item3.png" alt="Menu" title="Menu" loading="lazy">
+    </div>
+    <br>
+    <div class="img-container">
+      <img src="/legacy/design2_item4.png" alt="News" title="News" loading="lazy">
+    </div>
+    <br>
+  </section>
+  <footer>
+    <h6>&copy; SevenT33N Music 2020-2024. All Rights Reserved.</h6>
+  </footer>
+  <script src="script.js"></script>
+  <script src="lazyload.js"></script>
+</body>
+
+</html>

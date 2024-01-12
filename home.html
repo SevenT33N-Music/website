@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="title" content="SevenT33N Music">
+  <meta name="description" content="Listen to music made by SevenT33N">
+  <meta name="keywords" content="music, sevent33n, trap, rap, hiphop, lofi, rnb">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="90 days">
+  <meta name="author" content="SevenT33N Music">
+  <title>SevenT33N Music</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+  <section id="nav" class="overlay">
+    <div class="overlay-content">
+      <div class="overlay-close-btn">
+        <a href="javascript:void(0)" style="z-index: 2;" id="closeOverlay" onclick="navMenu('close')"><i class="fa-solid fa-xmark"></i></a>
+      </div>
+      <h1 style="color: whitesmoke;margin-bottom: 3%;">Pages</h1>
+      <hr style="width: 35%;margin-bottom: 3%;"/>
+      <a href="javascript:void(0)" onclick="navMenu('close')">Home</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '/profile.html';">Profile</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '/musicplayer.html#musicPage';">Music Player</a>
+      <h1 style="color: whitesmoke;margin-bottom: 3%;">Legal</h1>
+      <hr style="width: 35%;margin-bottom: 3%;"/>
+      <a href="javascript:void(0)" onclick="window.location.href = '/legal.html#termsOfUse'">Terms of Use</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '/legal.html#privacyPolicy'">Privacy Policy</a>
+      <h1 style="color: whitesmoke;margin-bottom: 3%;">Other</h1>
+      <hr style="width: 35%;margin-bottom: 3%;"/>
+      <a href="/news.html" onclick="navMenu('close')">News</a>
+      <a href="/aboutme.html" onclick="navMenu('close')">About Me</a>
+      <a href="/legacy.html" onclick="navMenu('close')">Legacy</a>
+    </div>
+  </section>
+  <header style="display: none;">
+    <div class="header"></div>
+  </header>
+  <!--<p id="mobileTest" style="color: white;"></p>-->
+  <nav class="nav-container">
+    <div class="nav-img"></div>
+    <div class="nav-links">
+      <a href="javascript:void(0)" class="nav-link" style="width: 75%;justify-content: flex-start;" id="searchbox" onclick="searchMenu('open')"><i class="fa-solid fa-magnifying-glass" style="font-size: 20px;padding: 3%;margin-left: 2%;" id="searchIcon"></i><input type="text" name="search" placeholder="Search.." id="search" autocomplete="off"></a>
+      <a href="javascript:void(0)" class="nav-link" style="width: 100%;justify-content: center;" onclick="navMenu('open')"><i class="fa-solid fa-bars"></i></a>
+    </div>
+  </nav>
+  <section id="albumsSection">
+    <div class="item-name">Albums</div>
+    <div class="music-item-container">
+      <div class="music-item" onclick="openMusicPlayer('false', 'RealLove', '0')">
+        <img src="/images/RealLove.jpg" loading="lazy">
+      </div>
+      <div class="music-item disabled">
+        <img src="/images/loveHeartbreakRepeat.jpg" loading="lazy" class="image">
+      </div>
+      <div class="music-item" onclick="openMusicPlayer('false', 'wasted', '0')">
+        <img src="/images/WASTED.jpg" loading="lazy">
+      </div>
+      <div class="music-item" onclick="openMusicPlayer('false', 'brixton', '0')">
+        <img src="/images/brixton.jpg" loading="lazy">
+      </div>
+    </div>
+  </section>
+  <div style="height: 15vh;"></div> <!-- Large Line Break -->
+  <section id="singlesSections">
+    <div class="item-name">Singles</div>
+    <div class="music-item-container">
+      <div class="music-item" onclick="openMusicPlayer('false', 'singles', '0')">
+        <img src="/images/Placeholder.jpg" loading="lazy">
+      </div>
+      <div class="music-item" onclick="openMusicPlayer('false', 'singles', '1')">
+        <img src="/images/loveReggaeton.jpg" loading="lazy">
+      </div>
+    </div>
+  </section>
+  <div style="height: 15vh;"></div> <!-- Large Line Break -->
+  <section id="singlesSections">
+    <div class="item-name">Remixes</div>
+    <div class="music-item-container">
+      <div class="music-item disabled">
+        <img src="/images/Already Dead.jpg" loading="lazy">
+      </div>
+      <div class="music-item disabled">
+        <img src="/images/All of Me.jpg" loading="lazy">
+      </div>
+      <div class="music-item disabled">
+        <img src="/images/All Girls Are The Same.jpg" loading="lazy">
+      </div>
+      <div class="music-item disabled">
+        <img src="/images/girlfriend.jpg" loading="lazy">
+      </div>
+      <div class="music-item disabled">
+        <img src="/images/Stay With Me.jpg" loading="lazy">
+      </div>
+    </div>
+  </section>
+  <div style="height: 15vh;"></div> <!-- Large Line Break -->
+  <footer>
+    <h6>&copy; SevenT33N Music 2020-2024. All Rights Reserved.</h6>
+  </footer>
+  <script src="script.js"></script>
+  <script src="deviceCheck.js"></script>
+  <script src="lazyload.js"></script>
+</body>
+
+</html>

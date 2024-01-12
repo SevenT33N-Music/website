@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Uh Oh...</title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://unpkg.com/movement.css/movement.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="styling.js"></script>
+  </head>
+  <body style="display: flex;flex-direction: column;justify-content: space-evenly;align-items: center;">
+    <h1 style="color: var(--txt-color);">Uh oh!</h1>
+    <h3 style="color: var(--txt-color);text-align: center;margin-left: 5vw;margin-right: 5vw;">It looks like you requested a file or page that doesnt exist!</h3>
+    <a href="javascript:void(0)" class="return-btn" onclick="relocate()" style="text-decoration: none;padding: calc(5vw + 5vh);position: relative;">
+      Return to Home Page <i class="fa-solid fa-reply"></i>
+    </a>
+    <script>
+      function relocate() {
+        console.log('Relocating...');
+        window.location.href = '/';
+      }
+    </script>
+  </body>
+</html>

@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <news xmlns:xlink="http://www.w3.org/1999/xlink">
   <item>
+    <header>BRAND NEW DESIGN! (v.4.0.0)</header>
+    <info>Brand new website design! that's right, there's a fresh layout to this amazing website. New features inlcude searching for songs, and my personal favorite, FAVORITES! You read that right, you can now choose which songs you like most! to check out your favorite songs, just head to the "profile" page. **SIDE NOTE** Searching is still very much work in progress, so please be patient. Anyway, enjoy the new design!</info>
+    <time>Thur January 11th, 2024 (04:56 PM UTC)</time>
+  </item>
+  <item>
+    <header>Image Size Fixed (v.3.5.4)</header>
+    <info>Fixed a bug that caused images to display at a size that is far too large. In addition to these bug fixes, I also made the settings save without refreshing the page. Finally, I started work on a new section for the "extras" page, which is flags which I have redesigned, for better or for worse.</info>
+    <time>Sat December 23rd, 2023 (07:53 PM UTC)</time>
+  </item>
+  <item>
+    <header>No More Early Access (v.3.5.3)</header>
+    <info>Removed early access. I felt that the many visual bugs on this website could be fixed. So instead of creating an entirely new design, I just fixed the bugs in the current design. Thank you for your understanding.</info>
+    <time>Mon December 18th, 2023 (07:06 AM UTC)</time>
+  </item>
+  <item>
+    <header>EARLY ACCESS! (v.3.5.2)</header>
+    <info>Changed some code in "Early Access".</info>
+    <time>Wed November 29th, 2023 (04:40 PM UTC)</time>
+  </item>
+  <item>
+    <header>EARLY ACCESS! (v.3.5.1)</header>
+    <info>Modified early access so you no longer have to login to access it.</info>
+    <time>Wed November 29th, 2023 (04:09 PM UTC)</time>
+  </item>
+  <item>
+    <header>EARLY ACCESS! (v.3.5.0)</header>
+    <info>You can now see what's being added to the site! Just head over to "Extras" and scroll down.</info>
+    <time>Tue November 28th, 2023 (04:11 PM UTC)</time>
+  </item>
+  <item>
+    <header>404 Fix (v.3.4.1)</header>
+    <info>Fixed a bug which caused the page to redirect twice on the "404" page.</info>
+    <time>Tue November 21st, 2023 (04:08 PM UTC)</time>
+  </item>
+  <item>
+    <header>404 Page (v.3.4.0)</header>
+    <info>Added a "404 Not Found" page.</info>
+    <time>Mon November 20th, 2023 (04:09 PM UTC)</time>
+  </item>
+  <item>
+    <header>Animation Fix (v.3.3.3)</header>
+    <info>Fixed a bug that caused the animations to occur on light mode, even when animations are toggled off.</info>
+    <time>Thur November 16th, 2023 (03:32 PM UTC)</time>
+  </item>
+  <item>
+    <header>Navigation Fixes (v.3.3.2)</header>
+    <info>Fixed a bug that caused some menu items to have the top clipped off. Also fixed a bug that caused the close nav button to continue showing after closing navigation (mobile bug).</info>
+    <time>Thu November 16th, 2023 (03:32 PM UTC)</time>
+  </item>
+  <item>
     <header>Navigation Animation (v.3.3.1)</header>
     <info>Added animation to the page navigation.</info>
     <time>Wed November 15th, 2023 (05:29 PM UTC)</time>
