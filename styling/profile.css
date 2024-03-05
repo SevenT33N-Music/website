@@ -1,0 +1,160 @@
+/* BUTTON ADAPTED FROM UIVERSE.IO: https://uiverse.io/cssbuttons-io/massive-mayfly-74 */
+.profile-nav-btn button {
+ position: relative;
+ display: inline-block;
+ cursor: pointer;
+ outline: none;
+ border: 0;
+ vertical-align: middle;
+ text-decoration: none;
+ background: transparent;
+ padding: 0;
+ font-size: inherit;
+ font-family: inherit;
+}
+.profile-nav-btn button.learn-more {
+ width: 12rem;
+ height: auto;
+}
+.profile-nav-btn button.learn-more .circle {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: relative;
+ display: block;
+ margin: 0;
+ width: 3rem;
+ height: 3rem;
+ background: #282936;
+ border-radius: 1.625rem;
+}
+.profile-nav-btn button.learn-more .circle .icon {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ margin: auto;
+ background: #fff;
+}
+.profile-nav-btn button.learn-more .circle .icon.arrow {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ left: 0.625rem;
+ width: 1.125rem;
+ height: 0.125rem;
+ background: none;
+}
+.profile-nav-btn button.learn-more .circle .icon.arrow::before {
+ position: absolute;
+ content: "";
+ top: -0.29rem;
+ right: 0.0625rem;
+ width: 0.625rem;
+ height: 0.625rem;
+ border-top: 0.125rem solid #fff;
+ border-right: 0.125rem solid #fff;
+ transform: rotate(45deg);
+}
+.profile-nav-btn button.learn-more .button-text {
+ transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ bottom: 0;
+ padding: 0.75rem 0;
+ margin: 0 0 0 1.85rem;
+ color: #282936;
+ font-weight: 700;
+ line-height: 1.6;
+ text-align: center;
+ text-transform: uppercase;
+}
+.profile-nav-btn button:hover .circle {
+ width: 100%;
+}
+.profile-nav-btn button:hover .circle .icon.arrow {
+ background: #fff;
+ transform: translate(1rem, 0);
+}
+.profile-nav-btn button:hover .button-text {
+ color: #fff;
+}
+
+/* ===== Profile Header ===== */
+.profile-header {
+  overflow: clip;
+  background: rgb(150, 150, 150);
+  background: rgba(150, 150, 150, 0.8);
+  width: 100%;
+  height: 15vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.profile-image {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: #e0e0e0;
+  width: 12vh;
+  height: 12vh;
+  max-width: 250px;
+  max-height: 250px;
+  border-radius: 50%;
+  overflow: clip;
+}
+.profile-image svg {
+  fill: black;
+  width: auto;
+  height: 10vh;
+  max-width: 250px;
+  max-height: 250px;
+}
+.edit-profile-image {
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.edit-profile-image svg {
+  fill: white;
+  width: auto;
+  height: 50%;
+}
+.profile-desc {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 5px;
+  width: fit-content;
+  height: fit-content;
+}
+.profile-desc p {
+  position: relative;
+  color: black;
+  font-weight: 800;
+  font-size: calc(2.5vw + 2.5vh);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.profile-desc p:after {
+  content: 'Profile';
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: black;
+  font-weight: 400;
+  font-size: calc(0.75vw + 0.75vh);
+  margin-top: -1vh;
+}

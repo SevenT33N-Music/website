@@ -17,7 +17,7 @@
       </div>
       <h1 style="color: whitesmoke;margin-bottom: 3%;">Pages</h1>
       <hr style="width: 35%;margin-bottom: 3%;"/>
-      <a href="javascript:void(0)" onclick="window.location.href = '/home.html';">Home</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '/index.html';">Home</a>
       <a href="javascript:void(0)" onclick="window.location.href = '/profile.html';">Profile</a>
       <a href="javascript:void(0)" onclick="window.location.href = '/musicplayer.html#musicPage';">Music Player</a>
       <h1 style="color: whitesmoke;margin-bottom: 3%;">Legal</h1>
@@ -27,15 +27,15 @@
       <h1 style="color: whitesmoke;margin-bottom: 3%;">Other</h1>
       <hr style="width: 35%;margin-bottom: 3%;"/>
       <a href="/news.html" onclick="navMenu('close')">News</a>
-      <a href="/aboutme.html">About Me</a>
       <a href="javascript:void(0)" onclick="navMenu('close')">Legacy</a>
+      <a href="/projects.html" onclick="navMenu('close')">More</a>
     </div>
   </section>
   <header style="display: none;">
     <div class="header"></div>
   </header>
   <nav class="nav-container">
-    <div class="nav-img" onclick="window.location.href = '/home.html'"></div>
+    <div class="nav-img" id="navImg" onclick="window.location.href = '/index.html'"><img src="/images/logo.svg" alt="SevenT33N Logo"/></div>
     <div class="nav-links">
       <a href="javascript:void(0)" class="nav-link" style="width: 75%;justify-content: flex-start;" id="searchbox" onclick="searchMenu('open')"><i class="fa-solid fa-magnifying-glass" style="font-size: 20px;padding: 3%;margin-left: 2%;" id="searchIcon"></i><input type="text" name="search" placeholder="Search.." id="search" autocomplete="off"></a>
       <a href="javascript:void(0)" class="nav-link" style="width: 100%;justify-content: center;" onclick="navMenu('open')"><i class="fa-solid fa-bars"></i></a>

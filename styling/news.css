@@ -1,0 +1,29 @@
+.news-container {
+  width: 80vw;
+  height: 80vh;
+  margin: 10vh 10vw;
+  padding: 1vh 1vw;
+}
+.news-header {
+  height: 10vh;
+  width: 100%;
+  font-size: calc(1.5vw + 2vh);
+  text-align: center;
+  overflow: clip;
+}
+.news-body {
+  height: fit-content;
+  padding: 0;
+  padding-bottom: 2vh;
+  width: 100%;
+  font-size: calc(1.5vw + 1vh);
+  text-align: center;
+  overflow: clip;
+}
+.news-time {
+  height: 5vh;
+  width: 100%;
+  font-size: calc(0.75vw + 0.75vh);
+  text-align: center;
+  overflow: clip;
+}

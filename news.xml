@@ -1,6 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <news xmlns:xlink="http://www.w3.org/1999/xlink">
   <item>
+    <header>New Page (v.5.1.0)</header>
+    <info>Added a new page: Drum Machine. Now you can play the drums from this amazing website, without spending a penny! Enjoy playing drill, jazz, reggaeton, and hiphop drums, with more on the way! As for the profile page, that is still a work in progress. It should be done soon though, so hang tight!</info>
+    <time>Mon, March 4th, 2024 (5:55 AM UTC)</time>
+  </item>
+  <item>
+    <header>New Layout! (v.5.0.0)</header>
+    <info>Check out this brand new layout! The music player is inspired by spotify's web player. New features include an inbox, and custom context menus (Right click menus). All content loads on one page, so their is no refreshing everytime you want to switch a page.</info>
+    <time>Mon, March 4th, 2024 (12:55 AM UTC)</time>
+  </item>
+  <item>
+    <header>Clicker Game Bug Fix (v.4.4.3)</header>
+    <info>Fixed a bug in the clicker game that caused the cash to be loaded incorrectly</info>
+    <time>Fri February 2nd, 2024 (4:03 PM UTC)</time>
+  </item>
+  <item>
+    <header>Bugs And Features (v.4.4.2)</header>
+    <info>Fixed a visual bug. Made the cash on the clicker game update in a more appealing way.</info>
+    <time>Fri February 2nd, 2024 (3:49 PM UTC)</time>
+  </item>
+  <item>
+    <header>Clicker Game Bug Fix (v.4.4.1)</header>
+    <info>Fixed a scrolling bug in the Clicker Game.</info>
+    <time>Thu February 1st, 2024 (6:40 PM UTC)</time>
+  </item>
+  <item>
+    <header>Major Update (v.4.4.0)</header>
+    <info>Added a new page called "more". This page houses some of my projects, as well is some features that are still being tested. Currently, the only page that is available is "Clicker Game". I made it a while being, and have finally brought it onto the website! In addition to this, I also added a greeting card that appears at the bottom left side of the screen If you find it annoying, let me know by using the contact form (W.I.P At the moment).</info>
+    <time>Thu February 1st, 2024 (6:34 PM UTC)</time>
+  </item>
+  <item>
+    <header>Minor Details (v.4.3.1)</header>
+    <info>Updated the loading animation for song covers.</info>
+    <time>Tue January 30th, 2024 (4:25 PM UTC)</time>
+  </item>
+  <item>
+    <header>Search Done! (v.4.3.0)</header>
+    <info>The search feature is now complete! In addition to completing this amazing feature, I have also modified the way the music page loads data.</info>
+    <time>Mon January 29th, 2024 (7:07 PM UTC)</time>
+  </item>
+  <item>
+    <header>Search Feature in Final Stages (v.4.2.3)</header>
+    <info>The feature which allows you to search for songs is almost done! I only have to add the rest of the data.</info>
+    <time>Mon January 29th, 2024 (1:49 PM UTC)</time>
+  </item>
+  <item>
+    <header>Temporary Shutdown? (v.4.2.2)</header>
+    <info>Disabled the song "All of Me" for various reasons. Website my temporarly go down in the future. More updates soon.</info>
+    <time>Wed January 17th, 2024 (1:02 PM UTC)</time>
+  </item>
+  <item>
+    <header>Bug Fix (v.4.2.1)</header>
+    <info>Fixed a bug with the time display of the music player.</info>
+    <time>Tue January 16th, 2024 (9:02 PM UTC)</time>
+  </item>
+  <item>
+    <header>Bug Fixes + New Features (v.4.2.0)</header>
+    <info>Fixed a few visual bugs. Also added text over each cover to let you know what album or song you are selecting.</info>
+    <time>Tue January 16th, 2024 (7:11 PM UTC)</time>
+  </item>
+  <item>
+    <header>Songs Now Available (v.4.1.4)</header>
+    <info>New songs are now available, including "All of Me" and "Already Dead".</info>
+    <time>Tue January 16th, 2024 (3:53 PM UTC)</time>
+  </item>
+  <item>
+    <header>Bug Fixes (v.4.1.3)</header>
+    <info>Fixed a bug with the song covers. Also fixed the display year for some news elements.</info>
+    <time>Fri January 12th, 2024 (4:36 PM UTC)</time>
+  </item>
+  <item>
+    <header>Modifications (v.4.1.2)</header>
+    <info>Added a few songs and modified code to run better.</info>
+    <time>Fri January 12th, 2024 (4:31 PM UTC)</time>
+  </item>
+  <item>
+    <header>Bug Fixes (v.4.1.1)</header>
+    <info>fixed bugs with the share links and favorites playlist.</info>
+    <time>Fri January 12th, 2024 (1:32 PM UTC)</time>
+  </item>
+  <item>
+    <header>Favorites Playlist (v.4.1.0)</header>
+    <info>Made it so all your favorite songs are put into a playlist.</info>
+    <time>Fri January 12th, 2024 (1:32 PM UTC)</time>
+  </item>
+  <item>
+    <header>Bug Fixes (v.4.0.1)</header>
+    <info>Fixed a bug with the share link. Also added time for the music player.</info>
+    <time>Fri January 12th, 2024 (12:15 PM UTC)</time>
+  </item>
+  <item>
     <header>BRAND NEW DESIGN! (v.4.0.0)</header>
     <info>Brand new website design! that's right, there's a fresh layout to this amazing website. New features inlcude searching for songs, and my personal favorite, FAVORITES! You read that right, you can now choose which songs you like most! to check out your favorite songs, just head to the "profile" page. **SIDE NOTE** Searching is still very much work in progress, so please be patient. Anyway, enjoy the new design!</info>
     <time>Thur January 11th, 2024 (04:56 PM UTC)</time>

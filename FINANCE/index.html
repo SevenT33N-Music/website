@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="title" content="SevenT33N Music">
+  <meta name="description" content="Listen to music made by SevenT33N">
+  <meta name="keywords" content="music, sevent33n, trap, rap hiphop, lofi, rnb">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="90 days">
+  <meta name="author" content="SevenT33N Music">
+  <title>SevenT33N Music</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload="showNotification()">
+  <section id="nav" class="overlay">
+    <div class="overlay-content">
+      <div class="overlay-close-btn">
+        <a href="javascript:void(0)" style="z-index: 2;" id="closeOverlay" onclick="navMenu('close')"><i class="fa-solid fa-xmark"></i></a>
+      </div>
+      <h1 style="color: whitesmoke;margin-bottom: 3vh;">Pages</h1>
+      <hr style="width: 35%;margin-bottom: 2vh;"/>
+      <a href="javascript:void(0)" onclick="navMenu('close')">Home</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '../profile.html';">Profile</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '../musicplayer.html';">Music Player</a>
+      <h1 style="color: whitesmoke;margin-bottom: 3vh;">Legal</h1>
+      <hr style="width: 35%;margin-bottom: 2vh;"/>
+      <a href="javascript:void(0)" onclick="window.location.href = '../legal.html#termsOfUse'">Terms of Use</a>
+      <a href="javascript:void(0)" onclick="window.location.href = '../legal.html#privacyPolicy'">Privacy Policy</a>
+      <h1 style="color: whitesmoke;margin-bottom: 3vh;">Other</h1>
+      <hr style="width: 35%;margin-bottom: 2vh;"/>
+      <a href="../news.html" onclick="navMenu('close')">News</a>
+      <a href="../legacy.html" onclick="navMenu('close')">Legacy</a>
+      <a href="../projects.html" onclick="navMenu('close')">More</a>
+    </div>
+  </section>
+  <nav class="nav-container">
+    <div class="nav-img" id="navImg" onclick="window.location.href = '../index.html'"><img src="../images/logo.svg" alt="SevenT33N Logo"/></div>
+    <div class="nav-links">
+      <a href="javascript:void(0)" class="nav-link" style="width: 75%;justify-content: flex-start;" id="searchbox" onclick="searchMenu('open')"><i class="fa-solid fa-magnifying-glass" style="font-size: 20px;padding: 3%;margin-left: 2%;" id="searchIcon"></i><input type="text" name="search" placeholder="Search.." id="search" autocomplete="off"></a>
+      <a href="javascript:void(0)" class="nav-link" style="width: 100%;justify-content: center;" onclick="navMenu('open')"><i class="fa-solid fa-bars"></i></a>
+    </div>
+  </nav>
+  <section class="home-container">
+    <div id="devHelper"></div>
+    <div style="height: 5vh;"></div> <!-- small Line Break -->
+    <div class="savings-card">
+      <div class="savings-card-title">Savings</div>
+      <div style="height: 15%;color: #fff">.</div>
+      <div class="savings-card-saved-amount" id="savingsCardAmount">69,000</div>
+      <div class="savings-card-progress-range">
+        <div class="savings-card-progress-fill" id="savingsCardFillAmount"></div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <h6>&copy; SevenT33N Music 2020-2024. All Rights Reserved.</h6>
+  </footer>
+  <div class="notification" id='welcomeNotification' style="left: -100vw;" onclick="hideNotification()">
+    <div class="notiglow"></div>
+    <div class="notiborderglow"></div>
+    <div class="notititle" id="randomHello">SevenT33N Music</div>
+    <div class="notibody" id="randomGreet">So glad you could make it!</div>
+  </div>
+  <script src="../randomGreetings.js"></script>
+  <script>
+    var notificationTimeout;
+    let notification = document.getElementById('welcomeNotification');
+    function showNotification() {
+      let randomGreet = document.getElementById('randomGreet');
+      let randomHello = document.getElementById('randomHello');
+      randomHello.innerHTML = randHello[Math.floor(Math.random() * randHello.length)];
+      randomGreet.innerHTML = randGreets[Math.floor(Math.random() * randGreets.length)];
+      notification.style.left = '1vw';
+      notificationTimeout = setTimeout(() => {
+        notification.style.left = '-100vw';
+      }, 5000);
+    }
+    function hideNotification() {
+      clearTimeout(notificationTimeout);
+      notification.style.left = '-100vw';
+    }
+  </script>
+  <script src="../script.js"></script>
+  <script src="scripts/finaceApp.js"></script>
+</body>
+</html>

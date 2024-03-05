@@ -1,0 +1,37 @@
+function newsFromNotis(fix = false) {
+  page = 'news';
+  hidePages();
+  document.getElementById('newsPage').style.opacity = '1';
+  document.getElementById('newsPage').style.height = '100vh';
+  document.getElementById('newsPage').style.marginTop = '0vh';
+  if (fix == false) {
+    notiModal(false);
+  }
+}
+
+function profileFromNotis() {
+  profilePage();
+  notiModal(false);
+}
+
+let newsDataItem = `Check out the <a href='javascript:void(0)' onclick='newsFromNotis()'>News</a> for more info.`;
+let profileDataItem = `Open Your <a href='javascript:void(0)' onclick='profileFromNotis()'>Profile</a>.`;
+
+let allNotis = [
+  ['Welcome to The Inbox!',
+   "Hey there! this is your own personal inbox. Here you can check updates and news about the site. You'll also recieve notifications about new song releases, new features, and more!",
+   "new"
+  ],
+  ['Update (v.5.0.0)',
+   `This update comes with a brand new layout and new features. Check out the ${newsDataItem} for more info. IMPORTANT: MANY FEATURES ARE STILL WORK IN PROGRESS. A PRIME EXAMPLE IS THE 'SEE ALL' BUTTONS, WHICH CURRENTLY DO NOTHING.`,
+   "new"
+  ],
+  ['Drum Machine',
+   `A new update has dropped: Introducing the drum machine! ${newsDataItem}`,
+   "new"
+  ],
+  ['Profiles',
+   `A new update has dropped: Profiles are looking good! ${profileDataItem}`,
+   "new"
+  ]
+];

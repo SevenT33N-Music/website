@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <meta name="title" content="Simplistic Clicker">
+    <meta name="description" content="A minimalistic and simple clicker game developed by SevenT33N Music">
+    <meta name="keywords" content="clicker, game, clicker game, SevenT33N Music, simple, simple clicker, simple clicker game, game, click game">
+    <meta name="robots" content="index, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="90 days">
+    <meta name="author" content="SevenT33N Music">
+    <title>Simplistic Clicker</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body>
+    <div class="game-container">
+      <!-- Page Loader -->
+      <div class="loading" id="loading">
+        <div class="loader">
+          <svg viewBox="25 25 50 50" id="loadingSpinner1">
+            <circle r="20" cy="50" cx="50"></circle>
+          </svg>
+        </div>
+      </div>
+      <!-- File Upload (For Loading Save Data) -->
+      <input id="fileUpload" type="file" accept=".json" style="display: none;"/>
+      <!-- Savedata Code (Modified to Only Save JSON Files) -->
+      <div class="wrapper" hidden="hidden">
+        <textarea id="jsonSaveDataTxt" spellcheck="false" placeholder="Enter something to save" required></textarea>
+        <div class="file-options">
+          <div class="option file-name">
+            <label>File name</label>
+            <input type="text" spellcheck="false" placeholder="Enter file name" value="savedata">
+          </div>
+          <div class="option save-as">
+            <label>Save as</label>
+            <div class="select-menu">
+              <select>
+                <option value="application/json">JSON File (.json)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button class="save-btn" type="button">Save As Text File</button>
+      </div>
+
+      <!-- Dev Tests --><!-- display: none; -->
+      <div style="position: fixed;top: 2px;left: 3px;display: none;">
+        <a href="javascript:void(0)" onclick="devTest('addCash')">Dev Test "Add Cash"</a> | 
+        <a href="javascript:void(0)" onclick="devTest('addCPS')">Dev Test "Cash Per Second"</a> | 
+        <a href="javascript:void(0)" onclick="devTest('addCPC')">Dev Test "Cash Per Click"</a> | 
+        <a href="javascript:void(0)" onclick="devTest('logData')">Dev Test "Log Data"</a> |
+        <a href="javascript:void(0)" onclick="devTest('clearData')">Dev Test "Clear Save Data"</a> |
+      </div>
+
+      <!-- Game Version -->
+      <div class="game-version">
+        <p id="gameInfo">{ Game Version }</p>
+      </div>
+
+      <!-- Game Audio -->
+      <audio id="musicAudio" src="/music/Kandy.mp3" type="audio/mpeg"></audio>
+      <audio id="btnClickAudio" src="/sfx/btn click.wav" type="audio/wav"></audio>
+      <audio id="toggleOnAudio" src="/sfx/toggle on.wav" type="audio/wav"></audio>
+      <audio id="toggleOffAudio" src="/sfx/toggle off.wav" type="audio/wav"></audio>
+      <audio id="denyAudio" src="/sfx/deny.wav" type="audio/wav"></audio>
+      <audio id="acceptAudio" src="/sfx/accept.wav" type="audio/wav"></audio>
+      <audio id="menuOpenCloseAudio" src="/sfx/menu open close.wav" type="audio/wav"></audio>
+      
+      <!-- Settings -->
+      <div id="settings" class="settings">
+        <div class="closebtn" onclick="settings('close')" id="settingsCloseBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" id="settingsCloseIcon"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></div>
+        <div class="settings-container" id="settingsContainer">
+          <h1 id="music" style="margin-bottom: 18px;margin-top: 35px;">Music</h1>
+          <div id="musicToggleSwitch" class="round" style="width: fit-content;height: fit-content;">
+            <h1><span data-tooltip="Toggle Music (Doesn't Work on Chrome)" data-flow="bottom">
+                <label class="switch">
+                  <input type="checkbox" id="toggleMusic" onclick="toggleSwitch('music')">
+                  <span class="slider round"></span>
+                </label>
+            </span></h1>
+          </div>
+          <br><br><br>
+          <h1 id="sfx" style="margin-bottom: 18px;margin-top: 25px;">Sound Effects</h1>
+          <div id="sfxToggleSwitch" class="round" style="width: fit-content;height: fit-content;">
+            <h1><span data-tooltip="Enable and Disable Sound Effects" data-flow="bottom">
+              <label class="switch">
+                <input type="checkbox" id="toggleSFX" onclick="toggleSwitch('sfx')">
+                <span class="slider round"></span>
+              </label>
+            </span></h1>
+          </div>
+          <br><br><br>
+          <h1 id="savedata" style="margin-bottom: 18px;margin-top: 25px;">Allow Save Data</h1>
+          <div id="savedataToggleSwitch" class="round" style="width: fit-content;height: fit-content;">
+            <h1><span data-tooltip="Allow The Game to Save Your Progress" data-flow="bottom">
+            <label class="switch">
+              <input type="checkbox" id="toggleSaveData" onclick="toggleSwitch('save data')">
+              <span class="slider round"></span>
+            </label>
+            </span></h1>
+          </div>
+          <br><br><br>
+          <div class="save-data-options" id="exportImportSavedata" style="display: none;">
+            <div title="Export Save Data" onclick="createExportValue()" id="exportSave" style="cursor: pointer;"><i class="fa-solid fa-file-export"></i></div>
+            <div title="Import Save Data" onclick="getFile()" id="importSave" style="cursor: pointer;" class="disabled"><i class="fa-solid fa-file-import"></i></div>
+          </div>
+          <br><hr><br>
+          <div class="dev-item" style="width: 100%;">
+            <h1 id="graphicSettings" style="margin-bottom: 18px;margin-top: 25px;">Graphics Settings</h1>
+              <br>
+              <h3 style="margin-bottom: 18px;margin-top: 15px;">Cash Animation</h3>
+              <div id="cashAniSwitch" class="round" style="width: fit-content;height: fit-content;">
+              <h1><span data-tooltip="Enable / Disable Clicker Cash Display" data-flow="bottom">
+                <label class="switch">
+                  <input type="checkbox" id="toggleCashAni" onclick="toggleSwitch('graphicsToggle', '0')">
+                  <span class="slider round"></span>
+                </label>
+              </span></h1>
+            </div>
+              <br><br><br>
+              <h3 style="margin-bottom: 18px;margin-top: 15px;">Click Animation</h3>
+              <div id="clickAniSwitch" class="round" style="width: fit-content;height: fit-content;">
+              <h1><span data-tooltip="Enable / Disable Clicker Animations" data-flow="bottom">
+                <label class="switch">
+                  <input type="checkbox" id="toggleClickerAni" onclick="toggleSwitch('graphicsToggle', '1')">
+                  <span class="slider round"></span>
+                </label>
+              </span></h1>
+            </div>
+              <br><br><br>
+              <h3 style="margin-bottom: 18px;margin-top: 15px;">Button Animations</h3>
+              <div id="btnAniSwitch" class="round" style="width: fit-content;height: fit-content;">
+              <h1><span data-tooltip="Enable / Disable Button Animations" data-flow="bottom">
+                <label class="switch">
+                  <input type="checkbox" id="toggleBtnAni" onclick="toggleSwitch('graphicsToggle', '2')">
+                  <span class="slider round"></span>
+                </label>
+              </span></h1>
+            </div>
+              <br><br><br>
+              <h3 style="margin-bottom: 18px;margin-top: 15px;">Transition Animation</h3>
+              <div id="transAniSwitch" class="round" style="width: fit-content;height: fit-content;">
+                <h1><span data-tooltip="Enable / Disable Transition Animations" data-flow="bottom">
+                  <label class="switch">
+                    <input type="checkbox" id="toggleTransAni" onclick="toggleSwitch('graphicsToggle', '3')">
+                    <span class="slider round"></span>
+                  </label>
+                </span></h1>
+              </div>
+            <br><br><br>
+            <h3 style="margin-bottom: 18px;margin-top: 15px;">Show Notifications</h3>
+            <div id="notificationsDisplaySwitch" class="round" style="width: fit-content;height: fit-content;">
+              <h1>
+                <span data-tooltip="Enable / Disable Notifications" data-flow="bottom">
+                  <label class="switch">
+                    <input type="checkbox" id="toggleNotiShow" onclick="toggleSwitch('graphicsToggle', '4')">
+                    <span class="slider round"></span>
+                  </label>
+                </span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Shop -->
+      <div id="shop" class="shop">
+        <div class="closebtn" onclick="shop('close')" id="shopCloseBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" id="shopCloseIcon"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></div>
+        <h3 id="shopCash"><i class="fa-solid fa-spinner fa-spin"></i></h3>
+        <h3 id="shopCPS"><i class="fa-solid fa-spinner fa-spin"></i></h3>
+        <br>
+        <div class="shop-container" id="shopContainer">
+          <div id="shopPage1" style="width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+            <br>
+            <h2>Upgrade <i class="fa-solid fa-stopwatch"></i></h2>
+            <br>
+            <div id="plusOneCashSecond" class="shop-purchase-btn" onclick="purchase('cash per second', '1')">+1 { PRICE_VALUE }</div>
+            <div id="plusTwenFiveCashSecond" class="shop-purchase-btn" onclick="purchase('cash per second', '25')">+25 { PRICE_VALUE }</div>
+            <div id="plusHundredCashSecond" class="shop-purchase-btn" onclick="purchase('cash per second', '100')">+100 { PRICE_VALUE }</div>
+            <div id="plusFivehundredCashSecond" class="shop-purchase-btn" onclick="purchase('cash per second', '500')">+500 { PRICE_VALUE }</div>
+            <div id="plusThousandCashSecond" class="shop-purchase-btn" onclick="purchase('cash per second', '1k')">+1,000 { PRICE_VALUE }</div>
+            <div id="plusFiftyThousandCashSecond" class="shop-purchase-btn" onclick="purchase('cash per second', '50k')">+50,000 { PRICE_VALUE }</div>
+            <div id="plusFiveHundredThousandCashSecond" class="shop-purchase-btn" onclick="purchase('cash per second', '500k')">+500,000 { PRICE_VALUE }</div>
+            <div id="plusMillionCashSecond" class="shop-purchase-btn" onclick="purchase('cash per second', '1m')">+1,000,000 { PRICE_VALUE }</div>
+          </div>
+          <div id="shopPage2" style="width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+            <br>
+            <h2>Upgrade <i class="fa-regular fa-hand-pointer" style="transform: rotate(-30deg);"></i></h2>
+            <br>
+            <div id="plusOneCashClick" class="shop-purchase-btn" onclick="purchase('cash per click', '1')">+1 { PRICE_VALUE }</div>
+            <div id="plusTenCashClick" class="shop-purchase-btn" onclick="purchase('cash per click', '10')">+10 { PRICE_VALUE }</div>
+            <div id="plusFiftyCashClick" class="shop-purchase-btn" onclick="purchase('cash per click', '50')">+50 { PRICE_VALUE }</div>
+            <div id="plusThousandCashClick" class="shop-purchase-btn" onclick="purchase('cash per click', '1k')">+1,000 { PRICE_VALUE }</div>
+            <div id="plusHundredThousandCashClick" class="shop-purchase-btn" onclick="purchase('cash per click', '100k')">+100,000 { PRICE_VALUE }</div>
+            <div id="plusMillionCashClick" class="shop-purchase-btn" onclick="purchase('cash per click', '1m')">+1,000,000 { PRICE_VALUE }</div>
+          </div>
+          <div id="shopPage3" style="width: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+            <h2>Upgrade Multipliers</h2>
+            <br>
+            <h4>W.I.P</h4>
+          </div>
+          <!--<div id="onePercentCashSecondMultiplier" class="shop-purchase-btn" onclick="purchase('CPS Multiplier', '.01%')">+0.01% { PRICE_VALUE }</div>-->
+          <br>
+        </div>
+      </div>
+
+      <!-- Player Stats -->
+      <div id="stats" class="stats">
+        <div class="closebtn" onclick="stats('close')" id="statsCloseBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" id="statsCloseIcon"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></div>
+          <div class="stats-container">
+            <h2>Stats</h2>
+            <div class="stat-item" id="totalCashStat">Total Cash: </div>
+            <div class="stat-item" id="totalClicksStat">Total Clicks: </div>
+            <div class="stat-item" id="cashPerSecondStat">Cash Per Second: </div>
+            <div class="stat-item" id="cashSecondMultStat">Cash Per Second Multiplier: </div>
+            <div class="stat-item" id="cashPerClickStat">Cash Per Click: </div>
+            <div class="stat-item" id="cashClickMultStat">Cash Per Click Multiplier: </div>
+            <hr style="width: 100%;border: 2px solid white;">
+            <h2>Achievements</h2>
+            <br>
+            <div class="stat-achievements-container">
+              <div class="stat-item-achievements" id="a1">?</div>
+              <div class="stat-item-achievements" id="a2">?</div>
+              <div class="stat-item-achievements" id="a3">?</div>
+              <div class="stat-item-achievements" id="a4">?</div>
+              <div class="stat-item-achievements" id="a5">?</div>
+              <div class="stat-item-achievements" id="a6">?</div>
+            </div>
+            <br>
+            <div class="stat-achievements-container">
+              <div class="stat-item-achievements" id="a7">?</div>
+              <div class="stat-item-achievements" id="a8">?</div>
+              <div class="stat-item-achievements" id="a9">?</div>
+              <div class="stat-item-achievements" id="a10">?</div>
+              <div class="stat-item-achievements" id="a11">?</div>
+            </div>
+            <br>
+          </div>
+        </div>
+      <!-- Main Game -->
+      <div id="main" style="opacity: 0;transition: all 0.6s ease;">
+      <div class="click-value-popup" id="clickValuePopup" style="position: fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;">
+          <p id="popup"></p>
+        </div>
+      <div class="money">
+          <p id="cashNoDisplay" style="display: none;"></p>
+          <div style="text-align: center;display:flex;align-items: center;justify-content: center;">  
+            <span data-tooltip="Spend Cash in The Shop!" data-flow="top">
+              <h3 id="cashDisplay"><i class="fa-solid fa-spinner fa-spin"></i></h3>
+            </span>
+          </div>
+          <div style="text-align: center;display:flex;align-items: center;justify-content: center;">  
+            <span data-tooltip="Cash Per Second" data-flow="bottom">
+              <h3 id="cpsDisplay"><i class="fa-solid fa-spinner fa-spin"></i></h3>
+            </span>
+          </div>
+        </div>
+      <center>
+          <div class="clicker" id="clickerBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" id="clickerPointer"><path d="M160 64c0-8.8 7.2-16 16-16s16 7.2 16 16V200c0 10.3 6.6 19.5 16.4 22.8s20.6-.1 26.8-8.3c3-3.9 7.6-6.4 12.8-6.4c8.8 0 16 7.2 16 16c0 10.3 6.6 19.5 16.4 22.8s20.6-.1 26.8-8.3c3-3.9 7.6-6.4 12.8-6.4c7.8 0 14.3 5.6 15.7 13c1.6 8.2 7.3 15.1 15.1 18s16.7 1.6 23.3-3.6c2.7-2.1 6.1-3.4 9.9-3.4c8.8 0 16 7.2 16 16l0 16V392c0 39.8-32.2 72-72 72H272 212.3h-.9c-37.4 0-72.4-18.7-93.2-49.9L50.7 312.9c-4.9-7.4-2.9-17.3 4.4-22.2s17.3-2.9 22.2 4.4L116 353.2c5.9 8.8 16.8 12.7 26.9 9.7s17-12.4 17-23V320 64zM176 0c-35.3 0-64 28.7-64 64V261.7C91.2 238 55.5 232.8 28.5 250.7C-.9 270.4-8.9 310.1 10.8 339.5L78.3 440.8c29.7 44.5 79.6 71.2 133.1 71.2h.9H272h56c66.3 0 120-53.7 120-120V288l0-16c0-35.3-28.7-64-64-64c-4.5 0-8.8 .5-13 1.3c-11.7-15.4-30.2-25.3-51-25.3c-6.9 0-13.5 1.1-19.7 3.1C288.7 170.7 269.6 160 248 160c-2.7 0-5.4 .2-8 .5V64c0-35.3-28.7-64-64-64zm48 304c0-8.8-7.2-16-16-16s-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304zm48-16c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304c0-8.8-7.2-16-16-16zm80 16c0-8.8-7.2-16-16-16s-16 7.2-16 16v96c0 8.8 7.2 16 16 16s16-7.2 16-16V304z"/></svg></div>
+        </center>
+        <div class="stats-btn" onclick="stats('open')" id="statsBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" id="statsIcon"><path d="M160 80c0-26.5 21.5-48 48-48h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V80zM0 272c0-26.5 21.5-48 48-48H80c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V272zM368 96h32c26.5 0 48 21.5 48 48V432c0 26.5-21.5 48-48 48H368c-26.5 0-48-21.5-48-48V144c0-26.5 21.5-48 48-48z"/></svg></div>
+        <div class="shop-btn" onclick="shop('open')" id="shopBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="shopCartIcon"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg></div>
+        <div class="settings-btn" onclick="settings('open')" id="settingsBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="settingsIcon"><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/></svg></div>
+        <div class="home-btn" onclick="goHome()" id="homeBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" id="homeIcon"><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg></div>
+      </div>
+      <div id="notificationContainer">
+        <div class="notification" id='welcomeNotification' style="left: -20rem;" onclick="hideNotification()">
+        <div class="notiglow"></div>
+        <div class="notiborderglow"></div>
+        <div class="notititle" id="actionTitle">Clicker Game Says:</div>
+        <div class="notibody" id="actionNoti">{ ACTION }</div>
+      </div>
+      </div>
+    </div>
+    <script>
+      var notiNum = 0;
+      var notificationTimeout;
+      let actionNoti = document.getElementById('actionNoti');
+      let notification = document.getElementById('welcomeNotification');
+      let notiContainer = document.getElementById('notificationContainer');
+      let notiTitle = document.getElementById('actionTitle');
+      function createNotificationElement(title, body, hideTime) {
+        var ele = document.createElement('div');
+        var eleTitle = document.createElement('div');
+        var eleBody = document.createElement('div');
+        var titleTxtNode = document.createTextNode(title);
+        var bodyTxtNode = document.createTextNode(body);
+        eleTitle.appendChild(titleTxtNode);
+        eleBody.appendChild(bodyTxtNode);
+        ele.id = `noti${notiNum}`;
+        notiNum += 1;
+        ele.classList.add('notification');
+        eleTitle.classList.add('notititle');
+        eleBody.classList.add('notibody');
+        ele.appendChild(eleTitle);
+        ele.appendChild(eleBody);
+        notiContainer.appendChild(ele);
+        var notiTimeout = setTimeout(function() {
+          ele.style.left = '-20rem';
+          deleteTimeout = setTimeout(function() {
+            notiContainer.removeChild(ele);
+          }, 1000);
+        }, hideTime);
+      }
+      function showNotification(action, hideTime = 5000) {
+        notiTitle.innerHTML = 'Clicker Game Says:';
+        actionNoti.innerHTML = action;
+        notification.style.left = '1vw';
+        notificationTimeout = setTimeout(() => {
+          notification.style.left = '-20rem';
+        }, hideTime);
+      }
+      function hideNotification() {
+        clearTimeout(notificationTimeout);
+        notification.style.left = '-20rem';
+      }
+    </script>
+    <script src="scripts/game.js"></script>
+    <script src="scripts/savedata.js"></script>
+    <script src="scripts/graphics.js"></script>
+    <script>
+      document.addEventListener("readystatechange", function(event) {
+        setTimeout(function() {
+          if (event.target.readyState == "complete") {
+            document.getElementById('loading').style.opacity = '0';
+            document.getElementById('main').style.opacity = '1';
+          }
+        }, 250);
+      });
+    </script>
+  </body>
+</html>

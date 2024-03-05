@@ -1,30 +1,440 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Redirecting to home page...</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-  <meta name="title" content="SevenT33N Music">
-  <meta name="description" content="Listen to music made by SevenT33N">
-  <meta name="keywords" content="music, sevent33n, trap, rap, hiphop, lofi, rnb">
-  <meta name="robots" content="index, follow">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="language" content="English">
-  <meta name="revisit-after" content="90 days">
-  <meta name="author" content="SevenT33N Music">
-
+  <title id="pageTitle">SevenT33N Music</title>
+  <link href="styling/main.css" rel="stylesheet" type="text/css"/>
+  <link href="styling/cards.css" rel="stylesheet" type="text/css"/>
+  <link href="styling/news.css" rel="stylesheet" type="text/css"/>
+  <link href="styling/profile.css" rel="stylesheet" type="text/css"/>
+  <link rel="manifest" href="manifest.json"/>
 </head>
-
-<body>
-  Redirecting to home page. Please wait...
+<body id="body">
+  <!-- Page Loader -->
+  <div class="loading" id="loading">
+    <div class="loader">
+      <svg viewBox="25 25 50 50" id="loadingSpinner1">
+        <circle r="20" cy="50" cx="50"></circle>
+      </svg>
+    </div>
+    <p id="loadingTxt" style="display: none;">Loading Content...</p>
+    <noscript>Please Enable Javascript.</noscript>
+  </div>
+  <!-- Script to Alert user Page is Loading -->
   <script>
-    window.location.href = "/home.html";
+    document.getElementById('loadingTxt').style.display = "block";
   </script>
-  <noscript>
-    Please enable JavaScript to continue.
-  </noscript>
+  <!-- Share Alert Modal / Card -->
+  <div class="modal">
+    <article class="modal-container" id="shareModal">
+      <header class="modal-container-header">
+        <span class="modal-container-title" style="width: 95%;">
+          <div style="width: 50%;"><img id="shareCover" src="images/logo.svg" style="height: auto; width: 80%;max-width: 10vh;"></div>
+          <div style="width: 50%;" id="shareSongInfo">Shared With You: {Song}</div>
+        </span>
+        <button class="icon-button" onclick="closeModal(false)">
+          <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" fill="currentColor"></path>
+          </svg>
+        </button>
+      </header>
+      <section class="modal-container-body rtf">
+        <p>Hey there! It looks like someone shared this song with you!</p>
+        <p>Go ahead and have a listen. Who knows, maybe this will be your new favorite song!</p>
+      </section>
+      <footer class="modal-container-footer">
+        <button class="button is-ghost" onclick="closeModal(true)">No Thanks</button>
+        <button class="button is-primary" onclick="loadSong(true)">I'll Listen</button>
+      </footer>
+    </article>
+  </div>
+  <!-- Noti Modal / Card -->
+  <div class="modal">
+    <article class="modal-container" id="notificationsModal">
+      <header class="modal-container-header">
+        <span class="modal-container-title" style="width: 100%;">
+          <div style="width: 100%;">Notifications</div>
+        </span>
+      </header>
+      <section class="modal-container-body" id="notificationsContainer" style="margin: 0;padding: 0;"></section>
+      <footer class="modal-container-footer">
+        <button class="button is-primary" onclick="notiModal(false)">Done</button>
+      </footer>
+    </article>
+  </div>
+  <!-- Profile Customization Modal / Card -->
+  <div class="modal">
+    <article class="modal-container" id="profileCustomModal">
+      <header class="modal-container-header">
+        <span class="modal-container-title" style="width: 100%;">
+          <div style="width: 100%;">Customize Profile</div>
+        </span>
+      </header>
+      <section class="modal-container-body" style="margin: 0;padding: 0;display: block;">
+        <div class="input-container">
+          <label for="username">Username:</label>
+          <input type="text" id="newProfileName" placeholder="Choose Name.." name="username">
+        </div>
+        <br>
+        <div class="input-container">
+          <label for="iconMainColor">Profile Icon Color:</label>
+          <input type="color" id="profileMainColor" name="iconMainColor" value="#000000">
+        </div>
+        <br>
+        <div class="input-container">
+          <label for="backgroundIconColor">Background Icon Color:</label>
+          <input type="color" id="profileBackColor" name="backgroundIconColor" value="#e0e0e0">
+        </div>
+        <br>
+        <div class="user-icons-container">
+          <div class="user-icon" id="userIconNormal" onclick="chooseProfileIcon('regular')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+          </div>
+          <div class="user-icon" id="ninjaIcon" onclick="chooseProfileIcon('ninja')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 256c-57.2 0-105.6-37.5-122-89.3c-1.1 1.3-2.2 2.6-3.5 3.8c-15.8 15.8-38.8 20.7-53.6 22.1c-8.1 .8-14.6-5.7-13.8-13.8c1.4-14.7 6.3-37.8 22.1-53.6c5.8-5.8 12.6-10.1 19.6-13.4c-7-3.2-13.8-7.6-19.6-13.4C37.4 82.7 32.6 59.7 31.1 44.9c-.8-8.1 5.7-14.6 13.8-13.8c14.7 1.4 37.8 6.3 53.6 22.1c4.8 4.8 8.7 10.4 11.7 16.1C131.4 28.2 174.4 0 224 0c70.7 0 128 57.3 128 128s-57.3 128-128 128zM0 482.3C0 399.5 56.4 330 132.8 309.9c6-1.6 12.2 .9 15.9 5.8l62.5 83.3c6.4 8.5 19.2 8.5 25.6 0l62.5-83.3c3.7-4.9 9.9-7.4 15.9-5.8C391.6 330 448 399.5 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM160 96c-8.8 0-16 7.2-16 16s7.2 16 16 16H288c8.8 0 16-7.2 16-16s-7.2-16-16-16H160z"/></svg>
+          </div>
+          <div class="user-icon" id="astroIcon" onclick="chooseProfileIcon('astro')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M370.7 96.1C346.1 39.5 289.7 0 224 0S101.9 39.5 77.3 96.1C60.9 97.5 48 111.2 48 128v64c0 16.8 12.9 30.5 29.3 31.9C101.9 280.5 158.3 320 224 320s122.1-39.5 146.7-96.1c16.4-1.4 29.3-15.1 29.3-31.9V128c0-16.8-12.9-30.5-29.3-31.9zM336 144v16c0 53-43 96-96 96H208c-53 0-96-43-96-96V144c0-26.5 21.5-48 48-48H288c26.5 0 48 21.5 48 48zM189.3 162.7l-6-21.2c-.9-3.3-3.9-5.5-7.3-5.5s-6.4 2.2-7.3 5.5l-6 21.2-21.2 6c-3.3 .9-5.5 3.9-5.5 7.3s2.2 6.4 5.5 7.3l21.2 6 6 21.2c.9 3.3 3.9 5.5 7.3 5.5s6.4-2.2 7.3-5.5l6-21.2 21.2-6c3.3-.9 5.5-3.9 5.5-7.3s-2.2-6.4-5.5-7.3l-21.2-6zM112.7 316.5C46.7 342.6 0 407 0 482.3C0 498.7 13.3 512 29.7 512H128V448c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64l98.3 0c16.4 0 29.7-13.3 29.7-29.7c0-75.3-46.7-139.7-112.7-165.8C303.9 338.8 265.5 352 224 352s-79.9-13.2-111.3-35.5zM176 448c-8.8 0-16 7.2-16 16v48h32V464c0-8.8-7.2-16-16-16zm96 32a16 16 0 1 0 0-32 16 16 0 1 0 0 32z"/></svg>
+          </div>
+          <div class="user-icon" id="suitIcon" onclick="chooseProfileIcon('suit')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 128a128 128 0 1 0 256 0A128 128 0 1 0 96 128zm94.5 200.2l18.6 31L175.8 483.1l-36-146.9c-2-8.1-9.8-13.4-17.9-11.3C51.9 342.4 0 405.8 0 481.3c0 17 13.8 30.7 30.7 30.7H162.5c0 0 0 0 .1 0H168 280h5.5c0 0 0 0 .1 0H417.3c17 0 30.7-13.8 30.7-30.7c0-75.5-51.9-138.9-121.9-156.4c-8.1-2-15.9 3.3-17.9 11.3l-36 146.9L238.9 359.2l18.6-31c6.4-10.7-1.3-24.2-13.7-24.2H224 204.3c-12.4 0-20.1 13.6-13.7 24.2z"/></svg>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-container-footer">
+        <button class="button is-ghost" onclick="profileModal(false)">Cancel</button>
+        <button class="button is-primary" onclick="updateProfileInfo()">Save Changes</button>
+      </footer>
+    </article>
+  </div>
+  <!-- Mobile Alert Modal / Card -->
+  <div class="modal">
+    <article class="modal-container" id="mobileAlertModal">
+      <header class="modal-container-header" style="text-align: center;">
+        <span class="modal-container-title" style="width: 100%;text-align: center;">
+          <div style="width: 100%;">⚠ Attention ⚠</div>
+        </span>
+      </header>
+      <section class="modal-container-body" style="text-align: center;">
+        It appears that you are using a mobile device. For the best experience, add this site to your home screen, or use a desktop device.
+      </section>
+      <footer class="modal-container-footer">
+        <button class="button is-primary" onclick="mobileAlertModal(false)">Acknowledge</button>
+      </footer>
+    </article>
+  </div>
+  <!-- Copy text Input -->
+  <input type="text" id="copytextInput" hidden="hidden" style="display: hidden;">
+  <!-- Song Audio -->
+  <audio id="audio" src="audio/Kaitlyn.mp3" preload="true"></audio>
+  <!-- Static Header -->
+  <div id="fixedHeader" class="header">
+    <div class="header-btn-container">
+      <button class="noti-button" id="notiBtn" onclick="notiModal(true)" style="margin-left: 0;">
+        <div class="notification-alert" id="notiNumberDisplay" style="opacity: 0;display: none;"></div>
+        <svg viewBox="0 0 448 512" class="bell"><path d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"></path></svg>
+      </button>
+      <button class="noti-button" id="userBtn" onclick="profilePage()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="0" class="user">
+          <path d="M12 2.5a5.5 5.5 0 0 1 3.096 10.047 9.005 9.005 0 0 1 5.9 8.181.75.75 0 1 1-1.499.044 7.5 7.5 0 0 0-14.993 0 .75.75 0 0 1-1.5-.045 9.005 9.005 0 0 1 5.9-8.18A5.5 5.5 0 0 1 12 2.5ZM8 8a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <!-- News Page -->
+  <section class="news" id="newsPage" style="opacity: 0;">
+    <div class="news-container" id="news"></div>
+  </section>
+  <!-- Home Page -->
+  <section class="home" id="homePage">
+    <div class="profile-container" id="profile" style="height: 0;opacity: 0;position: relative;overflow-y: auto;">
+      <header class="profile-header">
+        <div class="profile-image" id="profilebackground">
+          <div class="edit-profile-image" style="opacity: 0;" id="editProfile">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+            </svg>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" id="userIconProfile"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+        </div>
+        <div class="profile-desc">
+          <p id="profileName">Your Custom Profile</p>
+        </div>
+      </header>
+      <div class="profile-body-container">
+        <h1>Custom Playlists Coming Soon!</h1>
+      </div>
+      <footer class="links" style='display: flex;flex-direction: column;'>
+        <a href="/CLICKER/" class="temp-link">Open Clicker Game</a>
+        <a href="/DRUM_MACHINE/" class="temp-link">Open Drum Machine</a>
+        <a href="javascript:void(0)" onclick="newsFromNotis(true)" class="temp-link">Check News</a>
+      </footer>
+    </div>
+    <section class="home-container" id="homeSection">
+      <div class="catagory-container">
+        <h1>Singles</h1>
+        <a href="javascript:void(0)" class="see-more-btn">See All</a>
+      </div>
+      <div class="cover-container" id="singlesContainer">
+        <div class="card" onclick="selectSong('singles', 0, true, 'Kaitlyn')">
+          <img src="images/Kaitlyn.jpg" alt="Kaitlyn Cover">
+          <div class="card__content">
+            <p class="card__title">Kaitlyn</p>
+            <p class="card__description">Description Needed</p>
+            <div class="card__play-btn" onclick="selectSong('singles', 0, false, 'Kaitlyn')">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="selectSong('singles', 1, true, 'Kandy')">
+          <img src="images/Placeholder.jpg" alt="Kandy Cover">
+          <div class="card__content">
+            <p class="card__title">Kandy</p>
+            <p class="card__description">Description Needed</p>
+            <div class="card__play-btn" onclick="selectSong('singles', 1, false, 'Kandy')">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="selectSong('singles', 2, true, 'Love Reggaeton')">
+          <img src="images/loveReggaeton.jpg" alt="Love Reggaeton Cover">
+          <div class="card__content">
+            <p class="card__title">Love Reggaeton</p>
+            <p class="card__description">Description Needed</p>
+            <div class="card__play-btn" onclick="selectSong('singles', 2, false, 'Love Reggaeton')">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="catagory-container">
+        <h1>Albums</h1>
+        <a href="javascript:void(0)" class="see-more-btn">See All</a>
+      </div>
+      <div class="cover-container" id="albumsContainer">
+        <div class="card" onclick="selectSong('brixton', 0, true)">
+          <img src="images/brixton.jpg" alt="Brixton Cover">
+          <div class="card__content">
+            <p class="card__title">Brixton</p>
+            <p class="card__description">Description Needed</p>
+            <div class="card__play-btn" onclick="selectSong('brixton', 0)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="selectSong('wasted', 0, true)">
+          <img src="images/WASTED.jpg" alt="Wasted Cover">
+          <div class="card__content">
+            <p class="card__title">WASTED</p>
+            <p class="card__description">Description Needed</p>
+            <div class="card__play-btn" onclick="selectSong('wasted', 0)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="selectSong('realLove', 0, true)">
+          <img src="images/RealLove.jpg" alt="Wasted Cover">
+          <div class="card__content">
+            <p class="card__title">Real Love</p>
+            <p class="card__description">Description Needed</p>
+            <div class="card__play-btn" onclick="selectSong('realLove', 0)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="catagory-container">
+        <h1>Playlists</h1>
+        <a href="javascript:void(0)" class="see-more-btn">See All</a>
+      </div>
+      <div class="cover-container" id="playlistsContainer">
+        <div class="card">
+          <img src="images/no-content.jpg" alt="No Content Image">
+          <div class="card__content">
+            <p class="card__title">No Content</p>
+            <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
+            <div class="card__play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="images/no-content.jpg" alt="No Content Image">
+          <div class="card__content">
+            <p class="card__title">No Content</p>
+            <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
+            <div class="card__play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="images/no-content.jpg" alt="No Content Image">
+          <div class="card__content">
+            <p class="card__title">No Content</p>
+            <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
+            <div class="card__play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="musicPlayerContainer" class="music-container fade-player">
+      <div class="player-song-info">
+        <div class="song-cover">
+          <div class="audio-visual" id="playingVisual" style="opacity: 0;">
+            <div class="visualLine line-1"></div>
+            <div class="visualLine line-2"></div>
+            <div class="visualLine line-3"></div>
+            <div class="visualLine line-4"></div>
+            <div class="visualLine line-5"></div>
+          </div>
+          <img src="images/Placeholder.jpg" alt="Song Cover" id="songCover">
+        </div>
+        <div class="song-info">
+          <p class="song-title"><b><i id="songTitle"></i></b></p>
+          <p class="song-artist"><i id="songArtist">No Song Selected</i></p>
+        </div>
+      </div>
+      <div class="player-main">
+        <div class="player-controls">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="btn end-btn" id="shuffleBtn"><path d="M403.8 34.4c12-5 25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V160H352c-10.1 0-19.6 4.7-25.6 12.8L284 229.3 244 176l31.2-41.6C293.3 110.2 321.8 96 352 96h32V64c0-12.9 7.8-24.6 19.8-29.6zM164 282.7L204 336l-31.2 41.6C154.7 401.8 126.2 416 96 416H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c10.1 0 19.6-4.7 25.6-12.8L164 282.7zm274.6 188c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V416H352c-30.2 0-58.7-14.2-76.8-38.4L121.6 172.8c-6-8.1-15.5-12.8-25.6-12.8H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c30.2 0 58.7 14.2 76.8 38.4L326.4 339.2c6 8.1 15.5 12.8 25.6 12.8h32V320c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="btn" id="prevBtn"><path d="M267.5 440.6c9.5 7.9 22.8 9.7 34.1 4.4s18.4-16.6 18.4-29V96c0-12.4-7.2-23.7-18.4-29s-24.5-3.6-34.1 4.4l-192 160L64 241V96c0-17.7-14.3-32-32-32S0 78.3 0 96V416c0 17.7 14.3 32 32 32s32-14.3 32-32V271l11.5 9.6 192 160z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="btn play-btn" id="playBtn"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="btn" id="skipBtn"><path d="M52.5 440.6c-9.5 7.9-22.8 9.7-34.1 4.4S0 428.4 0 416V96C0 83.6 7.2 72.3 18.4 67s24.5-3.6 34.1 4.4l192 160L256 241V96c0-17.7 14.3-32 32-32s32 14.3 32 32V416c0 17.7-14.3 32-32 32s-32-14.3-32-32V271l-11.5 9.6-192 160z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="btn end-btn" id="repeatBtn"><path d="M0 224c0 17.7 14.3 32 32 32s32-14.3 32-32c0-53 43-96 96-96H320v32c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-9.2-9.2-22.9-11.9-34.9-6.9S320 19.1 320 32V64H160C71.6 64 0 135.6 0 224zm512 64c0-17.7-14.3-32-32-32s-32 14.3-32 32c0 53-43 96-96 96H192V352c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V448H352c88.4 0 160-71.6 160-160z"/></svg>
+        </div>
+        <div class="progress-time">
+          <div class="time" id="currentTime">-:--</div>
+          <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progress"></div>
+          </div>
+          <div class="time" id="fullTime">-:--</div>
+        </div>
+      </div>
+      <div class="player-extras">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#9e9e9e" viewBox="0 0 576 512" class="btn" onclick="shareSong()"><path d="M352 224H305.5c-45 0-81.5 36.5-81.5 81.5c0 22.3 10.3 34.3 19.2 40.5c6.8 4.7 12.8 12 12.8 20.3c0 9.8-8 17.8-17.8 17.8h-2.5c-2.4 0-4.8-.4-7.1-1.4C210.8 374.8 128 333.4 128 240c0-79.5 64.5-144 144-144h80V34.7C352 15.5 367.5 0 386.7 0c8.6 0 16.8 3.2 23.2 8.9L548.1 133.3c7.6 6.8 11.9 16.5 11.9 26.7s-4.3 19.9-11.9 26.7l-139 125.1c-5.9 5.3-13.5 8.2-21.4 8.2H384c-17.7 0-32-14.3-32-32V224zM80 96c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16H400c8.8 0 16-7.2 16-16V384c0-17.7 14.3-32 32-32s32 14.3 32 32v48c0 44.2-35.8 80-80 80H80c-44.2 0-80-35.8-80-80V112C0 67.8 35.8 32 80 32h48c17.7 0 32 14.3 32 32s-14.3 32-32 32H80z"/></svg>
+      </div>
+    </section>
+  </section>
+  <div class="notification" id='welcomeNotification' style="left: -100vw;" onclick="hideNotification()">
+    <div class="notiglow"></div>
+    <div class="notiborderglow"></div>
+    <div class="notititle" id="randomHello">SevenT33N Music</div>
+    <div class="notibody" id="randomGreet">So glad you could make it!</div>
+  </div>
+  <script src="scripts/randomGreetings.js"></script>
+  <script>
+    var notificationTimeout;
+    let notification = document.getElementById('welcomeNotification');
+    function showNotification(timeoutTime = 5000, showTip = false, showShareInfo = false, alertProfileSave = false) {
+      let randomGreet = document.getElementById('randomGreet');
+      let randomHello = document.getElementById('randomHello');
+      if (showShareInfo == true) {
+        randomHello.innerHTML = "Success!";
+        randomGreet.innerHTML = "Share Link Was Copied to Clipboard!";
+      }
+      else if (showTip == true) {
+        randomHello.innerHTML = "Pro Tip:";
+        randomGreet.innerHTML = "To see the alert again, just refresh the page!";
+      }
+      else if (alertProfileSave == true) {
+        randomHello.innerHTML = "Uh Oh!";
+        randomGreet.innerHTML = "Looks like you didn't enter a valid name!";
+      }
+      else if (mobileUser) {
+        mobileAlertModal(true);
+        return;
+      } 
+      else {
+        randomHello.innerHTML = randHello[Math.floor(Math.random() * randHello.length)];
+        randomGreet.innerHTML = randGreets[Math.floor(Math.random() * randGreets.length)];
+      }
+      //randomGreet.innerHTML = randGreets[8];
+      notification.style.left = '1vw';
+      notificationTimeout = setTimeout(() => {
+        hideNotification();
+      }, timeoutTime);
+    }
+    function hideNotification() {
+      clearTimeout(notificationTimeout);
+      notification.style.left = '-100vw';
+    }
+  </script>
+  <script src="scripts/customContextMenu.js"></script>
+  <script src="scripts/svgStrings.js"></script>
+  <script src="scripts/musicData.js"></script>
+  <script src="scripts/audioplayer.js"></script>
+  <script src="scripts/notiData.js"></script>
+  <script src="scripts/script.js"></script>
+  <script>
+    let profileEditor = document.getElementById('editProfile');
+    profileEditor.addEventListener('mouseenter', function() {
+      profileEditor.style.transition = 'opacity 0.05s ease-out';
+      profileEditor.style.opacity = '1';
+    });
+    profileEditor.addEventListener('mouseleave', function() {
+      profileEditor.style.transition = 'opacity 0.1s ease-out';
+      profileEditor.style.opacity = '0';
+    });
+    profileEditor.addEventListener('click', function() {
+      profileModal(true);
+    });
+    function loadNews(xml) {
+      var i;
+      var xmlDoc = xml.responseXML;
+      var x = xmlDoc.getElementsByTagName("item");
+      var result = "";
+      for (i = 0; i <x.length; i++) {
+        result += "<div class='news-header'>" +
+          x[i].getElementsByTagName("header")[0].childNodes[0].nodeValue +
+          "</div>" +
+          "<div class='news-body'>" +
+          x[i].getElementsByTagName("info")[0].childNodes[0].nodeValue +
+          "</div>" +
+          "<div class='news-time'>" +
+          x[i].getElementsByTagName("time")[0].childNodes[0].nodeValue +
+          "</div><br><hr><br>";
+      }
+      document.getElementById('news').innerHTML = result;
+    }
+    function loadDoc() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        loadNews(this);
+        }
+      };
+      xhttp.open("GET", "news.xml", true);
+      xhttp.send();
+    }
+    loadDoc();
+    populateModal();
+    if (!window.location.href.includes('replit.app')) {
+      newNoti('DEV MODE', "This is a development build of SevenT33N Music. If you are a visitor, please use <a href='https://SevenT33N-Music.replit.app'>this page</a> instead. Thank you!");
+    }
+    loadProfileInfo();
+    document.addEventListener("readystatechange", function(event) {
+      setTimeout(function() {
+        if (event.target.readyState == "complete") {
+          document.getElementById('loadingTxt').innerHTML = 'Done!';
+          document.getElementById('loading').style.opacity = '0';
+          document.getElementById('homePage').style.opacity = '1';
+          document.getElementById('fixedHeader').style.opacity = "1";
+          if (shareCheck == true) {
+            document.getElementById("shareModal").style.top = "0px";
+            document.getElementById("shareModal").style.opacity = "1";
+          }
+          else {
+            showNotification();
+          }
+        }
+      }, 250);
+    });
+  </script>
+  <!-- https://62ba76ae-3fab-40f4-8a16-2e1886c7c2d6-00-2fs8qy2ukjd5l.worf.repl.co/ -->
 </body>
-
 </html>

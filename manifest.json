@@ -1,0 +1,28 @@
+{
+  "lang": "en",
+  "name": "SevenT33N Music - Music 4 Life",
+  "short_name": "SVT Music",
+  "description": "The Official Web App For SevenT33N Music",
+  "icons": [
+    {
+      "src": "FAVICON/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "FAVICON/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "/",
+  "start_url": "https://sevent33n-music.replit.app/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "Black",
+  "background_color": "Black",
+  "categories": ["entertainment", "finance", "games", "music", "news", "business"],
+  "launch_handler": {
+    "client_mode": "auto"
+  }
+}

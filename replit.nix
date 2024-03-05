@@ -1,9 +1,6 @@
 { pkgs }: {
   deps = [
-    pkgs.notmuch-bower
-    pkgs.nodejs-16_x
     pkgs.nodePackages.vscode-langservers-extracted
-    pkgs.nodePackages.typescript-language-server
-    pkgs.php82
+    pkgs.nodePackages.typescript-language-server  
   ];
 }
