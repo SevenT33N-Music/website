@@ -542,9 +542,11 @@
     }
     loadDoc();
     populateModal();
-    if (!window.location.href.includes('replit.app') ||!window.location.href.includes('github.io')) {
-      newNoti('DEV MODE', "This is a development build of SevenT33N Music. If you are a visitor, please use <a href='https://SevenT33N-Music.replit.app'>this page</a> instead. Thank you!");
-      document.getElementById('manifestItem').href = 'manifestDev.json';
+    if (!window.location.href.includes('replit.app')) {
+      if (!window.location.href.includes('github.io')) {
+        newNoti('DEV MODE', "This is a development build of SevenT33N Music. If you are a visitor, please use <a href='https://SevenT33N-Music.replit.app'>this page</a> instead. Thank you!");
+        document.getElementById('manifestItem').href = 'manifestDev.json';
+      }
     }
     loadProfileInfo();
     document.addEventListener("readystatechange", function(event) {
