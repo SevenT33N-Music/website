@@ -234,14 +234,15 @@ function loadSong(closeTheModal = false) {
   }
   */
   if ("mediaSession" in navigator) {
-    console.log(`images/${playlist.cover}.jpg`);
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: playlist.song[songIndex],
-      artist: playlist.artist[songIndex],
-      album: playlist.album,
-      artwork: [
-        {src: `images/${cover}.jpg`}
-      ]
+    songAudio.addEventListener('loadedmetadata', function() {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: playlist.song[songIndex],
+        artist: playlist.artist[songIndex],
+        album: playlist.album,
+        artwork: [
+          {src: `images/${cover}.jpg`}
+        ]
+      });
     });
   }
   setEQ();
@@ -528,6 +529,20 @@ songAudio.addEventListener('timeupdate', function() {
   updateProgress();
 });
 songAudio.addEventListener('ended', nextSong);
+songAudio.addEventListener('playing', () => {
+  navigator.mediaSession.setActionHandler("nexttrack", function() {
+    nextSong();
+  });
+  navigator.mediaSession.setActionHandler("previoustrack", function() {
+    prevSong();
+  });
+  navigator.mediaSession.setActionHandler("play", function() {
+    togglePlayPause();
+  });
+  navigator.mediaSession.setActionHandler("pause", function() {
+    togglePlayPause();
+  });
+});
 prevBtn.addEventListener('click', prevSong);
 skipBtn.addEventListener('click', function() {
   nextSong(true);

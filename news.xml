@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <news xmlns:xlink="http://www.w3.org/1999/xlink">
   <item>
-    <header>Mobile Button Fix (v.5.4.0)</header>
+    <header>Bug Fixes (v.5.4.1)</header>
+    <info>Fixed a visual bug where the progress bar overlaps the total time. Also fixed the iPhone playback issue where time skip buttons were added instead of song skip buttons.</info>
+    <time>Thur March 28th, 2024 (4:47 PM UTC)</time>
+  </item>
+  <item>
+    <header>Metadata (v.5.4.0)</header>
     <info>Added metadata to the music player. You can now see the cover, artist, album, and song name.</info>
-    <time>Tue March 26th, 2024 (5:35 PM UTC)</time>
+    <time>Tue March 26th, 2024 (5:36 PM UTC)</time>
   </item>
   <item>
     <header>Mobile Button Fix (v.5.3.2)</header>
