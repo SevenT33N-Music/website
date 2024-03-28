@@ -62,4 +62,8 @@ let allNotis = [
    `Added The option to toggle on light mode. ${newsDataItem}`,
    "new"
   ],
+  ["URL Change",
+   `As you may have noticed, the URL for my main website has changed from "SevenT33N-Music.replit.app" to "<a href="https://sevent33n-music.github.io/website/">SevenT33N-Music.Github.io</a>".`,
+   "new"
+  ],
 ];

@@ -534,15 +534,16 @@ function seemore(section = 'singles') {
 }
 
 // Toggle Settings
-function toggleSettings(itemId, itemToggleDisplayId, settingsIdx = 0) {
-  if (!itemToggleDisplayId == "NONE") {
-    let itemToggle = document.getElementById(itemToggleDisplayId);
+function toggleSettings(itemId, itemToggleDisplayId = "NONE", settingsIdx = 0) {
+  var itemToggle;
+  if (itemToggleDisplayId !== "NONE") {
+    itemToggle = document.getElementById(itemToggleDisplayId);
   }
   let itemCheck = document.getElementById(itemId);
   let saveDataStr = localStorage.getItem('profileSettings');
   let saveDataArr = JSON.parse(saveDataStr);
   if (itemCheck.checked) {
-    if (!itemToggleDisplayId == "NONE") {
+    if (itemToggleDisplayId !== "NONE") {
       itemToggle.style.display = "block";
     }
     let newData = itemCheck.checked;
@@ -552,7 +553,7 @@ function toggleSettings(itemId, itemToggleDisplayId, settingsIdx = 0) {
     saveDataArr = JSON.parse(saveDataStr);
   }
   else if (!itemCheck.checked) {
-    if (!itemToggleDisplayId == "NONE") {
+    if (itemToggleDisplayId !== "NONE") {
       itemToggle.style.display = "none";
     }
     let newData = itemCheck.checked;
