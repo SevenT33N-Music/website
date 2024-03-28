@@ -1,0 +1,28 @@
+{
+  "lang": "en",
+  "name": "SevenT33N Music - Development App",
+  "short_name": "SVT Music DEV",
+  "description": "Dev Web App for SevenT33N Music",
+  "icons": [
+    {
+      "src": "FAVICON/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "FAVICON/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "scope": "/",
+  "start_url": "https://e866f994-4f96-4104-9e0e-f4d3b4c438ea-00-1iqq9brekw347.picard.repl.co/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "Black",
+  "background_color": "Black",
+  "categories": ["entertainment", "finance", "games", "music", "news", "business"],
+  "launch_handler": {
+    "client_mode": "auto"
+  }
+}

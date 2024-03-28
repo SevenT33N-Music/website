@@ -8,7 +8,7 @@ const prevBtn = document.getElementById("prevBtn");
 const songArtist = document.getElementById("songArtist");
 const songTitle = document.getElementById("songTitle");
 const songCover = document.getElementById("songCover");
-const songAudio = document.getElementById("audio");
+var songAudio = document.getElementById("audio");
 const progress = document.getElementById('progress');
 const progressContainer = document.getElementById('progressContainer');
 const currentTime = document.getElementById('currentTime');
@@ -16,6 +16,15 @@ const fullTime = document.getElementById('fullTime');
 const shuffleBtn = document.getElementById("shuffleBtn");
 const repeatBtn = document.getElementById("repeatBtn");
 const musicPlayerContainer = document.getElementById('musicPlayerContainer');
+const progressLoaded = document.getElementById('progressLoaded');
+const bassSlider = document.getElementById('bassSlider');
+const midSlider = document.getElementById('midSlider');
+const trebleSlider = document.getElementById('trebleSlider');
+const bassDisplay = document.getElementById('bassNum');
+const midDisplay = document.getElementById('midNum');
+const trebleDisplay = document.getElementById('trebleNum');
+const eqToggle = document.getElementById('audioEqCheckbox');
+let r = document.querySelector(':root');
 // Song Variables
 let songIndex = 0;
 let maxIndex = 0;
@@ -30,17 +39,55 @@ if (recentSongs == null) {
 } else {
   recentSongs = JSON.parse(recentSongs);
 }
+let allAudioTracks = [];
 
+/* ==== EQ Variables ==== */
+var doAudioEQ = false;
+var bass = 0.0;
+var mid = 0.0;
+var treble = 0.0;
+var bassFilter;
+var midFilter;
+var trebleFilter;
+var context = null;
+
+var saveEQData = [];
+var savedEQ = localStorage.getItem('EQ');
+if (savedEQ == null) {
+  saveEQData.push(bass);
+  saveEQData.push(mid);
+  saveEQData.push(treble);
+  saveEQData = JSON.stringify(saveEQData);
+  localStorage.setItem('EQ', saveEQData);
+  saveEQData = JSON.parse(saveEQData);
+}
+else {
+  savedEQ = JSON.parse(savedEQ);
+  bass = savedEQ[0];
+  mid = savedEQ[1];
+  treble = savedEQ[2];
+}
 
 // ===== Song Data ===== //
 var playlist = {
   song: [],
   cover: [],
-  artist: []
+  artist: [],
+  album: '',
+  coverSize: '500x500'
 }
 let shareCheck = checkShare();
 
 // ===== Load Song Data ===== //
+function createSources(playlistLength = 0) {
+  for (i = 0; i < playlistLength; i++) {
+    let sourceEle = document.createElement('source');
+    sourceEle.src = playlist.song[i];
+    sourceEle.type = 'audio/mpeg';
+    sourceEle.id = `source${i}`;
+    songAudio.appendChild(sourceEle);
+  }
+}
 function selectSong(album = "singles", idx = 0, fromCard = false, forceSongSelect = "none") {
   if (forceSongSelect == "none") {
     if (!fromCard) {
@@ -83,6 +130,8 @@ function loadAlbum(album) {
     playlist.song = singles.song;
     playlist.cover = singles.cover;
     playlist.artist = singles.artist;
+    playlist.coverSize = singles.coverSize[songIndex];
+    playlist.album = 'Singles';
     maxIndex = 2;
   }
   if (album == "brixton") {
@@ -90,6 +139,8 @@ function loadAlbum(album) {
     playlist.song = brixton.song;
     playlist.cover = brixton.cover;
     playlist.artist = brixton.artist;
+    playlist.coverSize = brixton.coverSize[0];
+    playlist.album = 'Brixton';
     maxIndex = 2;
   }
   if (album == "wasted") {
@@ -97,6 +148,9 @@ function loadAlbum(album) {
     playlist.song = wasted.song;
     playlist.cover = wasted.cover;
     playlist.artist = wasted.artist;
+    playlist.coverSize = wasted.coverSize[0];
+    playlist.album = 'WASTED';
+    
     maxIndex = 4;
   }
   if (album == "realLove") {
@@ -104,8 +158,20 @@ function loadAlbum(album) {
     playlist.song = realLove.song;
     playlist.cover = realLove.cover;
     playlist.artist = realLove.artist;
+    playlist.coverSize = realLove.coverSize[0];
+    playlist.album = 'Real Love';
     maxIndex = 3;
   }
+  if (album == "remixes") {
+    currentAlbum = "remixes";
+    playlist.song = remixes.song;
+    playlist.cover = remixes.cover;
+    playlist.artist = remixes.artist;
+    playlist.coverSize = remixes.coverSize[songIndex];
+    playlist.album = 'Remixes';
+    maxIndex = 1;
+  }
+  createSources(maxIndex);
 }
 function continueWithSongSelection(album, idx) {
   if (mobileUser) {
@@ -134,9 +200,17 @@ function loadSong(closeTheModal = false) {
   var song = "Kaitlyn";
   var cover = 'images/Kaitlyn.jpg';
   var artist = "SevenT33N";
+  var album = "singles";
+  var coverSize = '500x500';
   song = playlist.song[songIndex];
   cover = playlist.cover[songIndex];
   artist = playlist.artist[songIndex];
+  if (playlist.album == 'Singles' || playlist.album == 'Remixes') {
+    coverSize = playlist.coverSize[songIndex];
+  } else {
+    coverSize = playlist.coverSize[0];
+  }
+  album = playlist.album;
   songTitle.innerHTML = song;
   songArtist.innerHTML = artist;
   songAudio.src = `audio/${song}.mp3`;
@@ -152,8 +226,25 @@ function loadSong(closeTheModal = false) {
     console.log(recentSongs);
     localStorage.setItem('recentSongs', JSON.stringify(recentSongs));
   }
+  if (!eqCreated) {
+    setEQ();
+    eqCreated = true;
+  } else {
+    playSong();
+  }
   */
-  playSong();
+  if ("mediaSession" in navigator) {
+    console.log(`images/${playlist.cover}.jpg`);
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: playlist.song[songIndex],
+      artist: playlist.artist[songIndex],
+      album: playlist.album,
+      artwork: [
+        {src: `images/${cover}.jpg`}
+      ]
+    });
+  }
+  setEQ();
 }
 
 // ===== Action Functions ===== //
@@ -192,17 +283,17 @@ function checkShare() {
 function playSong() {
   document.getElementById('playingVisual').style.transition = 'opacity 0.3s ease';
   document.getElementById('playingVisual').style.opacity = '1';
-  audio.classList.add('play');
+  songAudio.classList.add('play');
   playBtn.innerHTML = pauseSvg;
-  audio.play();
+  songAudio.play();
   pageTitle.innerHTML = `SevenT33N Music | Playing "${currentSong}"`;
 }
 function pauseSong() {
   document.getElementById('playingVisual').style.transition = 'opacity 0.15s ease';
   document.getElementById('playingVisual').style.opacity = '0';
-  audio.classList.remove('play');
+  songAudio.classList.remove('play');
   playBtn.innerHTML = playSvg;
-  audio.pause();
+  songAudio.pause();
   pageTitle.innerHTML = `SevenT33N Music | Music Paused`;
 }
 function nextSong(btnClick = false) {
@@ -304,6 +395,91 @@ function shareSong() {
     showNotification(5000, false, true);
   }
 }
+function togglePlayPause() {
+  const isPlaying = audio.classList.contains('play');
+  const fadedPlayer = document.getElementById('musicPlayerContainer').classList.contains('fade-player');
+  if (!fadedPlayer) {
+    if (isPlaying) {
+      pauseSong();
+    } else {
+      playSong();
+    }
+  }
+}
+function disconnectEQ() {
+  // Disconnect bass filter
+  try {
+    bassFilter.disconnect();
+  }
+  catch {
+    console.log('No Bass Filter to Disconnect.');
+  }
+  // disconnect mid filter
+  try {
+    midFilter.disconnect();
+  }
+  catch {
+    console.log('No Mid Filter to Disconnect.');
+  }
+  // disconnect treble filter
+  try {
+    trebleFilter.disconnect();
+  }
+  catch {
+    console.log('No Treble Filter to Disconnect.');
+  }
+}
+function setEQ(doSong = true, checkVal3 = false, val3 = false) {
+  //console.log(`Bass: ${bass}, Mid: ${mid}, Treble: ${treble}`);
+  if (checkVal3) {
+    if (val3) {
+      doAudioEQ = true;
+    }
+    else {
+      doAudioEQ = false;
+    }
+  }
+  if (doAudioEQ) {
+    if (context == null) {
+      context = new AudioContext();
+      source = context.createMediaElementSource(songAudio);
+      gainNode = context.createGain();
+      console.log("Audio Context Created.");
+    }
+    disconnectEQ();
+    trebleFilter = context.createBiquadFilter();
+    midFilter = context.createBiquadFilter();
+    bassFilter = context.createBiquadFilter();
+    trebleFilter.type = "highshelf";
+    trebleFilter.frequency.value = 2000;
+    trebleFilter.gain.value = treble;
+    bassFilter.type = "lowshelf"; 
+    bassFilter.frequency.value = 250;
+    bassFilter.gain.value = bass;
+    midFilter.type = "peaking";
+    midFilter.gain.value = mid;
+    midFilter.Q.value = 2;
+    source.connect(bassFilter); 
+    bassFilter.connect(midFilter);
+    midFilter.connect(trebleFilter);
+    trebleFilter.connect(context.destination);
+  }
+  else {
+    disconnectEQ();
+    console.log("Removed EQ.");
+    try {
+      context.close().then(() => {
+        console.log("Audio Context Closed.");
+      });
+    }
+    catch {
+      console.log('No Audio Context to Close.');
+    }
+  }
+  if (doSong) {
+    playSong();
+  }
+}
 
 // ===== Update Data ===== //
 function updateProgress() {
@@ -312,6 +488,8 @@ function updateProgress() {
   const progressPercent = (curTime / duration) * 100;
   progress.style.width = `${progressPercent}%`;
   if (songAudio.readyState > 0) {
+    let loadedTime = songAudio.buffered.end(0);
+    r.style.setProperty('--music-player-loaded-width', `${loadedTime}%`)
     let time = calculateTime(curTime);
     let totalTime = calculateTime(duration);
     currentTime.innerHTML = `${time}`;
@@ -329,19 +507,23 @@ function calculateTime(time) {
   }
   return `${minutes}:${seconds}`;
 }
+function formatCount(count, decimals = 2) {
+  const i = 0 === count ? count : Math.floor(Math.log(count) / Math.log(1000));
+  let result = parseFloat((count / Math.pow(1000, i)).toFixed(decimals));
+  return result;
+}
 
 // ===== Event Listeners ===== //
-playBtn.addEventListener('click', function() {
-  const isPlaying = audio.classList.contains('play');
-  const fadedPlayer = document.getElementById('musicPlayerContainer').classList.contains('fade-player');
-  if (!fadedPlayer) {
-    if (isPlaying) {
-      pauseSong();
-    } else {
-      playSong();
-    }
+/*eqToggle.addEventListener('click', function() {
+  if (document.getElementById('playBtn').innerHTML == playSvg) {
+    setEQ(true, true, eqToggle.checked);
+    playSong();
   }
-});
+  else {
+    setEQ(false, true, eqToggle.checked);
+  }
+});*/
+playBtn.addEventListener('click', togglePlayPause);
 songAudio.addEventListener('timeupdate', function() {
   updateProgress();
 });
@@ -352,3 +534,38 @@ skipBtn.addEventListener('click', function() {
 });
 shuffleBtn.addEventListener('click', shufflePlaylist);
 repeatBtn.addEventListener('click', repeatSong);
+bassSlider.addEventListener('input', function() {
+  let numToDisplay = bassSlider.value / 5;
+  numToDisplay = numToDisplay.toString().slice(0,5);
+  bassDisplay.innerHTML = `Low Shelf (Bass): ${numToDisplay}x`;
+  bass = bassSlider.value / 5;
+  setEQ(false);
+});
+midSlider.addEventListener('input', function() {
+  let numToDisplay = midSlider.value / 5;
+  numToDisplay = numToDisplay.toString().slice(0,5);
+  midDisplay.innerHTML = `Peaking (Mid): ${numToDisplay}x`;
+  mid = midSlider.value / 5;
+  setEQ(false);
+});
+trebleSlider.addEventListener('input', function() {
+  let numToDisplay = trebleSlider.value / 5;
+  numToDisplay = numToDisplay.toString().slice(0,5);
+  trebleDisplay.innerHTML = `High Shelf (Treble): ${numToDisplay}x`;
+  treble = trebleSlider.value / 5;
+  setEQ(false);
+});
+if ("mediaSession" in navigator) {
+  navigator.mediaSession.setActionHandler("nexttrack", function() {
+    nextSong();
+  });
+  navigator.mediaSession.setActionHandler("previoustrack", function() {
+    prevSong();
+  });
+  navigator.mediaSession.setActionHandler("play", function() {
+    togglePlayPause();
+  });
+  navigator.mediaSession.setActionHandler("pause", function() {
+    togglePlayPause();
+  });
+}

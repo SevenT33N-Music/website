@@ -1,9 +1,13 @@
-function newsFromNotis(fix = false) {
+function newsFromNotis(fix = false, itemId = null) {
   page = 'news';
   hidePages();
   document.getElementById('newsPage').style.opacity = '1';
   document.getElementById('newsPage').style.height = '100vh';
   document.getElementById('newsPage').style.marginTop = '0vh';
+  if (itemId != null) {
+    let scrollToItem = document.getElementById(itemId);
+    scrollToItem.scrollIntoView();
+  }
   if (fix == false) {
     notiModal(false);
   }
@@ -33,5 +37,29 @@ let allNotis = [
   ['Profiles',
    `A new update has dropped: Profiles are looking good! ${profileDataItem}`,
    "new"
-  ]
+  ],
+  ['Offline Mode',
+   `Started working on offline support! ${newsDataItem}`,
+   "new"
+  ],
+  ["Audio EQ",
+   `Introducing: Audio EQ! Now you can adjust the song's frequencies! ${newsDataItem}`,
+   "new"
+  ],
+  ["NEW POLL: NOTIFICATIONS",
+   `Hey there! We've got a question for you: Should the news be in the notifications and not a seperate page? Answer <a href="https://forms.gle/S9rFuukCRuz9bFok9">Here!</a>`,
+   "new"
+  ],
+  ["CACHE TEMPORARLY DISABLED",
+   `Due to an issue, I've temporarily disabled data cache for offline access. I'll update everyone on the issue as I fix it. Thank you for your patience in this.`,
+   "new"
+  ],
+  ["Metadata",
+   `Added metadata to the audio. ${newsDataItem}`,
+   "new"
+  ],
+  ["Light Mode",
+   `Added The option to toggle on light mode. ${newsDataItem}`,
+   "new"
+  ],
 ];

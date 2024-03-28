@@ -1,3 +1,6 @@
+// Log if Media Session API is supported
+console.log(`Media Session API Supported: ${"mediaSession" in navigator}`)
+
 // DOM VARIABLES
 var root = document.querySelector(':root');
 var canClick = true;
@@ -10,6 +13,12 @@ var selectedIconId = '';
 var iconBeforeEdit = '';
 var primeColorBeforeEdit = '';
 var backColorBeforeEdit = '';
+var profileDataArr = [];
+var lightMode = false;
+
+// Const Variables
+const doDataCache = false;
+const settingsArrLen = 2;
 
 // New Notification Variables
 let mobileTitle = 'Alert Acknowledged';
@@ -37,6 +46,24 @@ if (shareCheck == true) {
   document.getElementById('shareSongInfo').innerHTML = "Song Shared: " + playlist.song[0];
 } else {
   console.log("Song Was Not Shared");
+}
+function setPageStyle(type = "dark") {
+  if (type == "light" || type == "true" || type == true) {
+    r.style.setProperty('--font-color', 'black');
+    r.style.setProperty('--background-color', '#d2ccff');
+    r.style.setProperty('--thumb-color', '#505a8b');
+    r.style.setProperty('--temp-link-background', '#ffffff');
+    r.style.setProperty('--card-background', 'linear-gradient(-45deg, #3a1556 0%, #1c404f 100%)');
+    r.style.setProperty('--card-fallback-background', '#1c404f');
+  }
+  else {
+    r.style.setProperty('--font-color', 'white');
+    r.style.setProperty('--background-color', '#2e2e2e');
+    r.style.setProperty('--thumb-color', '#c3cdfe');
+    r.style.setProperty('--temp-link-background', '#333333');
+    r.style.setProperty('--card-background', 'linear-gradient(-45deg, #dec4f2 0%, #bee2f3 100%)');
+    r.style.setProperty('--card-fallback-background', '#bee2f3');
+  }
 }
 
 // Profile Page
@@ -239,7 +266,46 @@ function loadProfileIcon(doReturn = false) {
     return currentPFP;
   }
 }
-
+// create new settings save data
+function createSettingsSaveData() {
+  profileDataArr = [];
+  for (i = 0; i < settingsArrLen; i++) {
+    profileDataArr.push(false)
+  }
+  let profileDataArrStr = JSON.stringify(profileDataArr);
+  localStorage.setItem('profileSettings', profileDataArrStr);
+}
+// load profile settings
+function loadProfileSettings() {
+  let settingsData = localStorage.getItem('profileSettings');
+  try {
+    profileDataArr = JSON.parse(settingsData);
+    if (profileDataArr.length < settingsArrLen) {
+      console.log('Settings Data Length Too Small. Creating New Data...');
+      createSettingsSaveData();
+      console.log('New Settings Data Created.');
+    }
+    else if (profileDataArr.length > settingsArrLen) {
+      console.log('Settings Data Length Too Large. Creating New Data...');
+      createSettingsSaveData();
+      console.log('New Settings Data Created.');
+    }
+    else {
+      if (profileDataArr[0] == true || profileDataArr[0] == 'true') {
+        doAudioEQ = true;
+        document.getElementById('audioEqCheckbox').checked = true;
+        document.getElementById('eqContainer').style.display = "block";
+      }
+    }
+  }
+  catch {
+    console.log('Error parsing profile settings. Creating new settings data...');
+    profileDataArr = [false];
+    let profileDataArrStr = JSON.stringify(profileDataArr);
+    localStorage.setItem('profileSettings', profileDataArrStr);
+  }
+}
+loadProfileSettings();
 // Open & Close Notification Modal
 function mobileAlertModal(open = false) {
   if (open == false) {
@@ -274,7 +340,6 @@ function createNotiCircle(id) {
   newNoti.classList.add('new-noti-circle');
   return newNoti;
 }
-
 // Load & Add Notifications Data
 function loadNotiData() {
   let notiData = localStorage.getItem('notis');
@@ -293,7 +358,6 @@ function loadNotiData() {
   }
 }
 loadNotiData();
-
 // Populate Notifications Modal
 function populateModal() {
   let notis = allNotis;
@@ -352,7 +416,6 @@ function populateModal() {
     notiNumber();
   }
 }
-
 // Create New Notification
 function newNoti(title, desc, special = "none") {
   let notiTitle = title;
@@ -440,7 +503,6 @@ function newNoti(title, desc, special = "none") {
     notiNumber();
   }
 }
-
 // Update Notification Numbers Display
 function notiNumber() {
   let notiNumberDisplay = document.getElementById('notiNumberDisplay');
@@ -453,4 +515,104 @@ function notiNumber() {
     notiNumberDisplay.style.display = "none";
     notiNumberDisplay.style.opacity = "0";
   }
+}
+
+// See All Songs in A Section
+function seemore(section = 'singles') {
+  let itemCheck = `${section}Container`;
+  let seeItemId = `${section}SeeAll`;
+  let item = document.getElementById(itemCheck);
+  let seeAllItem = document.getElementById(seeItemId);
+  if (item.classList.contains('seemore')) {
+    item.classList.remove('seemore');
+    seeAllItem.innerHTML = 'See All';
+  }
+  else {
+    item.classList.add('seemore');
+    seeAllItem.innerHTML = "Close";
+  }
+}
+
+// Toggle Settings
+function toggleSettings(itemId, itemToggleDisplayId, settingsIdx = 0) {
+  if (!itemToggleDisplayId == "NONE") {
+    let itemToggle = document.getElementById(itemToggleDisplayId);
+  }
+  let itemCheck = document.getElementById(itemId);
+  let saveDataStr = localStorage.getItem('profileSettings');
+  let saveDataArr = JSON.parse(saveDataStr);
+  if (itemCheck.checked) {
+    if (!itemToggleDisplayId == "NONE") {
+      itemToggle.style.display = "block";
+    }
+    let newData = itemCheck.checked;
+    saveDataArr[settingsIdx] = newData;
+    saveDataStr = JSON.stringify(saveDataArr);
+    localStorage.setItem('profileSettings', saveDataStr);
+    saveDataArr = JSON.parse(saveDataStr);
+  }
+  else if (!itemCheck.checked) {
+    if (!itemToggleDisplayId == "NONE") {
+      itemToggle.style.display = "none";
+    }
+    let newData = itemCheck.checked;
+    saveDataArr[settingsIdx] = newData;
+    saveDataStr = JSON.stringify(saveDataArr);
+    localStorage.setItem('profileSettings', saveDataStr);
+    saveDataArr = JSON.parse(saveDataStr);
+    if (itemId == "audioEqCheckbox") {
+      location.reload();
+    }
+  }
+  setSettingsValues(saveDataArr);
+}
+// Set new Variable Values
+function setSettingsValues(arr) {
+  doAudioEQ = arr[0];
+  setPageStyle(arr[1]);
+}
+// load settings
+function loadSettings() {
+  try {
+    savedSettings = localStorage.getItem('profileSettings');
+    savedSettings = JSON.parse(savedSettings);
+    doAudioEQ = savedSettings[0];
+    lightMode = savedSettings[1];
+    if (lightMode == 'true' || lightMode == true) {
+      setPageStyle('light');
+      document.getElementById('lightModeToggle').checked = true;
+    }
+  } catch {
+    console.log('No save data.');
+  }
+}
+loadSettings();
+
+// Remove Play Button on Cards That Arent Available
+let cardBtns = document.querySelectorAll('.card-btn-UnAvailable');
+for (i = 0; i < cardBtns.length; i++) {
+  let cardItem = cardBtns[i];
+  let cardBtn = cardItem.querySelector('.card__play-btn');
+  cardBtn.style.display = "none";
+}
+let footers = document.querySelectorAll('.footer-container');
+for (i = 0; i < footers.length; i++) {
+  let footeritem = footers[i];
+  footeritem.innerHTML = footerContent;
+}
+// Style Lazy Loader Images
+let lazyLoadImages = document.querySelectorAll('.extra-card');
+for (i = 0; i < lazyLoadImages.length; i++) {
+  let image = lazyLoadImages[i].querySelector('img');
+  let lazyLoadItem = lazyLoadImages[i];
+  lazyLoadItem.classList.add('skeleton-loader');
+  image.style.opacity = "0";
+  image.style.transition = "opacity 0.4s ease";
+  image.addEventListener('load', function() {
+    if (image.complete) {
+      image.style.opacity = "1";
+      lazyLoadItem.style.transition = "all 0.4s ease";
+      lazyLoadItem.classList.remove('skeleton-loader');
+    }
+  });
 }

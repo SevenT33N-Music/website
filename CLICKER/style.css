@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
+@font-face {
+  font-family: "Gruppo";
+  src: url("../custom-fonts/Gruppo-Regular.ttf");
+}
 
 :root {
   --transition-timing-function-custom: cubic-bezier(.52,.66,.21,1.17);

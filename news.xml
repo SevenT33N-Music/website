@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <news xmlns:xlink="http://www.w3.org/1999/xlink">
   <item>
+    <header>Mobile Button Fix (v.5.4.0)</header>
+    <info>Added metadata to the music player. You can now see the cover, artist, album, and song name.</info>
+    <time>Tue March 26th, 2024 (5:35 PM UTC)</time>
+  </item>
+  <item>
+    <header>Mobile Button Fix (v.5.3.2)</header>
+    <info>Modified the way button sizes are calculated, to better fit on mobile devices.</info>
+    <time>Fri March 8th, 2024 (5:35 PM UTC)</time>
+  </item>
+  <item>
+    <header>Audio EQ Update (v.5.3.1)</header>
+    <info>Updated the audio EQ with peaking frequency, and modified the way EQ is calculated and applied. Also, added a poll asking if news should be in the notifications and not a seperate page.</info>
+    <time>Fri March 8th, 2024 (4:30 PM UTC)</time>
+  </item>
+  <item>
+    <header>Audio EQ (v.5.3.0)</header>
+    <info>Guess What? No not chicken butt, you can now adjust the song's frequencies! Want more bass? go ahead! Not enough treble? add some more! The possibilities are endless!</info>
+    <time>Thur March 7th, 2024 (7:31 PM UTC)</time>
+  </item>
+  <item>
+    <header>Offline Mode! (v.5.2.0)</header>
+    <info>I have begun adding offline support! By using service workers, the website is cached, allowing access whilst offline.</info>
+    <time>Tue March 5th, 2024 (5:36 PM UTC)</time>
+  </item>
+  <item>
     <header>New Page (v.5.1.0)</header>
     <info>Added a new page: Drum Machine. Now you can play the drums from this amazing website, without spending a penny! Enjoy playing drill, jazz, reggaeton, and hiphop drums, with more on the way! As for the profile page, that is still a work in progress. It should be done soon though, so hang tight!</info>
-    <time>Mon, March 4th, 2024 (5:55 AM UTC)</time>
+    <time>Mon March 4th, 2024 (5:55 AM UTC)</time>
   </item>
   <item>
     <header>New Layout! (v.5.0.0)</header>
     <info>Check out this brand new layout! The music player is inspired by spotify's web player. New features include an inbox, and custom context menus (Right click menus). All content loads on one page, so their is no refreshing everytime you want to switch a page.</info>
-    <time>Mon, March 4th, 2024 (12:55 AM UTC)</time>
+    <time>Mon March 4th, 2024 (12:55 AM UTC)</time>
   </item>
   <item>
     <header>Clicker Game Bug Fix (v.4.4.3)</header>
@@ -139,150 +164,180 @@
     <header>Navigation Fixes (v.3.3.2)</header>
     <info>Fixed a bug that caused some menu items to have the top clipped off. Also fixed a bug that caused the close nav button to continue showing after closing navigation (mobile bug).</info>
     <time>Thu November 16th, 2023 (03:32 PM UTC)</time>
+    <itemId>update332</itemId>
   </item>
   <item>
     <header>Navigation Animation (v.3.3.1)</header>
     <info>Added animation to the page navigation.</info>
     <time>Wed November 15th, 2023 (05:29 PM UTC)</time>
+    <itemId>update331</itemId>
   </item>
   <item>
     <header>More Options in Settings (v.3.3.0)</header>
     <info>Added another option to "settings", which is the ability to enable or disable smooth animations. Another feature coming soon is the ability to change the timing functions of the animations. For example, you could switch the current "Cubic Bezier" for a linear animation.</info>
     <time>Mon November 13th, 2023 (04:58 PM UTC)</time>
+    <itemId>update330</itemId>
   </item>
   <item>
     <header>Another Minor Update (v.3.2.3)</header>
     <info>Renamed "Piano Chords" to "Extras" and added a new page to "Extras" called "AI Images".</info>
     <time>Fri November 10th, 2023 (03:32 PM UTC)</time>
+    <itemId>update323</itemId>
   </item>
   <item>
     <header>Minor Update (v.3.2.2)</header>
     <info>Finished adding my new album "Real Love", and fixed a few more bugs. Navigation now drops from the top instead of the side, and the links now resize to fit differnet screen sizes.</info>
     <time>Thu November 9th, 2023 (04:35 AM UTC)</time>
+    <itemId>update322</itemId>
   </item>
   <item>
     <header>Bug Fix (v.3.2.1)</header>
     <info>Removed Tutorials. Ranamed "Piano Chords Reference" to "Piano Chords". Removed ads and fixed bugs.</info>
     <time>Wed November 8th, 2023 (05:00 PM UTC)</time>
+    <itemId>update321</itemId>
   </item>
   <item>
     <header>More Features (v.3.2.0)</header>
     <info>Added tutorials and piano chord references. Piano chord reference is incomplete.</info>
     <time>Tue November 7th, 2023 (04:23 PM UTC)</time>
+    <itemId>update320</itemId>
   </item>
   <item>
     <header>Page Navigation (v.3.1.0)</header>
     <info>Added some more options to the navigation, and added more music. In addition to this, I also changed the color scheme of the site from pink to blue, and made the navigation more reactive. For bug fixes, I fixed an issue that was causing some songs not to play. Also... GLOW EFFECTS!!!!!</info>
     <time>Fri November 3rd, 2023 (07:23 PM UTC)</time>
+    <itemId>update310</itemId>
   </item>
   <item>
     <header>MAJOR UPDATE! (3.0.0)</header>
     <info>The UI has been completely redesigned from the bottom up, with mobile users in mind!</info>
     <time>Thu October 26th, 2023 (01:29 AM UTC)</time>
+    <itemId>update300</itemId>
   </item>
   <item>
     <header>UPDATE LOG 2.1.0</header>
     <info>The website has officially been published. In addition to this, the "Back to Top" button on the "news" page has been updated to always show at the bottom right side of the screen.</info>
     <time>Thu October 19th, 2023 (6:22 PM UTC)</time>
+    <itemId>update210</itemId>
   </item>
   <item>
     <header>UPDATE LOG 2.0.1</header>
     <info>The page is going into official deployment soon! I'll give an update when it  does.</info>
     <time>Tue October 18th, 2023 (4:48 PM UTC)</time>
+    <itemId>update201</itemId>
   </item>
   <item>
     <header>UPDATE LOG 2.0!</header>
     <info>The News Has Changed! That's right, I've changed the way the news page renders. This should make the page run much faster. I've also made the site more responsive, so have fun looking around!</info>
     <time>Mon September 25th, 2023 (03:47 PM UTC)</time>
+    <itemId>update200</itemId>
   </item>
   <item>
     <header>UPDATE LOG 1.3</header>
     <info>Settings have been updated! You can now customize the home page feed, adding or removing the news/projects. The page now uses toggle switches, for a fun interactive experience! I am slowly releasing the songs for my new album "LOVE, HEARTBREAK, REPEAT. As of publishing this update, there are curently two songs released in the album, with a bonus track "Spirit". Hope ya'll enjoy this album!</info>
     <time>Sat September 23rd, 2023 (10:52 PM UTC)</time>
+    <itemId>update130</itemId>
   </item>
   <item>
     <header>UPDATE LOG 1.2.2</header>
     <info>I updated the "twitter" icons to match Elon Musk's Rebranding. Why did he do this? I don't know, but I don't like it.</info>
     <time>Thu September 7th, 2023 (05:25 PM UTC)</time>
+    <itemId>update122</itemId>
   </item>
   <item>
     <header>UPDATE LOG 1.2.1</header>
     <info>I have updated the button interaction on the music page.</info>
     <time>Fri August 18th, 2023 (07:53 PM UTC)</time>
+    <itemId>update121</itemId>
   </item>
   <item>
     <header>UPDATE LOG 1.2.0</header>
     <info>I have created a work-around for the bug on windows, which is to simply replace the original icons with emojis. To enable this, click the nav button in the top right, which will open settings. There you can change the unicode options: click "disable". That should load emojis instead of icons. I also fixed the link to my dark humor website, so you can actually open it now.</info>
     <time>Thu August 10th, 2023 (04:33 PM UTC)</time>
+    <itemId>updateLog120</itemId>
   </item>
   <item>
     <header>UPDATE LOG 1.1.0</header>
     <info>Yes, the bug on windows still exists. I'm sorry it hasn't been fixed yet. I added a loading icon, so the wait time is a little more justified. Great News! The layout of the music page has been completed! Check out the amazing new design, with contrasting colors for easy readability and so much more!</info>
     <time>Sun August 6th, 2023 (08:17 AM UTC)</time>
+    <itemId>updateLog110</itemId>
   </item>
   <item>
     <header>UPDATE LOG 1.0.2</header>
     <info>There is still a bug on windows which fails to load icons. I'm still working to fix it. I have added a "projects" section to the home page, so you can see some of the things I've made or are working on. The redesign for the music page is nearly complete, I just need to add the finishing touches. Thats all for now, have fun ya'll!</info>
     <time>Fri August 4th, 2023 (12:17 PM UTC)</time>
+    <itemId>updateLog102</itemId>
   </item>
   <item>
     <header>UPDATE LOG 1.0.1</header>
     <info>I am aware of a bug on windows where the icons may not load. I've added "title" tags to the buttons, so you can simply hover your cursor over the buttons to see what the button does. I am also updating the layout of the "Music" page. Please be patient while I work, as it could take a few weeks.</info>
     <time>Fri July 28th, 2023 (04:05 PM UTC)</time>
+    <itemId>updateLog101</itemId>
   </item>
   <item>
     <header>IM BORRRRRED</header>
     <info>Mekayla has been publicly released. The next three songs for "STATIC" may not be published. I added a contact form button im probably gonna change it. I hav stoped caring about grammar..</info>
     <time>idk what today is lol</time>
+    <itemId>whatHaveIDone</itemId>
   </item>
   <item>
     <header>DELAYS</header>
     <info>Due to technical difficulties, the release date for "Static" has been pushed to Saturday, June 10th, 2023, at 12:00 P.M MST.</info>
     <time>Tue June 6th, 2023 (11:13 P.M UTC)</time>
+    <itemId>releaseDelay</itemId>
   </item>
   <item>
     <header>RE-RELEASED</header>
     <info>After careful consideration, I have decided to re-release "Mekayla" as unlisted. Please note that this is subject to change, and may be publicly released or made private again.</info>
     <time>Sat June 3rd, 2023 (04:56 P.M UTC)</time>
+    <itemId>mekaylaReleasedAgain</itemId>
   </item>
   <item>
     <header>NEW FEATURES</header>
     <info>New features have been added to the webiste. This includes toggleable smooth scroll, and the ability to support me on my socials. Speaking of socials, go check them out!</info>
     <time>Fri June 2nd, 2023 (06:34 A.M UTC)</time>
+    <itemId>newFeatures1</itemId>
   </item>
   <item>
     <header>NEW PAGE!</header>
     <info>The music page has been completed! New songs will be released regularly, so be on the lookout!</info>
     <time>Fri June 2nd, 2023 (04:01 A.M UTC)</time>
+    <itemId>newPage1</itemId>
   </item>
   <item>
     <header>GOTTA STAY HIGH</header>
     <info>I've remixed "Stay High" by Juice WRLD... again. Don't worry, this trap remix is much better than the last. "Stay High (Trap Remix)" drops on June 10th, 2023 at 12:00 P.M MST!</info>
     <time>Thu June 1st, 2023 (07:08 A.M UTC</time>
+    <itemId>stayHighRemix</itemId>
   </item>
   <item>
     <header>HELPFUL!</header>
     <info>Pro Tip: You can enable dark mode in settings! For real though, I spent a lot of time making it work, far longer than I needed to.</info>
     <time>Thu June 1st, 2023 (06:37 A.M UTC)</time>
+    <itemId>proTipV1</itemId>
   </item>
   <item>
     <header>MEKAYLA</header>
     <info>Recently, I had published a love song titled "Mekayla". Sadly, I had to take it down. I will not go into detail about what happened, but most of you can probably assume what did happened.</info>
     <time>Thu June 1st, 2023 (06:25 A.M UTC)</time>
+    <itemId>mekaylaRemove</itemId>
   </item>
   <item>
     <header>LIQUID?? WEAK??</header>
     <info>I had previously announced a few songs and albums on my Youtube. LIQUID (the album) has been discontinued, and will not be released, as a few songs from it have been moved to "Static". However, my single "WEAK" will be released. The release date is currently set for June 3rd, 2023 at 12:00 P.M MST.</info>
     <time>Thu June 1st, 2023 (06:22 A.M UTC)</time>
+    <itemId>liquidWeakUpdate</itemId>
   </item>
   <item> <!-- Item 2 -->
     <header>STATIC RELEASE DATE</header>
     <info>The current release date of "Static" is set for June 5th, 2023. However, as with every song and album I've released so far, there will likely be complications that cause delays for the release.</info>
     <time>Thu June 1st, 2023 (06:10 A.M UTC)</time>
+    <itemId>staticRelease</itemId>
   </item>
   <item> <!-- Item 1 -->
     <header>WEBSITE</header>
     <info>The Website is now up and running!</info>
     <time>Thu June 1st, 2023 (05:53 A.M UTC)</time>
+    <itemId>websiteUp</itemId>
   </item>
 </news>

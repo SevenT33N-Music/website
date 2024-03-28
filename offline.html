@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Looks like you're offline...</title>
+    <link rel="stylesheet" href="styling/404.css" type="text/css"/>
+    <link rel="icon" href="FAVICON/favicon.ico" type="image/x-icon"/>
+  </head>
+  <body class="not-found-page">
+    <h1 style="text-align: center;">Apologies But...</h1>
+    <h3 style="text-align: center;">It appears you are offline. The item you requested has not been cached, and therefore cannot be accesed while offline. Please try again once you are connected to the internet.</h3>
+    <a href="javascript:void(0)" class="return-btn" onclick="relocate()">Return to Home Page</a>
+    <script>
+      function relocate() {
+        console.log('Relocating...');
+        window.location.href = '/';
+      }
+    </script>
+  </body>
+</html>

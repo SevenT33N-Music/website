@@ -7,8 +7,8 @@
   margin: 0;
   margin-left: 3vw;
   margin-right: 3vw;
-  background: #dbf9ff;
-  background: linear-gradient(-45deg, #dec4f2 0%, #bee2f3 100%);
+  background: var(--card-fallback-background);
+  background: var(--card-background);
   border-radius: 10px;
   display: inline-flex;
   flex-direction: column;
@@ -102,7 +102,26 @@
   -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent);
 }
 
-/* ===== Share Alert Card ===== */
+/* Album Button Hide Styling */
+.card-btn-UnAvailable {
+  position: relative;
+}
+.card-btn-UnAvailable::after {
+  content: '';
+  position: absolute;
+  height: calc(0.15vw + 0.15vh);
+  width: 100%;
+  opacity: 0.25;
+  background-color: red;
+  transform: rotate(45deg);
+}
+.card-btn-UnAvailable img {
+  opacity: 0.8;
+  -webkit-filter: grayscale(100%) brightness(75%);
+  filter: grayscale(100%) brightness(75%);
+}
+
+/* ===== Modal Card ===== */
 .button, .input, .select, .textarea {
   color: black;
   font: inherit;

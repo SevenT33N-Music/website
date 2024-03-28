@@ -8,11 +8,13 @@
   <link href="styling/cards.css" rel="stylesheet" type="text/css"/>
   <link href="styling/news.css" rel="stylesheet" type="text/css"/>
   <link href="styling/profile.css" rel="stylesheet" type="text/css"/>
-  <link rel="manifest" href="manifest.json"/>
+  <link href="styling/togglesCheckboxes.css" rel="stylesheet" type="text/css"/>
+  <link rel="icon" href="FAVICON/icon.webp" type="image/x-icon">
+  <link rel="manifest" href="manifest.json" id="manifestItem"/>
 </head>
 <body id="body">
   <!-- Page Loader -->
-  <div class="loading" id="loading">
+  <div class="loading" id="loading" style="text-align: center;">
     <div class="loader">
       <svg viewBox="25 25 50 50" id="loadingSpinner1">
         <circle r="20" cy="50" cx="50"></circle>
@@ -24,6 +26,12 @@
   <!-- Script to Alert user Page is Loading -->
   <script>
     document.getElementById('loadingTxt').style.display = "block";
+    setTimeout(function() {
+      document.getElementById('loadingTxt').innerHTML = "This is Taking a While... Please be Patient!";
+    }, 7500);
+    setTimeout(function() {
+      document.getElementById('loadingTxt').innerHTML = "This is taking a lot longer than it should... Perhaps check Your Internet Connection?";
+    }, 20000);
   </script>
   <!-- Share Alert Modal / Card -->
   <div class="modal">
@@ -74,17 +82,17 @@
       </header>
       <section class="modal-container-body" style="margin: 0;padding: 0;display: block;">
         <div class="input-container">
-          <label for="username">Username:</label>
-          <input type="text" id="newProfileName" placeholder="Choose Name.." name="username">
+          <label for="newProfileName">Username:</label>
+          <input type="text" id="newProfileName" placeholder="Choose Name.." name="username" autocomplete="off">
         </div>
         <br>
         <div class="input-container">
-          <label for="iconMainColor">Profile Icon Color:</label>
+          <label for="profileMainColor">Profile Icon Color:</label>
           <input type="color" id="profileMainColor" name="iconMainColor" value="#000000">
         </div>
         <br>
         <div class="input-container">
-          <label for="backgroundIconColor">Background Icon Color:</label>
+          <label for="profileBackColor">Background Icon Color:</label>
           <input type="color" id="profileBackColor" name="backgroundIconColor" value="#e0e0e0">
         </div>
         <br>
@@ -128,7 +136,7 @@
   <!-- Copy text Input -->
   <input type="text" id="copytextInput" hidden="hidden" style="display: hidden;">
   <!-- Song Audio -->
-  <audio id="audio" src="audio/Kaitlyn.mp3" preload="true"></audio>
+  <audio id="audio"></audio>
   <!-- Static Header -->
   <div id="fixedHeader" class="header">
     <div class="header-btn-container">
@@ -149,7 +157,8 @@
   </section>
   <!-- Home Page -->
   <section class="home" id="homePage">
-    <div class="profile-container" id="profile" style="height: 0;opacity: 0;position: relative;overflow-y: auto;">
+    <!-- Profile Section -->
+    <section class="profile-container" id="profile" style="height: 0;opacity: 0;position: relative;overflow-y: auto;">
       <header class="profile-header">
         <div class="profile-image" id="profilebackground">
           <div class="edit-profile-image" style="opacity: 0;" id="editProfile">
@@ -164,82 +173,190 @@
         </div>
       </header>
       <div class="profile-body-container">
-        <h1>Custom Playlists Coming Soon!</h1>
+        <div style="height: 50vh">
+          <h1>Custom Playlists Coming Soon!</h1>
+        </div>
+        <div class="settings-container">
+          <h2>SETTINGS</h2>
+          <br>
+          <div class="settings-item-container">
+            <h3>Audio EQ</h3>
+            <label class="switch">
+              <input type="checkbox" class="toggleInput" id="audioEqCheckbox" onchange="toggleSettings('audioEqCheckbox', 'eqContainer', 0)">
+              <span class="sliderToggle"></span>
+            </label>
+          </div>
+          <div class="settings-item-container">
+            <h3>Light Mode</h3>
+            <label class="switch">
+              <input type="checkbox" class="toggleInput" id="lightModeToggle" onchange="toggleSettings('lightModeToggle', 'NONE', 1)">
+              <span class="sliderToggle"></span>
+            </label>
+          </div>
+          <br>
+          <div class="eq-container" id="eqContainer">
+            <h3>EQ Settings</h3>
+            <div class="eq-container-body">
+              <input type="range" min="-100" max="100" value="0" step="0.01" class="slider" id="bassSlider">
+              <p id="bassNum">Low Shelf (Bass): 0x</p>
+            </div>
+            <div class="eq-container-body">
+              <input type="range" min="-100" max="100" value="0" step="0.01" class="slider" id="midSlider">
+              <p id="midNum">Peaking (Mid): 0x</p>
+            </div>
+            <div class="eq-container-body">
+              <input type="range" min="-100" max="100" value="0" step="0.01" class="slider" id="trebleSlider">
+              <p id="trebleNum">High Shelf (Treble): 0x</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <footer class="links" style='display: flex;flex-direction: column;'>
+      <div class="links" style='display: flex;flex-direction: column;'>
         <a href="/CLICKER/" class="temp-link">Open Clicker Game</a>
         <a href="/DRUM_MACHINE/" class="temp-link">Open Drum Machine</a>
         <a href="javascript:void(0)" onclick="newsFromNotis(true)" class="temp-link">Check News</a>
-      </footer>
-    </div>
+        <!--<a href="/SONG_KITS/" class="temp-link">Open Music Kits</a>-->
+        <!-- <a href="/FINANCE/" class="temp-link">Open Finance App</a> -->
+        <!-- <a href="/CERTIFICATIONS/" class="temp-link">Open Progamming Certifications</a> -->
+      </div>
+      <hr>
+      <div class="footer-container"></div>
+    </section>
+    <!-- Home Section -->
     <section class="home-container" id="homeSection">
       <div class="catagory-container">
         <h1>Singles</h1>
-        <a href="javascript:void(0)" class="see-more-btn">See All</a>
-      </div>
+        <a href="javascript:void(0)" class="see-more-btn" id="singlesSeeAll" onclick="seemore('singles')">See All</a>
+      </div> <!-- Singles -->
       <div class="cover-container" id="singlesContainer">
         <div class="card" onclick="selectSong('singles', 0, true, 'Kaitlyn')">
-          <img src="images/Kaitlyn.jpg" alt="Kaitlyn Cover">
+          <img src="images/Kaitlyn.jpg" alt="Kaitlyn Cover" loading="eager">
           <div class="card__content">
             <p class="card__title">Kaitlyn</p>
-            <p class="card__description">Description Needed</p>
+            <p class="card__description">Love, Hiphop, Pop, Emotional</p>
             <div class="card__play-btn" onclick="selectSong('singles', 0, false, 'Kaitlyn')">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
             </div>
           </div>
         </div>
         <div class="card" onclick="selectSong('singles', 1, true, 'Kandy')">
-          <img src="images/Placeholder.jpg" alt="Kandy Cover">
+          <img src="images/Placeholder.jpg" alt="Kandy Cover" loading="eager">
           <div class="card__content">
             <p class="card__title">Kandy</p>
-            <p class="card__description">Description Needed</p>
+            <p class="card__description">EDM, Dance, Vocals</p>
             <div class="card__play-btn" onclick="selectSong('singles', 1, false, 'Kandy')">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
             </div>
           </div>
         </div>
         <div class="card" onclick="selectSong('singles', 2, true, 'Love Reggaeton')">
-          <img src="images/loveReggaeton.jpg" alt="Love Reggaeton Cover">
+          <img src="images/loveReggaeton.jpg" alt="Love Reggaeton Cover" loading="eager">
           <div class="card__content">
             <p class="card__title">Love Reggaeton</p>
-            <p class="card__description">Description Needed</p>
+            <p class="card__description">Reggaeton, Synth</p>
             <div class="card__play-btn" onclick="selectSong('singles', 2, false, 'Love Reggaeton')">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card extra-card card-btn-UnAvailable">
+          <img src="images/outtaBounds.jpg" alt="Outta Bounds Cover" loading="lazy">
+          <div class="card__content">
+            <p class="card__title">Not Available</p>
+            <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
+            <div class="card__play-btn">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
             </div>
           </div>
         </div>
       </div>
       <div class="catagory-container">
-        <h1>Albums</h1>
-        <a href="javascript:void(0)" class="see-more-btn">See All</a>
-      </div>
+        <h1>Albums / EP's</h1>
+        <a href="javascript:void(0)" class="see-more-btn" id="albumsSeeAll" onclick="seemore('albums')">See All</a>
+      </div> <!-- Albums / EP's -->
       <div class="cover-container" id="albumsContainer">
         <div class="card" onclick="selectSong('brixton', 0, true)">
-          <img src="images/brixton.jpg" alt="Brixton Cover">
+          <img src="images/brixton.jpg" alt="Brixton Cover" loading="eager">
           <div class="card__content">
             <p class="card__title">Brixton</p>
-            <p class="card__description">Description Needed</p>
+            <p class="card__description">Drill, Piano, Synth, Hiphop</p>
             <div class="card__play-btn" onclick="selectSong('brixton', 0)">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
             </div>
           </div>
         </div>
         <div class="card" onclick="selectSong('wasted', 0, true)">
-          <img src="images/WASTED.jpg" alt="Wasted Cover">
+          <img src="images/WASTED.jpg" alt="Wasted Cover" loading="eager">
           <div class="card__content">
             <p class="card__title">WASTED</p>
-            <p class="card__description">Description Needed</p>
+            <p class="card__description">Hiphop, Trap, Synth</p>
             <div class="card__play-btn" onclick="selectSong('wasted', 0)">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
             </div>
           </div>
         </div>
         <div class="card" onclick="selectSong('realLove', 0, true)">
-          <img src="images/RealLove.jpg" alt="Wasted Cover">
+          <img src="images/RealLove.jpg" alt="Real Love Cover" loading="eager">
           <div class="card__content">
             <p class="card__title">Real Love</p>
-            <p class="card__description">Description Needed</p>
+            <p class="card__description">Love, Emotional, Piano, Synth, RnB</p>
             <div class="card__play-btn" onclick="selectSong('realLove', 0)">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card extra-card card-btn-UnAvailable">
+          <img src="images/eclipse.jpg" alt="Eclipse Cover" loading="lazy">
+          <div class="card__content">
+            <p class="card__title">Not Available</p>
+            <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
+            <div class="card__play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="catagory-container">
+        <h1>Remixes</h1>
+        <a href="javascript:void(0)" class="see-more-btn" id="remixesSeeAll" onclick="seemore('remixes')">See All</a>
+      </div> <!-- Remixes -->
+      <div class="cover-container" id="remixesContainer">
+        <div class="card" onclick="selectSong('remixes', 0, true, 'Already Dead')">
+          <img src="images/Already Dead.jpg" alt="Already Dead Cover" loading="eager">
+          <div class="card__content">
+            <p class="card__title">Already Dead</p>
+            <p class="card__description">Trap, Rap, Hiphop, Vocals, Lyrics, Remix</p>
+            <div class="card__play-btn" onclick="selectSong('remixes', 0, false, 'Already Dead')">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="selectSong('remixes', 1, true, 'Lucky You Remix')">
+          <img src="images/Lucky You Remix.jpg" alt="Lucky You Cover" loading="eager">
+          <div class="card__content">
+            <p class="card__title">Lucky You</p>
+            <p class="card__description">Trap, Rap, Hiphop, Vocals, Lyrics, Remix</p>
+            <div class="card__play-btn" onclick="selectSong('remixes', 1, false, 'Lucky You Remix')">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card card-btn-UnAvailable">
+          <img src="images/no-content.jpg" alt="No Content Image" loading="eager">
+          <div class="card__content">
+            <p class="card__title">No Content</p>
+            <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
+            <div class="card__play-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="card extra-card card-btn-UnAvailable">
+          <img src="images/no-content.jpg" alt="No Content Image" loading="eager">
+          <div class="card__content">
+            <p class="card__title">No Content</p>
+            <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
+            <div class="card__play-btn">
               <svg xmlns="http://www.w3.org/2000/svg" fill="#f3bff7" viewBox="0 0 512 512" width="100" height="100"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9V168c0-8.7 4.7-16.7 12.3-20.9z"/></svg>
             </div>
           </div>
@@ -247,11 +364,11 @@
       </div>
       <div class="catagory-container">
         <h1>Playlists</h1>
-        <a href="javascript:void(0)" class="see-more-btn">See All</a>
-      </div>
+        <a href="javascript:void(0)" class="see-more-btn" id="playlistsSeeAll" onclick="seemore('playlists')">See All</a>
+      </div> <!-- Playlists -->
       <div class="cover-container" id="playlistsContainer">
-        <div class="card">
-          <img src="images/no-content.jpg" alt="No Content Image">
+        <div class="card card-btn-UnAvailable">
+          <img src="images/no-content.jpg" alt="No Content Image" loading="eager">
           <div class="card__content">
             <p class="card__title">No Content</p>
             <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
@@ -260,8 +377,8 @@
             </div>
           </div>
         </div>
-        <div class="card">
-          <img src="images/no-content.jpg" alt="No Content Image">
+        <div class="card card-btn-UnAvailable">
+          <img src="images/no-content.jpg" alt="No Content Image" loading="eager">
           <div class="card__content">
             <p class="card__title">No Content</p>
             <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
@@ -270,8 +387,8 @@
             </div>
           </div>
         </div>
-        <div class="card">
-          <img src="images/no-content.jpg" alt="No Content Image">
+        <div class="card card-btn-UnAvailable">
+          <img src="images/no-content.jpg" alt="No Content Image" loading="eager">
           <div class="card__content">
             <p class="card__title">No Content</p>
             <p class="card__description">Please Check Back Later to See if Things Have Changed.</p>
@@ -281,7 +398,10 @@
           </div>
         </div>
       </div>
+      <hr>
+      <div class="footer-container"></div>
     </section>
+    <!-- Music Player Section -->
     <section id="musicPlayerContainer" class="music-container fade-player">
       <div class="player-song-info">
         <div class="song-cover">
@@ -310,6 +430,7 @@
         <div class="progress-time">
           <div class="time" id="currentTime">-:--</div>
           <div class="progress-container" id="progressContainer">
+            <div class="progress-loaded-bar" id="progressLoaded"></div>
             <div class="progress-bar" id="progress"></div>
           </div>
           <div class="time" id="fullTime">-:--</div>
@@ -320,6 +441,7 @@
       </div>
     </section>
   </section>
+  <!-- Bottom Notification Popup Container -->
   <div class="notification" id='welcomeNotification' style="left: -100vw;" onclick="hideNotification()">
     <div class="notiglow"></div>
     <div class="notiborderglow"></div>
@@ -330,18 +452,18 @@
   <script>
     var notificationTimeout;
     let notification = document.getElementById('welcomeNotification');
-    function showNotification(timeoutTime = 5000, showTip = false, showShareInfo = false, alertProfileSave = false) {
+    function showNotification(timeoutTime = 5000, showTip = false, showShareInfo = false, alertProfileSave = false, showError = false, errMessage = '') {
       let randomGreet = document.getElementById('randomGreet');
       let randomHello = document.getElementById('randomHello');
-      if (showShareInfo == true) {
+      if (showShareInfo) {
         randomHello.innerHTML = "Success!";
         randomGreet.innerHTML = "Share Link Was Copied to Clipboard!";
       }
-      else if (showTip == true) {
+      else if (showTip) {
         randomHello.innerHTML = "Pro Tip:";
         randomGreet.innerHTML = "To see the alert again, just refresh the page!";
       }
-      else if (alertProfileSave == true) {
+      else if (alertProfileSave) {
         randomHello.innerHTML = "Uh Oh!";
         randomGreet.innerHTML = "Looks like you didn't enter a valid name!";
       }
@@ -349,6 +471,10 @@
         mobileAlertModal(true);
         return;
       } 
+      else if (showError) {
+        randomHello.innerHTML = 'ERROR';
+        randomGreet.innerHTML = errMessage;
+      }
       else {
         randomHello.innerHTML = randHello[Math.floor(Math.random() * randHello.length)];
         randomGreet.innerHTML = randGreets[Math.floor(Math.random() * randGreets.length)];
@@ -364,12 +490,14 @@
       notification.style.left = '-100vw';
     }
   </script>
+  <script src="scripts/footer.js"></script>
   <script src="scripts/customContextMenu.js"></script>
   <script src="scripts/svgStrings.js"></script>
   <script src="scripts/musicData.js"></script>
   <script src="scripts/audioplayer.js"></script>
   <script src="scripts/notiData.js"></script>
   <script src="scripts/script.js"></script>
+  <script src="registerWorker.js"></script>
   <script>
     let profileEditor = document.getElementById('editProfile');
     profileEditor.addEventListener('mouseenter', function() {
@@ -388,7 +516,8 @@
       var xmlDoc = xml.responseXML;
       var x = xmlDoc.getElementsByTagName("item");
       var result = "";
-      for (i = 0; i <x.length; i++) {
+      var newsItemId = "";
+      for (i = 0; i < x.length; i++) {
         result += "<div class='news-header'>" +
           x[i].getElementsByTagName("header")[0].childNodes[0].nodeValue +
           "</div>" +
@@ -415,6 +544,7 @@
     populateModal();
     if (!window.location.href.includes('replit.app')) {
       newNoti('DEV MODE', "This is a development build of SevenT33N Music. If you are a visitor, please use <a href='https://SevenT33N-Music.replit.app'>this page</a> instead. Thank you!");
+      document.getElementById('manifestItem').href = 'manifestDev.json';
     }
     loadProfileInfo();
     document.addEventListener("readystatechange", function(event) {
@@ -435,6 +565,6 @@
       }, 250);
     });
   </script>
-  <!-- https://62ba76ae-3fab-40f4-8a16-2e1886c7c2d6-00-2fs8qy2ukjd5l.worf.repl.co/ -->
-</body>
+  <!-- https://e866f994-4f96-4104-9e0e-f4d3b4c438ea-00-1iqq9brekw347.picard.repl.co/ -->
+  </body>
 </html>
