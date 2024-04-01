@@ -21,6 +21,7 @@ function profileFromNotis() {
 let newsDataItem = `Check out the <a href='javascript:void(0)' onclick='newsFromNotis()'>News</a> for more info.`;
 let profileDataItem = `Open Your <a href='javascript:void(0)' onclick='profileFromNotis()'>Profile</a>.`;
 
+// Noti Data
 let allNotis = [
   ['Welcome to The Inbox!',
    "Hey there! this is your own personal inbox. Here you can check updates and news about the site. You'll also recieve notifications about new song releases, new features, and more!",
@@ -66,4 +67,14 @@ let allNotis = [
    `As you may have noticed, the URL for my main website has changed from "SevenT33N-Music.replit.app" to "<a href="https://sevent33n-music.github.io/website/">SevenT33N-Music.Github.io</a>".`,
    "new"
   ],
+  ["Notification Data",
+   `Notifications now take significantly less data than before. ${newsDataItem}`,
+   "new"
+  ],
 ];
+
+// Noti Read Data (Saves to Local Storage)
+let notiReads = [];
+
+// Populated From Function. Used to hide notis the user chose to "Delete".
+let deletedNotis = [];

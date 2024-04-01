@@ -16,16 +16,12 @@ var preLoad = function() {
       "/scripts/",
       "/images/",
       "/audio/",
-      "/DRUM_MACHINE/style.css",
-      "/DRUM_MACHINE/script.js",
-      "/DRUM_MACHINE/drums.js",
-      "/DRUM_MACHINE/audio/",
-      "/CLICKER/scripts/",
-      "/CLICKER/style.css",
-      "/SONG_KITS/",
-      "/SONG_KITS/style.css",
-      "/SONG_KITS/script.js",
-    ]);
+      "/DRUM_MACHINE/",
+      "/CLICKER/",
+      "/SONG_KITS/"
+    ]).catch(function(error) {
+      console.error("Failed to cache some resources:", error);
+    });
   });
 };
 
@@ -49,18 +45,16 @@ var checkResponse = async function(request) {
 };
 
 var addToCache = async function(request) {
-  if (doDataCache) {
-    return caches.open("offline").then(function (cache) {
-      return fetch(request)
-        .then(function (response) {
-          console.log(response.url + " was cached");
-          return cache.put(request, response);
-        })
-        .catch(function (error) {
-          console.error("Failed to fetch request:", error);
-        });
-    });
-  }
+  return caches.open("offline").then(function (cache) {
+    return fetch(request)
+      .then(function (response) {
+        console.log(response.url + " was cached");
+        return cache.put(request, response);
+      })
+      .catch(function (error) {
+        console.error("Failed to fetch request:", error);
+      });
+  });
 };
 
 var returnFromCache = async function(request) {

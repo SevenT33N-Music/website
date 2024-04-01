@@ -8,6 +8,7 @@ var mobileUser = false;
 var page = 'home';
 var newNotiNumbers = 0;
 var totalNotiCircles = 0;
+var trashcanNum = 0;
 var currentPFP = 'regular';
 var selectedIconId = '';
 var iconBeforeEdit = '';
@@ -17,7 +18,7 @@ var profileDataArr = [];
 var lightMode = false;
 
 // Const Variables
-const doDataCache = false;
+const doDataCache = true;
 const settingsArrLen = 2;
 
 // New Notification Variables
@@ -343,17 +344,48 @@ function createNotiCircle(id) {
 // Load & Add Notifications Data
 function loadNotiData() {
   let notiData = localStorage.getItem('notis');
+  let notiDeleteData = localStorage.getItem('notiDelete');
   try {
     notiData = JSON.parse(notiData);
+    notiDeleteData = JSON.parse(notiDeleteData);
     for (i = 0; i < notiData.length; i++) {
-      let itemType = notiData[i][2];
-      allNotis[i][2] = itemType;
+      notiReads.push(notiData[i]);
+      deletedNotis.push(notiDeleteData[i]);
+      let itemType = notiData[i];
+      if (itemType !== 'new' && itemType !== 'read' || notiDeleteData == 'null' || notiDeleteData == null) {
+        console.log('Error: Incorrect Data.');
+        console.log('Creating New Save Data...');
+        var saveData = [];
+        var saveData2 = [];
+        for (i = 0; i < allNotis.length; i++) {
+          saveData.push('new');
+          saveData2.push('show');
+        }
+        saveData = JSON.stringify(saveData);
+        saveData2 = JSON.stringify(saveData2);
+        localStorage.setItem('notis', saveData);
+        localStorage.setItem('notiDelete', saveData2);
+        console.log("Save Data Created.");
+      }
+      else {
+        allNotis[i][2] = itemType;
+        notiReads[i] = itemType;
+      }
     }
-  } catch {
+  }
+  catch {
     console.log('Error: No Notification Save Data.');
     console.log('Creating Save Data...');
-    let saveData = JSON.stringify(allNotis);
+    var saveData = [];
+    var saveData2 = [];
+    for (i = 0; i < allNotis.length; i++) {
+      saveData.push('new');
+      saveData2.push('show');
+    }
+    saveData = JSON.stringify(saveData);
+    saveData2 = JSON.stringify(saveData2);
     localStorage.setItem('notis', saveData);
+    localStorage.setItem('notiDelete', saveData2);
     console.log("Save Data Created.");
   }
 }
@@ -397,7 +429,8 @@ function populateModal() {
           notiItem.classList.remove("newNoti");
           notiItem.classList.add("readNoti");
           allNotis[notiItem.id][2] = "read";
-          let newSaveData = JSON.stringify(allNotis);
+          notiReads[notiItem.id] = "read";
+          let newSaveData = JSON.stringify(notiReads);
           localStorage.setItem('notis', newSaveData);
         }
         notiNumber();
@@ -408,9 +441,21 @@ function populateModal() {
       let notiInfoItem = document.createElement('div');
       notiInfoItem.classList.add('notiInfo');
       notiInfoItem.innerHTML = notiInfo;
+      let notiDelete = document.createElement('div');
+      notiDelete.classList.add('noti-delete');
+      notiDelete.innerHTML = trashSvg;
+      notiDelete.onclick = function () {
+        notiItem.remove();
+        deletedNotis[notiItem.id] = "delete";
+        let newSaveData = JSON.stringify(deletedNotis);
+        localStorage.setItem('notiDelete', newSaveData);
+      }
+      notiInfoItem.appendChild(notiDelete);
       notiItem.appendChild(notiItemTitle);
       notiItem.appendChild(notiInfoItem);
-      document.getElementById('notificationsContainer').appendChild(notiItem);
+      if (deletedNotis[i] == "show") {
+        document.getElementById('notificationsContainer').appendChild(notiItem);
+      }
     }
     createNotis();
     notiNumber();
@@ -444,7 +489,8 @@ function newNoti(title, desc, special = "none") {
     if (special == "mobile") {
       if (localStorage.getItem('mobileAlertRead') == "true") {
         notiItem.classList.add('readNoti');
-      } else {
+      }
+      else {
         notiItem.classList.add('newNoti');
         totalNotiCircles += 1;
         let newNoti = createNotiCircle(`circle${totalNotiCircles}`);
@@ -473,6 +519,12 @@ function newNoti(title, desc, special = "none") {
       }
     }
     else {
+      notiItem.classList.add('newNoti');
+      totalNotiCircles += 1;
+      let newNoti = createNotiCircle(`circle${totalNotiCircles}`);
+      notiItem.appendChild(newNoti);
+      newNotiNumbers += 1;
+      let circleNotiId = `circle${totalNotiCircles}`;
       notiItem.onclick = function() {
         if (notiItem.classList.contains('notiPreview')) {
           notiItem.classList.remove("notiPreview");
@@ -481,6 +533,7 @@ function newNoti(title, desc, special = "none") {
           notiItem.classList.add("notiPreview");
         }
         if (notiItem.classList.contains('newNoti')) {
+          document.getElementById(circleNotiId).style.display = "none";
           notiItem.classList.remove("newNoti");
           notiItem.classList.add("readNoti");
           allNotis[notiItem.id][2] = "read";

@@ -79,13 +79,19 @@ var playlist = {
 let shareCheck = checkShare();
 
 // ===== Load Song Data ===== //
-function createSources(playlistLength = 0) {
+function createSources(playlistLength = 0, playlistGroup = 'singles') {
   for (i = 0; i < playlistLength; i++) {
     let sourceEle = document.createElement('source');
     sourceEle.src = playlist.song[i];
     sourceEle.type = 'audio/mpeg';
-    sourceEle.id = `source${i}`;
-    songAudio.appendChild(sourceEle);
+    //sourceEle.mediaGroup = playlistGroup;
+    sourceEle.preload = 'auto';
+    let audioEle = document.createElement('audio');
+    audioEle.id = `audio${i}`;
+    audioEle.preload = 'auto';
+    audioEle.appendChild(sourceEle);
+    let audioContainer = document.getElementById('audioContainer');
+    audioContainer.appendChild(audioEle);
   }
 }
 function selectSong(album = "singles", idx = 0, fromCard = false, forceSongSelect = "none") {
@@ -125,6 +131,15 @@ function selectSong(album = "singles", idx = 0, fromCard = false, forceSongSelec
   }
 }
 function loadAlbum(album) {
+  try {
+    for (i = 0; i < playlist.song.length; i++) {
+      let oldAudioEle = document.getElementById(`source${i}`);
+      oldAudioEle.remove();
+    }
+  }
+  catch {
+    console.log("No Audio Elements Created.");
+  }
   if (album == "singles") {
     currentAlbum = "singles";
     playlist.song = singles.song;
@@ -171,7 +186,7 @@ function loadAlbum(album) {
     playlist.album = 'Remixes';
     maxIndex = 1;
   }
-  createSources(maxIndex);
+  createSources(maxIndex, album);
 }
 function continueWithSongSelection(album, idx) {
   if (mobileUser) {
@@ -205,12 +220,22 @@ function loadSong(closeTheModal = false) {
   song = playlist.song[songIndex];
   cover = playlist.cover[songIndex];
   artist = playlist.artist[songIndex];
+  album = playlist.album;
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: playlist.song[songIndex],
+      artist: playlist.artist[songIndex],
+      album: playlist.album,
+      artwork: [
+        {src: `images/${cover}.jpg`}
+      ]
+    });
+  }
   if (playlist.album == 'Singles' || playlist.album == 'Remixes') {
     coverSize = playlist.coverSize[songIndex];
   } else {
     coverSize = playlist.coverSize[0];
   }
-  album = playlist.album;
   songTitle.innerHTML = song;
   songArtist.innerHTML = artist;
   songAudio.src = `audio/${song}.mp3`;
@@ -233,18 +258,6 @@ function loadSong(closeTheModal = false) {
     playSong();
   }
   */
-  if ("mediaSession" in navigator) {
-    songAudio.addEventListener('loadedmetadata', function() {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: playlist.song[songIndex],
-        artist: playlist.artist[songIndex],
-        album: playlist.album,
-        artwork: [
-          {src: `images/${cover}.jpg`}
-        ]
-      });
-    });
-  }
   setEQ();
 }
 
@@ -286,16 +299,22 @@ function playSong() {
   document.getElementById('playingVisual').style.opacity = '1';
   songAudio.classList.add('play');
   playBtn.innerHTML = pauseSvg;
-  songAudio.play();
   pageTitle.innerHTML = `SevenT33N Music | Playing "${currentSong}"`;
+  //let audioIdStr = `audio${songIndex}`;
+  //let audioEle = document.getElementById(audioIdStr);
+  //audioEle.play();
+  songAudio.play();
 }
 function pauseSong() {
   document.getElementById('playingVisual').style.transition = 'opacity 0.15s ease';
   document.getElementById('playingVisual').style.opacity = '0';
   songAudio.classList.remove('play');
   playBtn.innerHTML = playSvg;
-  songAudio.pause();
   pageTitle.innerHTML = `SevenT33N Music | Music Paused`;
+  //let audioIdStr = `audio${songIndex}`;
+  //let audioEle = document.getElementById(audioIdStr);
+  //audioEle.pause();
+  songAudio.pause();
 }
 function nextSong(btnClick = false) {
   const runCode = checkFadedPlayer();
@@ -309,7 +328,7 @@ function nextSong(btnClick = false) {
     }
     else if (repeatType == "single") {
       audio.currentTime = 0;
-      audio.play();
+      playSong();
     }
     else if (repeatType == "playlist") {
       songIndex++;
@@ -369,11 +388,13 @@ function repeatSong() {
       repeatType = "playlist";
       repeatBtn.classList.add('btn-on');
       repeatBtn.classList.remove('repeat-song');
-    } else if (repeatType == "playlist") {
+    }
+    else if (repeatType == "playlist") {
       repeatType = "single";
       repeatBtn.classList.add('btn-on');
       repeatBtn.classList.add('repeat-song');
-    } else {
+    }
+    else {
       repeatType = "none";
       repeatBtn.classList.remove('btn-on');
       repeatBtn.classList.remove('repeat-song');
@@ -513,17 +534,17 @@ function formatCount(count, decimals = 2) {
   let result = parseFloat((count / Math.pow(1000, i)).toFixed(decimals));
   return result;
 }
+function setProgress(e) {
+  const width = this.clientWidth;
+  const clickX = e.offsetX;
+  const duration = songAudio.duration;
+  let newCurrentTime = Math.round((clickX / width) * duration);
+  console.log(newCurrentTime);
+  songAudio.currentTime = newCurrentTime;
+}
 
 // ===== Event Listeners ===== //
-/*eqToggle.addEventListener('click', function() {
-  if (document.getElementById('playBtn').innerHTML == playSvg) {
-    setEQ(true, true, eqToggle.checked);
-    playSong();
-  }
-  else {
-    setEQ(false, true, eqToggle.checked);
-  }
-});*/
+progressContainer.addEventListener('click', setProgress);
 playBtn.addEventListener('click', togglePlayPause);
 songAudio.addEventListener('timeupdate', function() {
   updateProgress();

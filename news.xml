@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <news xmlns:xlink="http://www.w3.org/1999/xlink">
   <item>
+    <header>Notifications & Offline Support (v.5.5.0)</header>
+    <info>Notifications now take sginificantly less data than before. In addition to this modification, you can now delete old notifications. Finally, offline support has been enabled again.</info>
+    <time>Mon April 1st, 2024 (7:15 PM UTC)</time>
+  </item>
+  <item>
     <header>Bug Fixes (v.5.4.1)</header>
     <info>Fixed a visual bug where the progress bar overlaps the total time. Also fixed the iPhone playback issue where time skip buttons were added instead of song skip buttons.</info>
     <time>Thur March 28th, 2024 (4:47 PM UTC)</time>
