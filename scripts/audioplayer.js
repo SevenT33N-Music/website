@@ -2,6 +2,7 @@
 
 // DOM Variables
 const pageTitle = document.getElementById("pageTitle");
+const shareBtn = document.getElementById("shareBtn");
 const playBtn = document.getElementById("playBtn");
 const skipBtn = document.getElementById("skipBtn");
 const prevBtn = document.getElementById("prevBtn");
@@ -77,6 +78,11 @@ var playlist = {
   coverSize: '500x500'
 }
 let shareCheck = checkShare();
+var shareData = {
+  title: `SevenT33N Music`,
+  text: `Listen To "Kandy" by "SevenT33N"`,
+  url: `${window.location.href}`,
+}
 
 // ===== Load Song Data ===== //
 function createSources(playlistLength = 0, playlistGroup = 'singles') {
@@ -404,7 +410,13 @@ function repeatSong() {
 function shareSong() {
   const runCode = checkFadedPlayer();
   if (runCode) {
-    let link = window.location.href;
+    var link;
+    if (window.location.href.includes('github.io')) {
+      link = 'https://sevent33n-music.github.io/';
+    }
+    else {
+      link = window.location.href;
+    }
     let songName = playlist.song[songIndex];
     let songCover = playlist.cover[songIndex];
     let songArtist = playlist.artist[songIndex];
@@ -544,6 +556,33 @@ function setProgress(e) {
 }
 
 // ===== Event Listeners ===== //
+shareBtn.addEventListener("click", async () => {
+  const runCode = checkFadedPlayer();
+  if (runCode) {
+    try {
+      var link;
+      if (window.location.href.includes('github.io')) {
+        link = 'https://sevent33n-music.github.io/';
+      }
+      else {
+        link = window.location.href;
+      }
+      let songName = playlist.song[songIndex];
+      let songCover = playlist.cover[songIndex];
+      let songArtist = playlist.artist[songIndex];
+      link += `?album=${currentAlbum}&song=${songName}&cover=${songCover}&artist=${songArtist}`;
+      shareData.url = link;
+      shareData.title = `SevenT33N Music`;
+      shareData.text = `Listen to "${songName}" by ${songArtist}`;
+      await navigator.share(shareData);
+      showNotification(5000, false, true);
+    }
+    catch (err) {
+      console.log(`Error: ${err}`);
+      shareSong();
+    }
+  }
+});
 progressContainer.addEventListener('click', setProgress);
 playBtn.addEventListener('click', togglePlayPause);
 songAudio.addEventListener('timeupdate', function() {

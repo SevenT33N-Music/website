@@ -14,7 +14,12 @@
     <script>
       function relocate() {
         console.log('Relocating...');
-        window.location.href = '/';
+        if (window.location.href.includes('github.io')) {
+          window.location.href = '/website/';
+        }
+        else {
+          window.location.href = '/';
+        }
       }
     </script>
   </body>

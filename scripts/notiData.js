@@ -67,8 +67,8 @@ let allNotis = [
    `As you may have noticed, the URL for my main website has changed from "SevenT33N-Music.replit.app" to "<a href="https://sevent33n-music.github.io/website/">SevenT33N-Music.Github.io</a>".`,
    "new"
   ],
-  ["Notification Data",
-   `Notifications now take significantly less data than before. ${newsDataItem}`,
+  ["Update V.5.5.0",
+   `Notifications now take significantly less data than before. In addition to this, the news will now show up here, in notifications. Speaking of news, offline support was added back, and you can delete notifications! On top of all that, the share feature was updated.`,
    "new"
   ],
 ];

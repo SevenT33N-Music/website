@@ -1,11 +1,12 @@
-// Log if Media Session API is supported
-console.log(`Media Session API Supported: ${"mediaSession" in navigator}`)
+// Log API Support
+console.log(`Media Session API Supported: ${"mediaSession" in navigator}. App Badge Supported: ${"setAppBadge" in navigator}`);
 
 // DOM VARIABLES
 var root = document.querySelector(':root');
 var canClick = true;
 var mobileUser = false;
 var page = 'home';
+var notiPage = 'New'
 var newNotiNumbers = 0;
 var totalNotiCircles = 0;
 var trashcanNum = 0;
@@ -16,12 +17,14 @@ var primeColorBeforeEdit = '';
 var backColorBeforeEdit = '';
 var profileDataArr = [];
 var lightMode = false;
+var doNotis = false;
 
 // Const Variables
 const doDataCache = true;
-const settingsArrLen = 2;
+const settingsArrLen = 3;
 
 // New Notification Variables
+var unread = 0;
 let mobileTitle = 'Alert Acknowledged';
 let mobileBody = 'This notification is to let you know you have acknowledged the mobile alert. As a reminder, add this site to your home screen or use a desktop device for a better experience.';
 
@@ -106,10 +109,9 @@ function notiModal(open = false) {
     document.getElementById("notificationsModal").style.opacity = "0";
   }
   else {
-    document.getElementById("notificationsContainer").style.overflowY = "auto";
-    document.getElementById("notificationsContainer").style.display = "block";
-    document.getElementById("notificationsContainer").style.height = "35vh";
-    document.getElementById("notificationsContainer").style.padding = "1% 2%";
+    let notiStr = `notiPage${notiPage}`;
+    document.getElementById(notiStr).style.display = "block";
+    document.getElementById(notiStr).style.padding = "1% 2%";
     document.getElementById("notificationsModal").style.transition = "opacity 0.5s ease, top 1s ease";
     document.getElementById("notificationsModal").style.height = "fit-content";
     document.getElementById("notificationsModal").style.maxHeight = "80vh";
@@ -118,6 +120,14 @@ function notiModal(open = false) {
     document.getElementById("notificationsModal").style.top = "0px";
     document.getElementById("notificationsModal").style.opacity = "1";
   }
+}
+// Change Noti Page
+function notiPageSwitch(newPage = 'New') {
+  document.getElementById(`notiPage${notiPage}`).style.display = 'none';
+  document.getElementById(`NotiBtn${notiPage}`).classList.remove('page-active');
+  document.getElementById(`notiPage${newPage}`).style.display = 'block';
+  document.getElementById(`NotiBtn${newPage}`).classList.add('page-active');
+  notiPage = newPage;
 }
 
 // Open & Close Profile Modal
@@ -306,7 +316,6 @@ function loadProfileSettings() {
     localStorage.setItem('profileSettings', profileDataArrStr);
   }
 }
-loadProfileSettings();
 // Open & Close Notification Modal
 function mobileAlertModal(open = false) {
   if (open == false) {
@@ -329,7 +338,7 @@ function mobileAlertModal(open = false) {
       document.getElementById("mobileAlertModal").style.opacity = "1";
     }
     else {
-      newNoti(mobileTitle, mobileBody, 'mobile');
+      //newNoti(mobileTitle, mobileBody, 'mobile');
     }
   }
 }
@@ -370,6 +379,9 @@ function loadNotiData() {
       else {
         allNotis[i][2] = itemType;
         notiReads[i] = itemType;
+        if (itemType == 'new') {
+          unread += 1;
+        }
       }
     }
   }
@@ -387,9 +399,47 @@ function loadNotiData() {
     localStorage.setItem('notis', saveData);
     localStorage.setItem('notiDelete', saveData2);
     console.log("Save Data Created.");
+    notiData = localStorage.getItem('notis');
+    notiDeleteData = localStorage.getItem('notiDelete');
+    notiData = JSON.parse(notiData);
+    notiDeleteData = JSON.parse(notiDeleteData);
+    for (i = 0; i < notiData.length; i++) {
+      notiReads.push(notiData[i]);
+      deletedNotis.push(notiDeleteData[i]);
+      let itemType = notiData[i];
+      if (itemType !== 'new' && itemType !== 'read' || notiDeleteData == 'null' || notiDeleteData == null) {
+        console.log('Error: Incorrect Data.');
+        console.log('Creating New Save Data...');
+        var saveData = [];
+        var saveData2 = [];
+        for (i = 0; i < allNotis.length; i++) {
+          saveData.push('new');
+          saveData2.push('show');
+        }
+        saveData = JSON.stringify(saveData);
+        saveData2 = JSON.stringify(saveData2);
+        localStorage.setItem('notis', saveData);
+        localStorage.setItem('notiDelete', saveData2);
+        console.log("Save Data Created.");
+      }
+      else {
+        allNotis[i][2] = itemType;
+        notiReads[i] = itemType;
+      }
+    }
+    console.log(unread);
+  }
+  if (doNotis) {
+    navigator.setAppBadge(unread).catch((error) => {
+      console.log(`Error: ${error}`);
+    });
+  }
+  else {
+    navigator.setAppBadge(0).catch((error) => {
+      console.log(`Badge Error: ${error}`);
+    });
   }
 }
-loadNotiData();
 // Populate Notifications Modal
 function populateModal() {
   let notis = allNotis;
@@ -401,6 +451,8 @@ function populateModal() {
       let notiInfo = noti[1];
       let notiDisplayType = noti[2];
       let notiItemId = indexId;
+      let tooltip = document.createElement('div');
+      tooltip.classList.add('tooltip');
       let notiItem = document.createElement('div');
       if (notiDisplayType == "new") {
         totalNotiCircles += 1;
@@ -424,6 +476,10 @@ function populateModal() {
           notiItem.classList.add("notiPreview");
         }
         if (notiItem.classList.contains('newNoti')) {
+          unread -= 1;
+          navigator.setAppBadge(unread).catch((error) => {
+            console.log(`Badge Error: ${error}`);
+          });
           document.getElementById(circleNotiId).style.display = "none";
           newNotiNumbers -= 1;
           notiItem.classList.remove("newNoti");
@@ -442,19 +498,43 @@ function populateModal() {
       notiInfoItem.classList.add('notiInfo');
       notiInfoItem.innerHTML = notiInfo;
       let notiDelete = document.createElement('div');
+      //notiDelete.id = `notiDel${indexId}`;
       notiDelete.classList.add('noti-delete');
       notiDelete.innerHTML = trashSvg;
       notiDelete.onclick = function () {
         notiItem.remove();
-        deletedNotis[notiItem.id] = "delete";
+        if (deletedNotis[indexId] == 'delete') {
+          deletedNotis[notiItem.id] = "remove";
+        }
+        else {
+          document.getElementById(`notiPageDeleted`).appendChild(notiItem);
+          deletedNotis[notiItem.id] = "delete";
+        }
         let newSaveData = JSON.stringify(deletedNotis);
         localStorage.setItem('notiDelete', newSaveData);
       }
-      notiInfoItem.appendChild(notiDelete);
-      notiItem.appendChild(notiItemTitle);
-      notiItem.appendChild(notiInfoItem);
       if (deletedNotis[i] == "show") {
-        document.getElementById('notificationsContainer').appendChild(notiItem);
+        notiDelete.title = "Delete";
+        tooltip.innerHTML = 'Delete';
+        //notiDelete.appendChild(tooltip);
+        notiInfoItem.appendChild(notiDelete);
+        notiItem.appendChild(notiItemTitle);
+        notiItem.appendChild(notiInfoItem);
+        if (allNotis[i][2] == "new") {
+          document.getElementById('notiPageNew').appendChild(notiItem);
+        }
+        else {
+          document.getElementById('notiPageRead').appendChild(notiItem);
+        }
+      }
+      else if (deletedNotis[i] == 'delete') {
+        notiDelete.title = "Remove From Trash";
+        tooltip.innerHTML = 'Remove From Trash';
+        //notiDelete.appendChild(tooltip);
+        notiInfoItem.appendChild(notiDelete);
+        notiItem.appendChild(notiItemTitle);
+        notiItem.appendChild(notiInfoItem);
+        document.getElementById('notiPageDeleted').appendChild(notiItem);
       }
     }
     createNotis();
@@ -604,6 +684,9 @@ function toggleSettings(itemId, itemToggleDisplayId = "NONE", settingsIdx = 0) {
     saveDataStr = JSON.stringify(saveDataArr);
     localStorage.setItem('profileSettings', saveDataStr);
     saveDataArr = JSON.parse(saveDataStr);
+    if (itemId == 'notiToggle') {
+      checkNotificationPermission(true);
+    }
   }
   else if (!itemCheck.checked) {
     if (itemToggleDisplayId !== "NONE") {
@@ -624,6 +707,7 @@ function toggleSettings(itemId, itemToggleDisplayId = "NONE", settingsIdx = 0) {
 function setSettingsValues(arr) {
   doAudioEQ = arr[0];
   setPageStyle(arr[1]);
+  doNotis = arr[2];
 }
 // load settings
 function loadSettings() {
@@ -632,15 +716,75 @@ function loadSettings() {
     savedSettings = JSON.parse(savedSettings);
     doAudioEQ = savedSettings[0];
     lightMode = savedSettings[1];
+    doNotis = savedSettings[2];
     if (lightMode == 'true' || lightMode == true) {
       setPageStyle('light');
       document.getElementById('lightModeToggle').checked = true;
     }
+    document.getElementById('notiToggle').checked = doNotis;
   } catch {
     console.log('No save data.');
   }
 }
+
+// Open New Link
+function openLink(link) {
+  if (window.location.href.contains('github.io')) {
+    window.location.href = `/website/${link}/`;
+  }
+  else {
+    window.location.href = `/${link}/`;
+  }
+}
+// Confirm Data Clear
+function promptClearData() {
+  if (confirm("Are You Are You Want to Clear Your Save Data?")) {
+    localStorage.clear();
+    navigator.setAppBadge(0).catch((error) => {
+      console.log(`Badge Error: ${error}`);
+    });
+    window.location.reload();
+  }
+}
+// Ask For Noti Permission
+async function requestNotificationPermission() {
+  const permission = await Notification.requestPermission();
+  if (permission === 'granted') {
+    console.log("Noti Permission Was Granted");
+  }
+}
+// Check if Notis Are Available
+async function checkNotificationPermission(toggle = false) {
+  const permissionStatus = await navigator
+    .permissions
+    .query({ name: 'notifications' });
+  switch (permissionStatus.state) {
+    case 'granted':
+      console.log('User Granted Notification Permission');
+      if (toggle) {
+        navigator.setAppBadge(unread).catch((error) => {
+          console.log(`Error: ${error}`);
+        });
+      }
+      break;
+    case 'denied':
+      console.log('User Denied Notification Permission');
+      if (toggle) {
+        alert('Notification Permission Was Denied. To Recieve Notifications, Please Enable It.');
+        document.getElementById('notiToggle').checked = false;
+      }
+      break;
+    default:
+      await requestNotificationPermission();
+      break;
+  }
+}
+//checkNotificationPermission();
+
+// Run Functions
 loadSettings();
+loadProfileSettings();
+loadNotiData();
 
 // Remove Play Button on Cards That Arent Available
 let cardBtns = document.querySelectorAll('.card-btn-UnAvailable');
